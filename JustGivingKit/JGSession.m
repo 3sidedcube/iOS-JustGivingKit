@@ -38,6 +38,7 @@ static JGSession *sharedSession = nil;
         
         self.requestController = [[TSCRequestController alloc] initWithBaseAddress:JGAPIBaseAddress];
         self.applicationId = [[NSBundle mainBundle] infoDictionary][@"JGApplicationId"];
+        [self restoreLoggedInState];
     }
     
     return self;
@@ -45,18 +46,15 @@ static JGSession *sharedSession = nil;
 
 - (void)restoreLoggedInState
 {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    
-    NSDictionary *credentials = [userDefaults objectForKey:BKAuthorizationCredentials];
-    
-    if (credentials) {
-        
-        if ([credentials[@"timestamp"] intValue] > [[NSDate date] timeIntervalSince1970]) {
-            
-            self.authorizationToken = credentials[@"token"];
-            self.requestController.sharedRequestHeaders[@"Authorization"] = self.authorizationToken;
-            _loggedIn = YES;
-        }
+    TSCRequestCredential *credential = [TSCRequestCredential retrieveCredentialWithIdentifier:@"JGUserLogin"];
+    if (credential) {
+        [self loginWithCredential:credential completion:^(NSObject *user, NSError *error) {
+            if (!error) {
+                [self willChangeValueForKey:@"loggedIn"];
+                _loggedIn = YES;
+                [self didChangeValueForKey:@"loggedIn"];
+            }
+        }];
     }
 }
 
@@ -79,13 +77,17 @@ static JGSession *sharedSession = nil;
         credential.authorizationToken = [NSString stringWithFormat:@"Basic %@", [[[NSString stringWithFormat:@"%@:%@", email, password] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedDataWithOptions:kNilOptions]];
         self.requestController.sharedRequestCredential = credential;
         
-        [self willChangeValueForKey:@"loggedIn"];
-        _loggedIn = YES;
-        [self didChangeValueForKey:@"loggedIn"];
-        
-        TSCre
-        
+        if ([TSCRequestCredential storeCredential:credential withIdentifier:@"JGUserLogin"]) {
+            [self willChangeValueForKey:@"loggedIn"];
+            _loggedIn = YES;
+            [self didChangeValueForKey:@"loggedIn"];
+        }
     }];
+}
+
+- (void)loginWithCredential:(TSCRequestCredential *)credential completion:(JGSessionLoginCompletion)completion
+{
+    [self loginWithEmail:credential.username password:credential.password completion:completion];
 }
 
 @end
