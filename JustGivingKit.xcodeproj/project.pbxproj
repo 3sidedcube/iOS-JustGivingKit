@@ -8,12 +8,47 @@
 
 /* Begin PBXBuildFile section */
 		361DA0761BE2190400F76120 /* JustGivingKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 361DA0751BE2190400F76120 /* JustGivingKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		368411141BE21A3F00FEE624 /* ThunderBasics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 368411081BE21A2B00FEE624 /* ThunderBasics.framework */; };
+		368411151BE21A3F00FEE624 /* ThunderRequest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 368411111BE21A3200FEE624 /* ThunderRequest.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		368411071BE21A2B00FEE624 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 368411021BE21A2B00FEE624 /* ThunderBasics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C272EF8419C831AB004BD339;
+			remoteInfo = ThunderBasics;
+		};
+		368411091BE21A2B00FEE624 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 368411021BE21A2B00FEE624 /* ThunderBasics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C272EF8F19C831AC004BD339;
+			remoteInfo = ThunderBasicsTests;
+		};
+		368411101BE21A3200FEE624 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3684110B1BE21A3200FEE624 /* ThunderRequest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C2E5088219C835A300350F00;
+			remoteInfo = ThunderRequest;
+		};
+		368411121BE21A3200FEE624 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3684110B1BE21A3200FEE624 /* ThunderRequest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C2E5088D19C835A300350F00;
+			remoteInfo = ThunderRequestTests;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		361DA0721BE2190400F76120 /* JustGivingKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JustGivingKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		361DA0751BE2190400F76120 /* JustGivingKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustGivingKit.h; sourceTree = "<group>"; };
 		361DA0771BE2190400F76120 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		368411021BE21A2B00FEE624 /* ThunderBasics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ThunderBasics.xcodeproj; path = "Thunder Basics/ThunderBasics.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		3684110B1BE21A3200FEE624 /* ThunderRequest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ThunderRequest.xcodeproj; path = "Thunder Request/ThunderRequest.xcodeproj"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -21,6 +56,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				368411141BE21A3F00FEE624 /* ThunderBasics.framework in Frameworks */,
+				368411151BE21A3F00FEE624 /* ThunderRequest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,10 +83,38 @@
 		361DA0741BE2190400F76120 /* JustGivingKit */ = {
 			isa = PBXGroup;
 			children = (
+				368411011BE21A1D00FEE624 /* Supporting Files */,
 				361DA0751BE2190400F76120 /* JustGivingKit.h */,
 				361DA0771BE2190400F76120 /* Info.plist */,
 			);
 			path = JustGivingKit;
+			sourceTree = "<group>";
+		};
+		368411011BE21A1D00FEE624 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				368411021BE21A2B00FEE624 /* ThunderBasics.xcodeproj */,
+				3684110B1BE21A3200FEE624 /* ThunderRequest.xcodeproj */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		368411031BE21A2B00FEE624 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				368411081BE21A2B00FEE624 /* ThunderBasics.framework */,
+				3684110A1BE21A2B00FEE624 /* ThunderBasicsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3684110C1BE21A3200FEE624 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				368411111BE21A3200FEE624 /* ThunderRequest.framework */,
+				368411131BE21A3200FEE624 /* ThunderRequestTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -108,12 +173,53 @@
 			mainGroup = 361DA0681BE2190400F76120;
 			productRefGroup = 361DA0731BE2190400F76120 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 368411031BE21A2B00FEE624 /* Products */;
+					ProjectRef = 368411021BE21A2B00FEE624 /* ThunderBasics.xcodeproj */;
+				},
+				{
+					ProductGroup = 3684110C1BE21A3200FEE624 /* Products */;
+					ProjectRef = 3684110B1BE21A3200FEE624 /* ThunderRequest.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				361DA0711BE2190400F76120 /* JustGivingKit */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		368411081BE21A2B00FEE624 /* ThunderBasics.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ThunderBasics.framework;
+			remoteRef = 368411071BE21A2B00FEE624 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3684110A1BE21A2B00FEE624 /* ThunderBasicsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ThunderBasicsTests.xctest;
+			remoteRef = 368411091BE21A2B00FEE624 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		368411111BE21A3200FEE624 /* ThunderRequest.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ThunderRequest.framework;
+			remoteRef = 368411101BE21A3200FEE624 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		368411131BE21A3200FEE624 /* ThunderRequestTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ThunderRequestTests.xctest;
+			remoteRef = 368411121BE21A3200FEE624 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		361DA0701BE2190400F76120 /* Resources */ = {
@@ -275,6 +381,7 @@
 				361DA07C1BE2190400F76120 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
