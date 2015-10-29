@@ -29,6 +29,11 @@ typedef void (^JGSessionLoginCompletion)(NSObject *user, NSError *error);
 @property (nonatomic, readwrite, getter = isLoggedIn) BOOL loggedIn;
 
 /**
+ @abstract Returns a shared session. Use this by default.
+ */
++ (JGSession *)sharedSession;
+
+/**
  @abstract Logs a user into the JustGiving API.
  @param username The email of an existing account.
  @param password The password of an exisiting account.
