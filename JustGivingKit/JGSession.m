@@ -82,6 +82,8 @@ static JGSession *sharedSession = nil;
             _loggedIn = YES;
             [self didChangeValueForKey:@"loggedIn"];
         }
+        
+        completion(nil, error);
     }];
 }
 
