@@ -8,6 +8,32 @@
 
 #import <Foundation/Foundation.h>
 
+@class TSCRequestController;
+
+/**
+ @class JGSession
+ @abstract  A session is used to access endpoints and represent a user in the JustGiving API.
+ */
 @interface JGSession : NSObject
+
+typedef void (^JGSessionLoginCompletion)(NSObject *user, NSError *error);
+
+/**
+ @abstract A request controller with a baseURL to the JustGiving API as defined in JGDefines.
+ */
+@property (nonatomic, strong) TSCRequestController *requestController;
+
+/**
+ @abstract Returns YES if a user is logged in.
+ */
+@property (nonatomic, readwrite, getter = isLoggedIn) BOOL loggedIn;
+
+/**
+ @abstract Logs a user into the JustGiving API.
+ @param username The email of an existing account.
+ @param password The password of an exisiting account.
+ @param completion The completion block to be fired when the request is complete.
+ */
+- (void)loginWithEmail:(NSString *)email password:(NSString *)password completion:(JGSessionLoginCompletion)completion;
 
 @end
