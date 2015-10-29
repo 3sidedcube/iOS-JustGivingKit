@@ -10,7 +10,6 @@
 
 @interface JGFundraisingPage : NSObject
 
-
 @property (nonatomic, copy) NSString *pageId;
 
 @property (nonatomic, copy) NSString *pageTitle;
@@ -18,6 +17,8 @@
 @property (nonatomic, copy) NSString *pageShortName;
 
 @property (nonatomic, copy) NSNumber *raisedAmount;
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 
 @end
