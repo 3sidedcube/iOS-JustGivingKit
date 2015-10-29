@@ -22,6 +22,10 @@
             self.lastName = dictionary[@"lastName"];
         }
         
+        if (dictionary[@"email"]) {
+            self.email = dictionary[@"email"];
+        }
+        
         if (dictionary[@"profileImageUrls"]) {
             
             for (NSDictionary *imageDictionary in dictionary[@"profileImageUrls"]) {
