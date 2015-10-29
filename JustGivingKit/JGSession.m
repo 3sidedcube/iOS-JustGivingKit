@@ -95,7 +95,6 @@ static JGSession *sharedSession = nil;
             
             completion(user, error);
         }];
-        
     }];
 }
 
