@@ -79,4 +79,22 @@
     }];
 }
 
+- (void)totalFundsRaisedByUser:(JGUser *)user ForCharityId:(NSString *)charityId completion:(JGRaisedAmountCompletion)completion
+{
+    __block double totalRaised = 0;
+    [self getFundraisingPagesWithCharityId:charityId forUser:user withCompletion:^(NSArray *pages, NSError *error) {
+        
+        for (NSDictionary *pageInfo in pages) {
+            JGFundraisingPage *page = [[JGFundraisingPage alloc]initWithDictionary:pageInfo];
+            if (page.raisedAmount) {
+                double raisedAmount = page.raisedAmount.doubleValue;
+                totalRaised += raisedAmount;
+            }
+        }
+        
+        completion([NSNumber numberWithDouble:totalRaised], error);
+    }];
+}
+
+
 @end
