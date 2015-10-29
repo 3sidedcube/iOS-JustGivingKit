@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class TSCRequestController;
+@class JGUser;
 
 /**
  @class JGSession
@@ -16,7 +17,7 @@
  */
 @interface JGSession : NSObject
 
-typedef void (^JGSessionLoginCompletion)(NSObject *user, NSError *error);
+typedef void (^JGSessionLoginCompletion)(JGUser *user, NSError *error);
 
 /**
  @abstract A request controller with a baseURL to the JustGiving API as defined in JGDefines.

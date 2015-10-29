@@ -10,6 +10,7 @@
 @import ThunderBasics;
 @import ThunderRequest;
 #import "JGDefines.h"
+#import "JGUser.h"
 
 @interface JGSession ()
 
@@ -36,8 +37,8 @@ static JGSession *sharedSession = nil;
 {
     if (self = [super init]) {
         
-        self.requestController = [[TSCRequestController alloc] initWithBaseAddress:JGAPIBaseAddress];
         self.applicationId = [[NSBundle mainBundle] infoDictionary][@"JGApplicationId"];
+        self.requestController = [[TSCRequestController alloc] initWithBaseAddress:[NSString stringWithFormat:@"%@/%@/v1", JGAPIBaseAddress, self.applicationId]];
         [self restoreLoggedInState];
     }
     
@@ -60,7 +61,7 @@ static JGSession *sharedSession = nil;
 
 - (void)loginWithEmail:(NSString *)email password:(NSString *)password completion:(JGSessionLoginCompletion)completion
 {
-    [self.requestController post:@"/(:appId)/v1/account/validate" withURLParamDictionary:@{@"appID":self.applicationId} bodyParams:@{@"email":email, @"password":password} completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
+    [self.requestController post:@"account/validate" withURLParamDictionary:nil bodyParams:@{@"email":email, @"password":password} completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
         
         if (error || response.status != 200) {
             
@@ -90,6 +91,23 @@ static JGSession *sharedSession = nil;
 - (void)loginWithCredential:(TSCRequestCredential *)credential completion:(JGSessionLoginCompletion)completion
 {
     [self loginWithEmail:credential.username password:credential.password completion:completion];
+}
+
+- (void)retrieveUserAccountInformationWithCompletion:(JGSessionLoginCompletion)completion
+{
+    [self.requestController get:@"account" completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
+        if (error) {
+            completion(nil, error);
+            return;
+        }
+        
+        if (!response.dictionary) {
+            completion(nil, error);
+            return;
+        }
+        
+        completion([[JGUser alloc] initWithDictionary:response.dictionary], error);
+    }];
 }
 
 @end
