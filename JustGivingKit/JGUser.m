@@ -26,11 +26,11 @@
             
             for (NSDictionary *imageDictionary in dictionary[@"profileImageUrls"]) {
                 
-                if (imageDictionary[@"value"]) {
-                    self.profileUrl = [NSURL URLWithString:imageDictionary[@"value"]];
+                if (imageDictionary[@"Value"]) {
+                    self.profileUrl = [NSURL URLWithString:imageDictionary[@"Value"]];
                 }
                 
-                if (imageDictionary[@"key"] && [imageDictionary[@"key"] isEqualToString:@"Size150x150Face"] && self.profileUrl) {
+                if (imageDictionary[@"Key"] && [imageDictionary[@"Key"] isEqualToString:@"Size150x150Face"] && self.profileUrl) {
                     break;
                 }
             }
