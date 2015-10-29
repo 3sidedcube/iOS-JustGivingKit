@@ -13,6 +13,7 @@
 @interface JGFundraisingController : NSObject
 
 typedef void (^JGFetchPagesCompletion)(NSArray *pages, NSError *error);
+typedef void (^JGRaisedAmountCompletion)(NSNumber *raisedAmount, NSError *error);
 
 /**
  @abstract Returns all of a user's fundraising pages
@@ -38,6 +39,8 @@ typedef void (^JGFetchPagesCompletion)(NSArray *pages, NSError *error);
 - (void)getFundraisingPagesWithCharityId:(NSString *)charityId forUserEmail:(NSString *)userEmail withCompletion:(JGFetchPagesCompletion)completion;
 
 
--(NSObject *)getMoreDetailsforFundraisingPage:(NSObject *)pageShortName;
+- (NSObject *)getMoreDetailsforFundraisingPage:(NSObject *)pageShortName;
+
+- (void)totalFundsRaisedByUser:(JGUser *)user ForCharityId:(NSString *)charityId completion:(JGRaisedAmountCompletion)completion;
 
 @end
