@@ -17,3 +17,4 @@ FOUNDATION_EXPORT const unsigned char JustGivingKitVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <JustGivingKit/PublicHeader.h>
 
 #import "JGSession.h"
+#import "JGUser.h"

@@ -12,4 +12,8 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
+@property (nonatomic, copy) NSString *firstName;
+@property (nonatomic, copy) NSString *lastName;
+@property (nonatomic, strong) NSURL *profileUrl;
+
 @end

@@ -12,7 +12,7 @@
 		368411151BE21A3F00FEE624 /* ThunderRequest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 368411111BE21A3200FEE624 /* ThunderRequest.framework */; };
 		368411341BE2225B00FEE624 /* JGSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 368411321BE2225B00FEE624 /* JGSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		368411351BE2225B00FEE624 /* JGSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 368411331BE2225B00FEE624 /* JGSession.m */; settings = {ASSET_TAGS = (); }; };
-		3684114B1BE23E8800FEE624 /* JGUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 368411491BE23E8800FEE624 /* JGUser.h */; settings = {ASSET_TAGS = (); }; };
+		3684114B1BE23E8800FEE624 /* JGUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 368411491BE23E8800FEE624 /* JGUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3684114C1BE23E8800FEE624 /* JGUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3684114A1BE23E8800FEE624 /* JGUser.m */; settings = {ASSET_TAGS = (); }; };
 		3684114F1BE23F8C00FEE624 /* JGFundraisingController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3684114D1BE23F8C00FEE624 /* JGFundraisingController.h */; settings = {ASSET_TAGS = (); }; };
 		368411501BE23F8C00FEE624 /* JGFundraisingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3684114E1BE23F8C00FEE624 /* JGFundraisingController.m */; settings = {ASSET_TAGS = (); }; };
@@ -168,8 +168,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3684114B1BE23E8800FEE624 /* JGUser.h in Headers */,
 				368411341BE2225B00FEE624 /* JGSession.h in Headers */,
+				3684114B1BE23E8800FEE624 /* JGUser.h in Headers */,
 				3684114F1BE23F8C00FEE624 /* JGFundraisingController.h in Headers */,
 				361DA0761BE2190400F76120 /* JustGivingKit.h in Headers */,
 			);

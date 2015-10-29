@@ -75,8 +75,11 @@ static JGSession *sharedSession = nil;
         }
         
         TSCRequestCredential *credential = [[TSCRequestCredential alloc] initWithUsername:email password:password];
-        credential.authorizationToken = [NSString stringWithFormat:@"Basic %@", [[[NSString stringWithFormat:@"%@:%@", email, password] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedDataWithOptions:kNilOptions]];
+        credential.authorizationToken = [[[NSString stringWithFormat:@"%@:%@", email, password] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:kNilOptions];
+        credential.authorizationToken = [NSString stringWithFormat:@"Basic %@", credential.authorizationToken];
         self.requestController.sharedRequestCredential = credential;
+        
+        self.requestController.sharedRequestHeaders = [[NSMutableDictionary alloc] initWithObjects:@[self.requestController.sharedRequestCredential.authorizationToken] forKeys:@[@"Authorization"]];
         
         if ([TSCRequestCredential storeCredential:credential withIdentifier:@"JGUserLogin"]) {
             [self willChangeValueForKey:@"loggedIn"];
@@ -84,7 +87,15 @@ static JGSession *sharedSession = nil;
             [self didChangeValueForKey:@"loggedIn"];
         }
         
-        completion(nil, error);
+        [self retrieveUserAccountInformationWithCompletion:^(JGUser *user, NSError *error) {
+            if (error) {
+                completion(nil, error);
+                return;
+            }
+            
+            completion(user, error);
+        }];
+        
     }];
 }
 

@@ -14,6 +14,27 @@
 {
     if (self = [super init]) {
         
+        if (dictionary[@"firstName"]) {
+            self.firstName = dictionary[@"firstName"];
+        }
+        
+        if (dictionary[@"lastName"]) {
+            self.lastName = dictionary[@"lastName"];
+        }
+        
+        if (dictionary[@"profileImageUrls"]) {
+            
+            for (NSDictionary *imageDictionary in dictionary[@"profileImageUrls"]) {
+                
+                if (imageDictionary[@"value"]) {
+                    self.profileUrl = [NSURL URLWithString:imageDictionary[@"value"]];
+                }
+                
+                if (imageDictionary[@"key"] && [imageDictionary[@"key"] isEqualToString:@"Size150x150Face"] && self.profileUrl) {
+                    break;
+                }
+            }
+        }
     }
     
     return self;
