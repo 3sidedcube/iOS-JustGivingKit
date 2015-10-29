@@ -18,3 +18,4 @@ FOUNDATION_EXPORT const unsigned char JustGivingKitVersionString[];
 
 #import "JGSession.h"
 #import "JGUser.h"
+#import "JGFundraisingController.h"

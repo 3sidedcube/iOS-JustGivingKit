@@ -10,4 +10,11 @@
 
 @interface JGFundraisingController : NSObject
 
+typedef void (^JGFetchPagesCompletion)(NSArray *pages, NSError *error);
+
+- (void)getFundraisingPagesWithCompletion:(JGFetchPagesCompletion)completion;
+
+
+-(NSObject *)getMoreDetailsforFundraisingPage:(NSObject *)pageShortName;
+
 @end
