@@ -27,4 +27,9 @@
  */
 @property (nonatomic, strong) NSURL *profileUrl;
 
+/**
+ @abstract The users email
+ */
+@property (nonatomic, copy) NSString *email;
+
 @end
