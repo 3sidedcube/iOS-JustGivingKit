@@ -10,6 +10,8 @@
 		361DA0761BE2190400F76120 /* JustGivingKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 361DA0751BE2190400F76120 /* JustGivingKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		368411141BE21A3F00FEE624 /* ThunderBasics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 368411081BE21A2B00FEE624 /* ThunderBasics.framework */; };
 		368411151BE21A3F00FEE624 /* ThunderRequest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 368411111BE21A3200FEE624 /* ThunderRequest.framework */; };
+		368411341BE2225B00FEE624 /* JGSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 368411321BE2225B00FEE624 /* JGSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		368411351BE2225B00FEE624 /* JGSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 368411331BE2225B00FEE624 /* JGSession.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		361DA0771BE2190400F76120 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		368411021BE21A2B00FEE624 /* ThunderBasics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ThunderBasics.xcodeproj; path = "Thunder Basics/ThunderBasics.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		3684110B1BE21A3200FEE624 /* ThunderRequest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ThunderRequest.xcodeproj; path = "Thunder Request/ThunderRequest.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		368411321BE2225B00FEE624 /* JGSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGSession.h; sourceTree = "<group>"; };
+		368411331BE2225B00FEE624 /* JGSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGSession.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,8 @@
 				368411011BE21A1D00FEE624 /* Supporting Files */,
 				361DA0751BE2190400F76120 /* JustGivingKit.h */,
 				361DA0771BE2190400F76120 /* Info.plist */,
+				368411321BE2225B00FEE624 /* JGSession.h */,
+				368411331BE2225B00FEE624 /* JGSession.m */,
 			);
 			path = JustGivingKit;
 			sourceTree = "<group>";
@@ -124,6 +130,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				368411341BE2225B00FEE624 /* JGSession.h in Headers */,
 				361DA0761BE2190400F76120 /* JustGivingKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,6 +243,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				368411351BE2225B00FEE624 /* JGSession.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
