@@ -11,9 +11,27 @@
 #import "JGFundraisingController.h"
 #import "JGFundraisingPage.h"
 #import "JGSession.h"
+#import "JGUser.h"
 
 @implementation JGFundraisingController
 
+- (void)getFundraisingPagesWithCharityId:(NSString *)charityId forUser:(JGUser *)user withCompletion:(JGFetchPagesCompletion)completion
+{
+    NSString *userEmail = @"";
+    if (user) {
+        userEmail = user.email;
+    }
+    
+    [self getFundraisingPages:charityId forUser:userEmail withCompletion:^(NSArray *pages, NSError *error) {
+        
+        if (completion) {
+            if (!error) {
+                completion(pages, error);
+            }
+        }
+        
+    }];
+}
 
 - (void)getFundraisingPages:(NSString *)charityId forUser:(NSString *)userEmail withCompletion:(JGFetchPagesCompletion)completion
 {
