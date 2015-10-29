@@ -10,4 +10,29 @@
 
 @implementation JGFundraisingPage
 
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+{
+    if (self = [super init]) {
+        
+        if (dictionary[@"pageId"]) {
+            self.pageId = dictionary[@"pageId"];
+        }
+        
+        if (dictionary[@"pageTitle"]) {
+            self.pageTitle = dictionary[@"pageTitle"];
+        }
+        
+        if (dictionary[@"pageShortName"]) {
+            self.pageShortName = dictionary[@"pageShortName"];
+        }
+        
+        if (dictionary[@"raisedAmount"]) {
+            self.pageShortName = dictionary[@"raisedAmount"];
+        }
+        
+    }
+    
+    return self;
+}
+
 @end
