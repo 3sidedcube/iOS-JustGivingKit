@@ -84,8 +84,7 @@
     __block double totalRaised = 0;
     [self getFundraisingPagesWithCharityId:charityId forUser:user withCompletion:^(NSArray *pages, NSError *error) {
         
-        for (NSDictionary *pageInfo in pages) {
-            JGFundraisingPage *page = [[JGFundraisingPage alloc]initWithDictionary:pageInfo];
+        for (JGFundraisingPage *page in pages) {
             if (page.raisedAmount) {
                 double raisedAmount = page.raisedAmount.doubleValue;
                 totalRaised += raisedAmount;
