@@ -20,3 +20,5 @@ FOUNDATION_EXPORT const unsigned char JustGivingKitVersionString[];
 #import "JGUser.h"
 #import "JGFundraisingController.h"
 #import "JGFundraisingPage.h"
+#import "JGSearchQuery.h"
+#import "JGSearchController.h"
