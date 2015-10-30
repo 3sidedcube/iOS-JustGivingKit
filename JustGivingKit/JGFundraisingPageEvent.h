@@ -10,8 +10,14 @@
 
 @interface JGFundraisingPageEvent : JGFundraisingPage
 
+/**
+ @abstract The unqiue event identifier
+ */
 @property (nonatomic, copy) NSString *eventId;
 
+/**
+ @abstract The event's name
+ */
 @property (nonatomic, copy) NSString *eventName;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
