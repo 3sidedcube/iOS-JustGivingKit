@@ -57,6 +57,23 @@
     }];
 }
 
+- (void)getMoreDetailsForFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGFetchPageDetailCompletion)completion
+{
+    NSString *getAddress = [NSString stringWithFormat:@"fundraising/pages/%@",fundraisingPage.pageShortName];
+    
+    [[JGSession sharedSession].requestController get:getAddress completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
+        
+        if (error || response.status != 200) {
+            completion(nil, error);
+            return;
+        }
+        
+        JGFundraisingPage *page = [[JGFundraisingPage alloc]initWithDictionary:response.dictionary];
+        completion(page, error);
+    }];
+
+}
+
 - (void)requestPagesWithAddress:(NSString *)address WithCompletion:(JGFetchPagesCompletion)completion
 {
     [[JGSession sharedSession].requestController get:address completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {

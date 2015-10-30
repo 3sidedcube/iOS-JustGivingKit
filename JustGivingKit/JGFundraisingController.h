@@ -9,10 +9,16 @@
 #import <Foundation/Foundation.h>
 
 @class JGUser;
+@class JGFundraisingPage;
 
+/**
+ @class JGFundraisingController
+ @abstract A fundraising controller provides a set of useful methods to obtain fundraising page information from the JustGiving API
+ */
 @interface JGFundraisingController : NSObject
 
 typedef void (^JGFetchPagesCompletion)(NSArray *pages, NSError *error);
+typedef void (^JGFetchPageDetailCompletion)(JGFundraisingPage *page, NSError *error);
 typedef void (^JGRaisedAmountCompletion)(NSNumber *raisedAmount, NSError *error);
 
 /**
@@ -38,9 +44,20 @@ typedef void (^JGRaisedAmountCompletion)(NSNumber *raisedAmount, NSError *error)
  */
 - (void)getFundraisingPagesWithCharityId:(NSString *)charityId forUserEmail:(NSString *)userEmail withCompletion:(JGFetchPagesCompletion)completion;
 
+/**
+ @abstract Returns a fundraising page model with greater detailed attributes
+ @discussion Use this method after getting a fundraising page to obtain more information about the fundraising page
+ @param fundraisingPage The fundraising page for which you want to obtain the details
+ @param completion completion block which returns a fundraising page object if the operation successfully completes
+ */
+- (void)getMoreDetailsForFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGFetchPageDetailCompletion)completion;
 
-- (NSObject *)getMoreDetailsforFundraisingPage:(NSObject *)pageShortName;
-
+/**
+ @abstract Returns the total amount of money raised by a user for a given charity
+ @param user A just giving user which you want the total for
+ @param charityId A valid justgiving charityId
+ @param completion completion block which returns the total amount raised if the operation successfully completes
+ */
 - (void)totalFundsRaisedByUser:(JGUser *)user ForCharityId:(NSString *)charityId completion:(JGRaisedAmountCompletion)completion;
 
 @end

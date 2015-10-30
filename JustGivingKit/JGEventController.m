@@ -14,7 +14,7 @@
 
 @implementation JGEventController
 
--(void)getEventsForUser:(JGUser *)user withCharityId:(NSString *)charityId completion:(JGFetchEventsCompletion)completion
+- (void)getEventsForUser:(JGUser *)user withCharityId:(NSString *)charityId completion:(JGFetchEventsCompletion)completion
 {
     NSString *userEmail = @"";
     if (user) {
@@ -40,7 +40,6 @@
         
         completion([events copy],error);
     }];
-
 }
 
 @end
