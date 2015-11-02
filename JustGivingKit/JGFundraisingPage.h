@@ -21,6 +21,11 @@
 @property (nonatomic, copy) NSString *pageTitle;
 
 /**
+ @abstract The summary of what the user is doing and why the user is raising
+ */
+@property (nonatomic, copy) NSString *pageSummary;
+
+/**
  @abstract A unique identifier for the fundraising page that is used to make requests
  */
 @property (nonatomic, copy) NSString *pageShortName;
@@ -29,6 +34,16 @@
  @abstract The total amount raised for a given fundraising page
  */
 @property (nonatomic, copy) NSNumber *raisedAmount;
+
+/**
+ @abstract The target amount to raise for a fundraising page
+ */
+@property (nonatomic, copy) NSNumber *targetAmount;
+
+/**
+ @abstract An array of the funraising page's image urls
+ */
+@property (nonatomic, strong) NSArray<NSURL *> *imageUrls;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

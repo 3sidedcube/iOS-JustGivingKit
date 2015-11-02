@@ -27,9 +27,32 @@
         }
         
         if (dictionary[@"raisedAmount"]) {
-            self.pageShortName = dictionary[@"raisedAmount"];
+            self.raisedAmount = dictionary[@"raisedAmount"];
+            
+            if (!self.raisedAmount) {
+                self.raisedAmount = @(0);
+            }
         }
         
+        if (dictionary[@"targetAmount"]) {
+            self.targetAmount = dictionary[@"targetAmount"];
+            
+            if (!self.targetAmount) {
+                self.targetAmount = @(0);
+            }
+        }
+        
+        NSMutableArray<NSURL *> *imageUrls = [NSMutableArray new];
+        
+        if (dictionary[@"images"]) {
+            for (NSDictionary *imageDictionary in dictionary[@"images"]) {
+                if (imageDictionary[@"absoluteUrl"]) {
+                    [imageUrls addObject:[NSURL URLWithString:imageDictionary[@"absoluteUrl"]]];
+                }
+            }
+        }
+        
+        self.imageUrls = [NSArray<NSURL *> arrayWithArray:imageUrls];
     }
     
     return self;

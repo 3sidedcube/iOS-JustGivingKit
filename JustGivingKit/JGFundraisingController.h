@@ -17,7 +17,7 @@
  */
 @interface JGFundraisingController : NSObject
 
-typedef void (^JGFetchPagesCompletion)(NSArray *pages, NSError *error);
+typedef void (^JGFetchPagesCompletion)(NSArray<JGFundraisingPage *> *pages, NSError *error);
 typedef void (^JGFetchPageDetailCompletion)(JGFundraisingPage *page, NSError *error);
 typedef void (^JGRaisedAmountCompletion)(NSNumber *raisedAmount, NSError *error);
 
