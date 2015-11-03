@@ -68,7 +68,7 @@
             return;
         }
         
-        JGFundraisingPage *page = [[JGFundraisingPage alloc]initWithDictionary:response.dictionary];
+        JGFundraisingPage *page = [[JGFundraisingPage alloc] initWithDictionary:response.dictionary];
         completion(page, error);
     }];
 

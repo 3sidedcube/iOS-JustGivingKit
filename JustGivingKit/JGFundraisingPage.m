@@ -22,6 +22,10 @@
             self.pageTitle = dictionary[@"pageTitle"];
         }
         
+        if (dictionary[@"pageSummary"]) {
+            self.pageSummary = dictionary[@"pageSummary"];
+        }
+        
         if (dictionary[@"pageShortName"]) {
             self.pageShortName = dictionary[@"pageShortName"];
         }
