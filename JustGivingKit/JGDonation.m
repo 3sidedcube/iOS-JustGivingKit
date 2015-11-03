@@ -7,6 +7,7 @@
 //
 
 #import "JGDonation.h"
+#import "NSDate+JGDate.h"
 
 @implementation JGDonation
 
@@ -29,6 +30,14 @@
             
             if (dictionary[@"message"]) {
                 self.donorMessage = dictionary[@"message"];
+            }
+            
+            if (dictionary[@"image"]) {
+                self.donorProfileImageUrl = [NSURL URLWithString:dictionary[@"image"]];
+            }
+            
+            if (dictionary[@"donationDate"]) {
+                self.donationDate = [NSDate dateWithODataString:dictionary[@"donationDate"]];
             }
         }
     }
