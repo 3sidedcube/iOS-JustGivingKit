@@ -25,4 +25,7 @@ typedef void (^JGFetchEventsCompletion)(NSArray *events, NSError *error);
  */
 - (void)getEventsForUser:(JGUser *)user withCharityId:(NSString *)charityId completion:(JGFetchEventsCompletion)completion;
 
+
+- (void)getEventsForSearchTerm:(NSString *)searchTerm withCharityId:(NSString *)charityId completion:(JGFetchEventsCompletion)completion;
+
 @end

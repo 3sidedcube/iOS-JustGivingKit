@@ -14,6 +14,8 @@
 		3684114B1BE23E8800FEE624 /* JGUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 368411491BE23E8800FEE624 /* JGUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3684114C1BE23E8800FEE624 /* JGUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3684114A1BE23E8800FEE624 /* JGUser.m */; };
 		368411501BE23F8C00FEE624 /* JGFundraisingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3684114E1BE23F8C00FEE624 /* JGFundraisingController.m */; };
+		496C48281BE9030D00E653D3 /* JGEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496C48271BE9030D00E653D3 /* JGEvent.swift */; };
+		496C482D1BE90EE200E653D3 /* JGEvent.swift in Headers */ = {isa = PBXBuildFile; fileRef = 496C48271BE9030D00E653D3 /* JGEvent.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF05C93B1BE258530039ADF4 /* JGFundraisingPage.h in Headers */ = {isa = PBXBuildFile; fileRef = FF05C9391BE258530039ADF4 /* JGFundraisingPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF05C93C1BE258530039ADF4 /* JGFundraisingPage.m in Sources */ = {isa = PBXBuildFile; fileRef = FF05C93A1BE258530039ADF4 /* JGFundraisingPage.m */; };
 		FF05C9411BE25BBB0039ADF4 /* JGFundraisingController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3684114D1BE23F8C00FEE624 /* JGFundraisingController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -72,6 +74,7 @@
 		3684114A1BE23E8800FEE624 /* JGUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGUser.m; sourceTree = "<group>"; };
 		3684114D1BE23F8C00FEE624 /* JGFundraisingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGFundraisingController.h; sourceTree = "<group>"; };
 		3684114E1BE23F8C00FEE624 /* JGFundraisingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGFundraisingController.m; sourceTree = "<group>"; };
+		496C48271BE9030D00E653D3 /* JGEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JGEvent.swift; sourceTree = "<group>"; };
 		FF05C9391BE258530039ADF4 /* JGFundraisingPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGFundraisingPage.h; sourceTree = "<group>"; };
 		FF05C93A1BE258530039ADF4 /* JGFundraisingPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGFundraisingPage.m; sourceTree = "<group>"; };
 		FF7517261BE3715300989F27 /* JGEventController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGEventController.h; sourceTree = "<group>"; };
@@ -177,6 +180,7 @@
 				FF05C93A1BE258530039ADF4 /* JGFundraisingPage.m */,
 				FF8A895E1BE37C10009707C2 /* JGFundraisingPageEvent.h */,
 				FF8A895F1BE37C10009707C2 /* JGFundraisingPageEvent.m */,
+				496C48271BE9030D00E653D3 /* JGEvent.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -223,6 +227,7 @@
 				FFD27FC71BE393F400825CD4 /* JGSearchController.h in Headers */,
 				FF7517211BE2619E00989F27 /* JGSession.h in Headers */,
 				361DA0761BE2190400F76120 /* JustGivingKit.h in Headers */,
+				496C482D1BE90EE200E653D3 /* JGEvent.swift in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +258,7 @@
 		361DA0691BE2190400F76120 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "3 Sided Cube";
 				TargetAttributes = {
@@ -335,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				368411501BE23F8C00FEE624 /* JGFundraisingController.m in Sources */,
+				496C48281BE9030D00E653D3 /* JGEvent.swift in Sources */,
 				FF8A89611BE37C10009707C2 /* JGFundraisingPageEvent.m in Sources */,
 				368411351BE2225B00FEE624 /* JGSession.m in Sources */,
 				FF05C93C1BE258530039ADF4 /* JGFundraisingPage.m in Sources */,
@@ -439,26 +446,31 @@
 		361DA07B1BE2190400F76120 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = JustGivingKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.threesidedcube.JustGivingKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		361DA07C1BE2190400F76120 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = JustGivingKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

@@ -8,8 +8,21 @@
 
 #import "JGSearchController.h"
 #import "JGSearchQuery.h"
+#import "JGDefines.h"
 
 @implementation JGSearchController
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        
+        self.requestController = [[TSCRequestController alloc] initWithBaseAddress:[NSString stringWithFormat:@"%@/%@/v1", JGAPIBaseAddress, [[NSBundle mainBundle] infoDictionary][@"JGApplicationId"]]];
+        self.requestController.sharedRequestHeaders[@"Accept"] = @"application/json";
+        
+    }
+    return self;
+}
 
 - (void)performSearchWithQuery:(JGSearchQuery *)searchQuery withCompletion:(JGPerformSearchCompletion)completion
 {
@@ -22,13 +35,21 @@
             return;
         }
         
-        NSMutableArray *pages = [NSMutableArray new];
-        
-        for (NSDictionary *result in response.array) {
-            NSLog(@"results: %@", result);
+        if (response.dictionary && [response.dictionary isKindOfClass:[NSDictionary class]] && response.dictionary[@"GroupedResults"] && [response.dictionary[@"GroupedResults"] isKindOfClass:[NSArray class]]) {
+            
+            NSArray *resultsGroupedArray = response.dictionary[@"GroupedResults"];
+            
+            if (resultsGroupedArray.count > 0) {
+                
+                NSDictionary *resultDictionary = resultsGroupedArray.firstObject;
+                NSArray *eventsResultsArray = resultDictionary[@"Results"];
+                completion(eventsResultsArray,error);
+                return;
+                
+            }
         }
         
-        completion([pages copy],error);
+        completion(nil,error);
     }];
 
 }

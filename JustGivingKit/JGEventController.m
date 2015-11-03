@@ -11,6 +11,9 @@
 #import "JGSession.h"
 #import "JGUser.h"
 #import "JGFundraisingPageEvent.h"
+#import "JGSearchController.h"
+#import "JGSearchQuery.h"
+#import <JustGivingKit/JustGivingKit-Swift.h>
 
 @implementation JGEventController
 
@@ -42,4 +45,31 @@
     }];
 }
 
+
+- (void)getEventsForSearchTerm:(NSString *)searchTerm withCharityId:(NSString *)charityId completion:(JGFetchEventsCompletion)completion
+{
+    JGSearchQuery *query = [JGSearchQuery createQueryWithSearchTerm:searchTerm groupResults:false searchIndex:JGSearchQueryIndexEvent limit:@(10) offset:@(0) countryCode:@"gb"];
+    
+    JGSearchController *searchController = [JGSearchController new];
+    
+    [searchController performSearchWithQuery:query withCompletion:^(NSArray *results, NSError *error) {
+       
+        if (error) {
+            
+            completion(nil, error);
+            return;
+        }
+        
+        NSMutableArray *eventsArray = [NSMutableArray array];
+        for (NSDictionary *eventDictionary in results) {
+            
+            JGEvent *event = [[JGEvent alloc] initWithDictionary:eventDictionary];
+            [eventsArray addObject:event];
+            
+        }
+        
+        completion(eventsArray, nil);
+
+    }];
+}
 @end
