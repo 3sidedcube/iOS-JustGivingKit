@@ -12,6 +12,7 @@
 #import "JGFundraisingPage.h"
 #import "JGSession.h"
 #import "JGUser.h"
+#import "JGDonation.h"
 
 @implementation JGFundraisingController
 
@@ -71,7 +72,26 @@
         JGFundraisingPage *page = [[JGFundraisingPage alloc] initWithDictionary:response.dictionary];
         completion(page, error);
     }];
+}
 
+- (void)getDonationsForFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGFetchPageDonationsCompletion)completion
+{
+    NSString *getAddress = [NSString stringWithFormat:@"fundraising/pages/%@/donations",fundraisingPage.pageShortName];
+    
+    [[JGSession sharedSession].requestController get:getAddress completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
+        if (error) {
+            completion(nil, error);
+            return;
+        }
+        
+        NSMutableArray *donations = [NSMutableArray new];
+        
+        for (NSDictionary *donationDictionary in response.dictionary[@"donations"]) {
+            [donations addObject:[[JGDonation alloc] initWithDictionary:donationDictionary]];
+        }
+        
+        completion([NSArray arrayWithArray:donations], nil);
+    }];
 }
 
 - (void)requestPagesWithAddress:(NSString *)address WithCompletion:(JGFetchPagesCompletion)completion

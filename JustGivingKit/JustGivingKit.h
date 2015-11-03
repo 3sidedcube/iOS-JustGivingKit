@@ -16,9 +16,13 @@ FOUNDATION_EXPORT const unsigned char JustGivingKitVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <JustGivingKit/PublicHeader.h>
 
+// Models
 #import "JGSession.h"
 #import "JGUser.h"
+#import "JGDonation.h"
+#import "JGSearchQuery.h"
+
+// Controllers
 #import "JGFundraisingController.h"
 #import "JGFundraisingPage.h"
-#import "JGSearchQuery.h"
 #import "JGSearchController.h"

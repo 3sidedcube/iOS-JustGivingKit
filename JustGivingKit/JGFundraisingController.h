@@ -10,6 +10,7 @@
 
 @class JGUser;
 @class JGFundraisingPage;
+@class JGDonation;
 
 /**
  @class JGFundraisingController
@@ -20,6 +21,7 @@
 typedef void (^JGFetchPagesCompletion)(NSArray<JGFundraisingPage *> *pages, NSError *error);
 typedef void (^JGFetchPageDetailCompletion)(JGFundraisingPage *page, NSError *error);
 typedef void (^JGRaisedAmountCompletion)(NSNumber *raisedAmount, NSError *error);
+typedef void (^JGFetchPageDonationsCompletion)(NSArray<JGDonation *> *donations, NSError *error);
 
 /**
  @abstract Returns all of a user's fundraising pages
@@ -51,6 +53,14 @@ typedef void (^JGRaisedAmountCompletion)(NSNumber *raisedAmount, NSError *error)
  @param completion completion block which returns a fundraising page object if the operation successfully completes
  */
 - (void)getMoreDetailsForFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGFetchPageDetailCompletion)completion;
+
+/**
+ @abstract Returns an arrary of `JGDonation` objects for the given `JGFundraisingPage`
+ @discussion Use this method get the donations made to a fundraising page
+ @param fundraisingPage The fundraising page for which you want to obtain the donations
+ @param completion completion block which returns an `NSArrary` of `JGDonation` objects if the operation successfully completes
+ */
+- (void)getDonationsForFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGFetchPageDonationsCompletion)completion;
 
 /**
  @abstract Returns the total amount of money raised by a user for a given charity
