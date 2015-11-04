@@ -30,6 +30,11 @@ typedef void (^JGSessionLoginCompletion)(JGUser *user, NSError *error);
 @property (nonatomic, readwrite, getter = isLoggedIn) BOOL loggedIn;
 
 /**
+ @abstract The current authenticated user
+ */
+@property (nonatomic, strong) JGUser *currentUser;
+
+/**
  @abstract Returns a shared session. Use this by default.
  */
 + (JGSession *)sharedSession;
