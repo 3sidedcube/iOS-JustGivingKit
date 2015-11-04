@@ -93,6 +93,8 @@ static JGSession *sharedSession = nil;
                 return;
             }
             
+            self.currentUser = user;
+            
             completion(user, error);
         }];
     }];
