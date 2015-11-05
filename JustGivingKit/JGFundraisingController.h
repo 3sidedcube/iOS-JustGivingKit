@@ -10,6 +10,7 @@
 
 @class JGUser;
 @class JGFundraisingPage;
+@class JGFundraisingPageEvent;
 @class JGDonation;
 
 /**
@@ -22,6 +23,7 @@ typedef void (^JGFetchPagesCompletion)(NSArray<JGFundraisingPage *> *pages, NSEr
 typedef void (^JGFetchPageDetailCompletion)(JGFundraisingPage *page, NSError *error);
 typedef void (^JGRaisedAmountCompletion)(NSNumber *raisedAmount, NSError *error);
 typedef void (^JGFetchPageDonationsCompletion)(NSArray<JGDonation *> *donations, NSError *error);
+typedef void (^JGCreateFundraisingPageCompletion)(JGFundraisingPageEvent *page, NSError *error);
 
 /**
  @abstract Returns all of a user's fundraising pages
@@ -69,5 +71,8 @@ typedef void (^JGFetchPageDonationsCompletion)(NSArray<JGDonation *> *donations,
  @param completion completion block which returns the total amount raised if the operation successfully completes
  */
 - (void)totalFundsRaisedByUser:(JGUser *)user ForCharityId:(NSString *)charityId completion:(JGRaisedAmountCompletion)completion;
+
+
+- (void)createFundraisingPage:(JGFundraisingPageEvent *)fundraisingPage withCompletion:(JGCreateFundraisingPageCompletion)completion;
 
 @end

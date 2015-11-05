@@ -45,6 +45,11 @@
  */
 @property (nonatomic, strong) NSArray<NSURL *> *imageUrls;
 
+/**
+ @abstract The charity the fundraising page is raising for
+ */
+@property (nonatomic, strong) NSString *charityId;
+
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 

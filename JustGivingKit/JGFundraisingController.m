@@ -10,6 +10,7 @@
 
 #import "JGFundraisingController.h"
 #import "JGFundraisingPage.h"
+#import "JGFundraisingPageEvent.h"
 #import "JGSession.h"
 #import "JGUser.h"
 #import "JGDonation.h"
@@ -132,5 +133,49 @@
     }];
 }
 
+- (void)createFundraisingPage:(JGFundraisingPageEvent *)fundraisingPage withCompletion:(JGCreateFundraisingPageCompletion)completion
+{
+    NSMutableDictionary *payload = [NSMutableDictionary new];
+    payload[@"charityId"] = fundraisingPage.charityId;
+    payload[@"pageShortName"] = fundraisingPage.pageShortName;
+    payload[@"pageTitle"] = fundraisingPage.pageTitle;
+    payload[@"justGivingOptIn"] = @"false";
+    payload[@"charityOptIn"] = @"false";
+    payload[@"charityFunded"] = @"false";
+
+    
+    [[JGSession sharedSession].requestController put:@"fundraising/pages" bodyParams:payload completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
+        
+        if (error || response.status != 201) {
+            if (response.status == 409) {
+                //page was not created
+                
+                if ([response.dictionary[@"error"][@"id"] isEqualToString:@"PageShortNameAlreadyExists"]) {
+                    //pageshortname exists
+                    completion(nil, error);
+                }
+                
+                completion(nil, error);
+                return;
+            }
+            
+        } else {
+            //success
+            [self getMoreDetailsForFundraisingPage:fundraisingPage withCompletion:^(JGFundraisingPage *page, NSError *error) {
+                
+                if (error) {
+                    completion(nil, error);
+                    
+                } else {
+                    completion(page, error);
+                }
+                
+            }];
+        }
+        
+        
+        
+    }];
+}
 
 @end

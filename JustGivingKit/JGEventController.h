@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class JGUser;
+@class JGFundraisingPage;
 
 /**
  @class JGEventController
@@ -16,6 +17,7 @@
 @interface JGEventController : NSObject
 
 typedef void (^JGFetchEventsCompletion)(NSArray *events, NSError *error);
+typedef void (^JGJoinEventCompletion)(JGFundraisingPage *page, NSError *error);
 
 /**
  @abstract Returns an arary of fundraising page events for a given user for a charity
@@ -27,5 +29,8 @@ typedef void (^JGFetchEventsCompletion)(NSArray *events, NSError *error);
 
 
 - (void)getEventsForSearchTerm:(NSString *)searchTerm withCharityId:(NSString *)charityId completion:(JGFetchEventsCompletion)completion;
+
+
+- (void)joinEventWithEventId:(NSString *)eventId andPageShortName:(NSString *)pageShortName withCharityId:(NSString *)charityId targetAmount:(NSNumber *)targetAmount withCompletion:(JGJoinEventCompletion)completion;
 
 @end
