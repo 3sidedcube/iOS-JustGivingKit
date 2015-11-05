@@ -10,7 +10,6 @@
 
 @class JGUser;
 @class JGFundraisingPage;
-@class JGFundraisingPageEvent;
 @class JGDonation;
 
 /**
@@ -23,7 +22,7 @@ typedef void (^JGFetchPagesCompletion)(NSArray<JGFundraisingPage *> *pages, NSEr
 typedef void (^JGFetchPageDetailCompletion)(JGFundraisingPage *page, NSError *error);
 typedef void (^JGRaisedAmountCompletion)(NSNumber *raisedAmount, NSError *error);
 typedef void (^JGFetchPageDonationsCompletion)(NSArray<JGDonation *> *donations, NSError *error);
-typedef void (^JGCreateFundraisingPageCompletion)(JGFundraisingPageEvent *page, NSError *error);
+typedef void (^JGCreateFundraisingPageCompletion)(JGFundraisingPage *page, NSError *error);
 
 /**
  @abstract Returns all of a user's fundraising pages
@@ -72,7 +71,12 @@ typedef void (^JGCreateFundraisingPageCompletion)(JGFundraisingPageEvent *page, 
  */
 - (void)totalFundsRaisedByUser:(JGUser *)user ForCharityId:(NSString *)charityId completion:(JGRaisedAmountCompletion)completion;
 
-
-- (void)createFundraisingPage:(JGFundraisingPageEvent *)fundraisingPage withCompletion:(JGCreateFundraisingPageCompletion)completion;
+/**
+ @abstract Creates/registers a fundraising page using the JustGivingApi
+ @discussion Make sure the fundraisingpage object you give the method has at least a charityId, pageShortName and pageTitle. The method is used in the wrapper method joinEventWithEventId
+ @param fundraisingPage A fundraising page with a charityId, pageShortName and pageTitle
+ @param completion completion block which returns the a fully detailed fundraisingPage or an error 
+ */
+- (void)createFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGCreateFundraisingPageCompletion)completion;
 
 @end

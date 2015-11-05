@@ -133,12 +133,14 @@
     }];
 }
 
-- (void)createFundraisingPage:(JGFundraisingPageEvent *)fundraisingPage withCompletion:(JGCreateFundraisingPageCompletion)completion
+- (void)createFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGCreateFundraisingPageCompletion)completion
 {
     NSMutableDictionary *payload = [NSMutableDictionary new];
+    
     payload[@"charityId"] = fundraisingPage.charityId;
     payload[@"pageShortName"] = fundraisingPage.pageShortName;
     payload[@"pageTitle"] = fundraisingPage.pageTitle;
+    if (fundraisingPage.targetAmount) { payload[@"targetAmount"] = [fundraisingPage.targetAmount stringValue]; }
     payload[@"justGivingOptIn"] = @"false";
     payload[@"charityOptIn"] = @"false";
     payload[@"charityFunded"] = @"false";
@@ -148,10 +150,10 @@
         
         if (error || response.status != 201) {
             if (response.status == 409) {
-                //page was not created
+                // page was not created
                 
                 if ([response.dictionary[@"error"][@"id"] isEqualToString:@"PageShortNameAlreadyExists"]) {
-                    //pageshortname exists
+                    // pageshortname exists
                     completion(nil, error);
                 }
                 
@@ -160,7 +162,8 @@
             }
             
         } else {
-            //success
+            
+            // success
             [self getMoreDetailsForFundraisingPage:fundraisingPage withCompletion:^(JGFundraisingPage *page, NSError *error) {
                 
                 if (error) {
@@ -169,12 +172,8 @@
                 } else {
                     completion(page, error);
                 }
-                
             }];
         }
-        
-        
-        
     }];
 }
 

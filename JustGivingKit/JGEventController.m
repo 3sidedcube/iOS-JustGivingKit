@@ -78,12 +78,13 @@
 {
     JGFundraisingController *fundraisingController = [JGFundraisingController new];
     
-    JGFundraisingPageEvent *page = [JGFundraisingPageEvent new];
+    JGFundraisingPage *page = [JGFundraisingPage new];
     page.eventId = eventId;
     page.pageShortName = pageShortName;
     page.charityId = charityId;
+    page.targetAmount = targetAmount;
     
-    [fundraisingController createFundraisingPage:page withCompletion:^(JGFundraisingPageEvent *page, NSError *error) {
+    [fundraisingController createFundraisingPage:page withCompletion:^(JGFundraisingPage *page, NSError *error) {
         
         if (error) {
             
