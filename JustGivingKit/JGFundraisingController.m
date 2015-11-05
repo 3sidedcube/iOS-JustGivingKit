@@ -175,4 +175,16 @@
     }];
 }
 
+- (void)deleteFundraisingPageWithShortName:(NSString *)pageShortName withCompletion:(JGDeleteFundraisingPageCompletion)completion
+{
+    [[JGSession sharedSession].requestController delete:[NSString stringWithFormat:@"fundraising/pages/%@", pageShortName] completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
+        
+        if (error) {
+            completion(error);
+        } else {
+            completion(nil);
+        }
+    }];
+}
+
 @end

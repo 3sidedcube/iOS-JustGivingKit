@@ -23,6 +23,7 @@ typedef void (^JGFetchPageDetailCompletion)(JGFundraisingPage *page, NSError *er
 typedef void (^JGRaisedAmountCompletion)(NSNumber *raisedAmount, NSError *error);
 typedef void (^JGFetchPageDonationsCompletion)(NSArray<JGDonation *> *donations, NSError *error);
 typedef void (^JGCreateFundraisingPageCompletion)(JGFundraisingPage *page, NSError *error);
+typedef void (^JGDeleteFundraisingPageCompletion)(NSError *error);
 
 /**
  @abstract Returns all of a user's fundraising pages
@@ -78,5 +79,7 @@ typedef void (^JGCreateFundraisingPageCompletion)(JGFundraisingPage *page, NSErr
  @param completion completion block which returns the a fully detailed fundraisingPage or an error 
  */
 - (void)createFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGCreateFundraisingPageCompletion)completion;
+
+- (void)deleteFundraisingPageWithShortName:(NSString *)pageShortName withCompletion:(JGDeleteFundraisingPageCompletion)completion;
 
 @end
