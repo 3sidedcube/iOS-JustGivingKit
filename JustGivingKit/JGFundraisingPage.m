@@ -30,6 +30,13 @@
             self.pageShortName = dictionary[@"pageShortName"];
         }
         
+        if (dictionary[@"pageStatus"]) {
+            self.pageStatus = dictionary[@"pageStatus"];
+            // we have to check for 'status' aswell as the API uses this in some places
+        } else if (dictionary[@"status"]) {
+            self.pageStatus = dictionary[@"status"];
+        }
+        
         if (dictionary[@"raisedAmount"]) {
             self.raisedAmount = dictionary[@"raisedAmount"];
             

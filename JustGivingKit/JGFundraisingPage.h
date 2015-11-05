@@ -31,6 +31,11 @@
 @property (nonatomic, copy) NSString *pageShortName;
 
 /**
+ @abstract The page status i.e Active/Cancelled
+ */
+@property (nonatomic, copy) NSString *pageStatus;
+
+/**
  @abstract The total amount raised for a given fundraising page
  */
 @property (nonatomic, copy) NSNumber *raisedAmount;
