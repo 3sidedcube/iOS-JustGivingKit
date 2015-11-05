@@ -139,6 +139,7 @@
     payload[@"charityId"] = fundraisingPage.charityId;
     payload[@"pageShortName"] = fundraisingPage.pageShortName;
     payload[@"pageTitle"] = fundraisingPage.pageTitle;
+    payload[@"eventId"] = fundraisingPage.eventId;
     if (fundraisingPage.targetAmount) { payload[@"targetAmount"] = [fundraisingPage.targetAmount stringValue]; }
     payload[@"justGivingOptIn"] = @"false";
     payload[@"charityOptIn"] = @"false";
@@ -146,26 +147,24 @@
 
     
     [[JGSession sharedSession].requestController put:@"fundraising/pages" bodyParams:payload completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
-        
         if (error || response.status != 201) {
             if (response.status == 409) {
                 // page was not created
-                
-                if ([response.dictionary[@"error"][@"id"] isEqualToString:@"PageShortNameAlreadyExists"]) {
-                    // pageshortname exists
-                    completion(nil, error);
-                }
-                
+                NSLog(@"error %@", error);
                 completion(nil, error);
                 return;
+            } else {
+                NSLog(@"error %@", error);
+                completion(nil, error);
             }
             
         } else {
+            //if the page has been successfully created then we'll go get the full details for it
             
-            // success
             [self getMoreDetailsForFundraisingPage:fundraisingPage withCompletion:^(JGFundraisingPage *page, NSError *error) {
                 
                 if (error) {
+                    NSLog(@"error %@", error);
                     completion(nil, error);
                     
                 } else {

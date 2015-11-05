@@ -31,6 +31,6 @@ typedef void (^JGJoinEventCompletion)(JGFundraisingPage *page, NSError *error);
 - (void)getEventsForSearchTerm:(NSString *)searchTerm withCharityId:(NSString *)charityId completion:(JGFetchEventsCompletion)completion;
 
 
-- (void)joinEventWithEventId:(NSString *)eventId andPageShortName:(NSString *)pageShortName withCharityId:(NSString *)charityId targetAmount:(NSNumber *)targetAmount withCompletion:(JGJoinEventCompletion)completion;
+- (void)joinEventWithEventId:(NSString *)eventId pageTitle:(NSString *)pageTitle pageShortName:(NSString *)pageShortName withCharityId:(NSString *)charityId targetAmount:(NSNumber *)targetAmount withCompletion:(JGJoinEventCompletion)completion;
 
 @end
