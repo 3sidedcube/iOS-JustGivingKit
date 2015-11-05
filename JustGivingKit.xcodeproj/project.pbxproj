@@ -15,9 +15,9 @@
 		3684114C1BE23E8800FEE624 /* JGUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3684114A1BE23E8800FEE624 /* JGUser.m */; };
 		368411501BE23F8C00FEE624 /* JGFundraisingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3684114E1BE23F8C00FEE624 /* JGFundraisingController.m */; };
 		36A4A4ED1BE8D92F007EB555 /* JGDonation.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A4A4EB1BE8D92F007EB555 /* JGDonation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		36A4A4EE1BE8D92F007EB555 /* JGDonation.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4A4EC1BE8D92F007EB555 /* JGDonation.m */; settings = {ASSET_TAGS = (); }; };
-		36A4A52B1BE91990007EB555 /* NSDate+JGDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A4A5291BE91990007EB555 /* NSDate+JGDate.h */; settings = {ASSET_TAGS = (); }; };
-		36A4A52C1BE91990007EB555 /* NSDate+JGDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4A52A1BE91990007EB555 /* NSDate+JGDate.m */; settings = {ASSET_TAGS = (); }; };
+		36A4A4EE1BE8D92F007EB555 /* JGDonation.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4A4EC1BE8D92F007EB555 /* JGDonation.m */; };
+		36A4A52B1BE91990007EB555 /* NSDate+JGDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A4A5291BE91990007EB555 /* NSDate+JGDate.h */; };
+		36A4A52C1BE91990007EB555 /* NSDate+JGDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4A52A1BE91990007EB555 /* NSDate+JGDate.m */; };
 		496C48281BE9030D00E653D3 /* JGEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496C48271BE9030D00E653D3 /* JGEvent.swift */; };
 		496C482D1BE90EE200E653D3 /* JGEvent.swift in Headers */ = {isa = PBXBuildFile; fileRef = 496C48271BE9030D00E653D3 /* JGEvent.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF05C93B1BE258530039ADF4 /* JGFundraisingPage.h in Headers */ = {isa = PBXBuildFile; fileRef = FF05C9391BE258530039ADF4 /* JGFundraisingPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -26,8 +26,6 @@
 		FF7517211BE2619E00989F27 /* JGSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 368411321BE2225B00FEE624 /* JGSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF7517281BE3715300989F27 /* JGEventController.h in Headers */ = {isa = PBXBuildFile; fileRef = FF7517261BE3715300989F27 /* JGEventController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF7517291BE3715300989F27 /* JGEventController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7517271BE3715300989F27 /* JGEventController.m */; };
-		FF8A89601BE37C10009707C2 /* JGFundraisingPageEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = FF8A895E1BE37C10009707C2 /* JGFundraisingPageEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FF8A89611BE37C10009707C2 /* JGFundraisingPageEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = FF8A895F1BE37C10009707C2 /* JGFundraisingPageEvent.m */; };
 		FFD27FC71BE393F400825CD4 /* JGSearchController.h in Headers */ = {isa = PBXBuildFile; fileRef = FFD27FC51BE393F400825CD4 /* JGSearchController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FFD27FC81BE393F400825CD4 /* JGSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFD27FC61BE393F400825CD4 /* JGSearchController.m */; };
 		FFD27FD01BE3945E00825CD4 /* JGSearchQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = FFD27FCE1BE3945E00825CD4 /* JGSearchQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -87,8 +85,6 @@
 		FF05C93A1BE258530039ADF4 /* JGFundraisingPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGFundraisingPage.m; sourceTree = "<group>"; };
 		FF7517261BE3715300989F27 /* JGEventController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGEventController.h; sourceTree = "<group>"; };
 		FF7517271BE3715300989F27 /* JGEventController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGEventController.m; sourceTree = "<group>"; };
-		FF8A895E1BE37C10009707C2 /* JGFundraisingPageEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGFundraisingPageEvent.h; sourceTree = "<group>"; };
-		FF8A895F1BE37C10009707C2 /* JGFundraisingPageEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGFundraisingPageEvent.m; sourceTree = "<group>"; };
 		FFD27FC51BE393F400825CD4 /* JGSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGSearchController.h; sourceTree = "<group>"; };
 		FFD27FC61BE393F400825CD4 /* JGSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGSearchController.m; sourceTree = "<group>"; };
 		FFD27FCE1BE3945E00825CD4 /* JGSearchQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGSearchQuery.h; sourceTree = "<group>"; };
@@ -187,8 +183,6 @@
 				3684114A1BE23E8800FEE624 /* JGUser.m */,
 				FF05C9391BE258530039ADF4 /* JGFundraisingPage.h */,
 				FF05C93A1BE258530039ADF4 /* JGFundraisingPage.m */,
-				FF8A895E1BE37C10009707C2 /* JGFundraisingPageEvent.h */,
-				FF8A895F1BE37C10009707C2 /* JGFundraisingPageEvent.m */,
 				36A4A4EB1BE8D92F007EB555 /* JGDonation.h */,
 				36A4A4EC1BE8D92F007EB555 /* JGDonation.m */,
 				496C48271BE9030D00E653D3 /* JGEvent.swift */,
@@ -240,7 +234,6 @@
 			files = (
 				FF05C93B1BE258530039ADF4 /* JGFundraisingPage.h in Headers */,
 				FF05C9411BE25BBB0039ADF4 /* JGFundraisingController.h in Headers */,
-				FF8A89601BE37C10009707C2 /* JGFundraisingPageEvent.h in Headers */,
 				36A4A52B1BE91990007EB555 /* NSDate+JGDate.h in Headers */,
 				FF7517281BE3715300989F27 /* JGEventController.h in Headers */,
 				3684114B1BE23E8800FEE624 /* JGUser.h in Headers */,
@@ -364,7 +357,6 @@
 			files = (
 				368411501BE23F8C00FEE624 /* JGFundraisingController.m in Sources */,
 				496C48281BE9030D00E653D3 /* JGEvent.swift in Sources */,
-				FF8A89611BE37C10009707C2 /* JGFundraisingPageEvent.m in Sources */,
 				368411351BE2225B00FEE624 /* JGSession.m in Sources */,
 				FF05C93C1BE258530039ADF4 /* JGFundraisingPage.m in Sources */,
 				3684114C1BE23E8800FEE624 /* JGUser.m in Sources */,

@@ -38,6 +38,15 @@
             }
         }
         
+        if (dictionary[@"eventId"]) {
+            self.eventId = dictionary[@"eventId"];
+        }
+        
+        if (dictionary[@"eventName"]) {
+            self.eventName = dictionary[@"eventName"];
+        }
+
+        
         if (dictionary[@"targetAmount"]) {
             self.targetAmount = dictionary[@"targetAmount"];
             

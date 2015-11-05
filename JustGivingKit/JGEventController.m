@@ -10,7 +10,8 @@
 #import "JGEventController.h"
 #import "JGSession.h"
 #import "JGUser.h"
-#import "JGFundraisingPageEvent.h"
+#import "JGFundraisingPage.h"
+#import "JGFundraisingController.h"
 #import "JGSearchController.h"
 #import "JGSearchQuery.h"
 #import <JustGivingKit/JustGivingKit-Swift.h>
@@ -37,7 +38,7 @@
         NSMutableArray *events = [NSMutableArray new];
         
         for (NSDictionary *pageInfo in response.array) {
-            JGFundraisingPageEvent *event = [[JGFundraisingPageEvent alloc]initWithDictionary:pageInfo];
+            JGFundraisingPage *event = [[JGFundraisingPage alloc]initWithDictionary:pageInfo];
             [events addObject:event];
         }
         
@@ -72,4 +73,28 @@
 
     }];
 }
+
+- (void)joinEventWithEventId:(NSString *)eventId pageTitle:(NSString *)pageTitle pageShortName:(NSString *)pageShortName withCharityId:(NSString *)charityId targetAmount:(NSNumber *)targetAmount withCompletion:(JGJoinEventCompletion)completion;
+{
+    JGFundraisingController *fundraisingController = [JGFundraisingController new];
+    
+    JGFundraisingPage *page = [JGFundraisingPage new];
+    page.eventId = eventId;
+    page.pageTitle = pageTitle;
+    page.pageShortName = pageShortName;
+    page.charityId = charityId;
+    page.targetAmount = targetAmount;
+    
+    [fundraisingController createFundraisingPage:page withCompletion:^(JGFundraisingPage *page, NSError *error) {
+        
+        if (error) {
+            NSLog(@"error %@", error);
+            completion(nil, error);
+            return;
+        }
+        
+        completion(page, error);
+    }];
+}
+
 @end

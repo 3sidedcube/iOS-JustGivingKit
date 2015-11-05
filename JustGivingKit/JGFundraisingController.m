@@ -132,5 +132,59 @@
     }];
 }
 
+- (void)createFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGCreateFundraisingPageCompletion)completion
+{
+    NSMutableDictionary *payload = [NSMutableDictionary new];
+    
+    payload[@"charityId"] = fundraisingPage.charityId;
+    payload[@"pageShortName"] = fundraisingPage.pageShortName;
+    payload[@"pageTitle"] = fundraisingPage.pageTitle;
+    payload[@"eventId"] = fundraisingPage.eventId;
+    if (fundraisingPage.targetAmount) { payload[@"targetAmount"] = [fundraisingPage.targetAmount stringValue]; }
+    payload[@"justGivingOptIn"] = @"false";
+    payload[@"charityOptIn"] = @"false";
+    payload[@"charityFunded"] = @"false";
+
+    
+    [[JGSession sharedSession].requestController put:@"fundraising/pages" bodyParams:payload completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
+        if (error || response.status != 201) {
+            if (response.status == 409) {
+                // page was not created
+                NSLog(@"error %@", error);
+                completion(nil, error);
+                return;
+            } else {
+                NSLog(@"error %@", error);
+                completion(nil, error);
+            }
+            
+        } else {
+            //if the page has been successfully created then we'll go get the full details for it
+            
+            [self getMoreDetailsForFundraisingPage:fundraisingPage withCompletion:^(JGFundraisingPage *page, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"error %@", error);
+                    completion(nil, error);
+                    
+                } else {
+                    completion(page, error);
+                }
+            }];
+        }
+    }];
+}
+
+- (void)deleteFundraisingPageWithShortName:(NSString *)pageShortName withCompletion:(JGDeleteFundraisingPageCompletion)completion
+{
+    [[JGSession sharedSession].requestController delete:[NSString stringWithFormat:@"fundraising/pages/%@", pageShortName] completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
+        
+        if (error) {
+            completion(error);
+        } else {
+            completion(nil);
+        }
+    }];
+}
 
 @end

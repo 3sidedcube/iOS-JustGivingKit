@@ -45,6 +45,22 @@
  */
 @property (nonatomic, strong) NSArray<NSURL *> *imageUrls;
 
+/**
+ @abstract The charity the fundraising page is raising for
+ */
+@property (nonatomic, strong) NSString *charityId;
+
+/**
+ @abstract The unqiue event identifier
+ */
+@property (nonatomic, copy) NSString *eventId;
+
+/**
+ @abstract The event's name
+ */
+@property (nonatomic, copy) NSString *eventName;
+
+
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 
