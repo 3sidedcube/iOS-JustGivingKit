@@ -80,6 +80,20 @@ typedef void (^JGDeleteFundraisingPageCompletion)(NSError *error);
  */
 - (void)createFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGCreateFundraisingPageCompletion)completion;
 
+/**
+ @abstract Deletes a given fundraising page
+ @discussion Convenience method which calls deleteFundraisingPageWithShortName the deleted page will still appear in requests but will have a status of 'Cancelled'
+ @param fundraisingPage A fundraising page with a pageShortName
+ @param completion Completion block which returns an error if the delete was not successful
+ */
+- (void)deleteFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGDeleteFundraisingPageCompletion)completion;
+
+/**
+ @abstract Deletes a given fundraising page via a shortName
+ @discussion The deleted page will still appear in requests but will have a status of 'Cancelled'
+ @param pageShortName Unique page short name string
+ @param completion Completion block which returns an error if the delete was not successful
+ */
 - (void)deleteFundraisingPageWithShortName:(NSString *)pageShortName withCompletion:(JGDeleteFundraisingPageCompletion)completion;
 
 @end

@@ -175,6 +175,18 @@
     }];
 }
 
+- (void)deleteFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGDeleteFundraisingPageCompletion)completion;
+{
+    [self deleteFundraisingPageWithShortName:fundraisingPage.pageShortName withCompletion:^(NSError *error) {
+        
+        if (error) {
+            completion(error);
+        } else {
+            completion(nil);
+        }
+    }];
+}
+
 - (void)deleteFundraisingPageWithShortName:(NSString *)pageShortName withCompletion:(JGDeleteFundraisingPageCompletion)completion
 {
     [[JGSession sharedSession].requestController delete:[NSString stringWithFormat:@"fundraising/pages/%@", pageShortName] completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
