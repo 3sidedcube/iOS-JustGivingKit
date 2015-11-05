@@ -10,7 +10,7 @@
 #import "JGEventController.h"
 #import "JGSession.h"
 #import "JGUser.h"
-#import "JGFundraisingPageEvent.h"
+#import "JGFundraisingPage.h"
 #import "JGFundraisingController.h"
 #import "JGSearchController.h"
 #import "JGSearchQuery.h"
@@ -38,7 +38,7 @@
         NSMutableArray *events = [NSMutableArray new];
         
         for (NSDictionary *pageInfo in response.array) {
-            JGFundraisingPageEvent *event = [[JGFundraisingPageEvent alloc]initWithDictionary:pageInfo];
+            JGFundraisingPage *event = [[JGFundraisingPage alloc]initWithDictionary:pageInfo];
             [events addObject:event];
         }
         

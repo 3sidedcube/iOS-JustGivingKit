@@ -10,7 +10,6 @@
 
 #import "JGFundraisingController.h"
 #import "JGFundraisingPage.h"
-#import "JGFundraisingPageEvent.h"
 #import "JGSession.h"
 #import "JGUser.h"
 #import "JGDonation.h"
