@@ -27,10 +27,22 @@ typedef void (^JGJoinEventCompletion)(JGFundraisingPage *page, NSError *error);
  */
 - (void)getEventsForUser:(JGUser *)user withCharityId:(NSString *)charityId completion:(JGFetchEventsCompletion)completion;
 
-
+/**
+ @abstract Searches for events using OneSearch and returns an array of events
+ @param searchTerm Search term to query events for
+ @param charityId Unique charity Id to find the events for
+ @param completion Completion block which returns an array of events if the operation successfully completes
+ */
 - (void)getEventsForSearchTerm:(NSString *)searchTerm withCharityId:(NSString *)charityId completion:(JGFetchEventsCompletion)completion;
 
-
+/**
+ @abstract Joins the user to an event and creates a fundraising page for it
+ @param eventId Unique Id for an event
+ @param pageTitle Title of the fundraising page to be created
+ @param pageShortName Unique identifier short name for the craeted fundraising page
+ @param charityId Unique charity Id that the fundraising page is for
+ @param targetAmount The target amount of money the page aims to raise
+ */
 - (void)joinEventWithEventId:(NSString *)eventId pageTitle:(NSString *)pageTitle pageShortName:(NSString *)pageShortName withCharityId:(NSString *)charityId targetAmount:(NSNumber *)targetAmount withCompletion:(JGJoinEventCompletion)completion;
 
 @end
