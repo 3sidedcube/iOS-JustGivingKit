@@ -74,7 +74,7 @@
     }];
 }
 
-- (void)joinEventWithEventId:(NSString *)eventId pageTitle:(NSString *)pageTitle pageShortName:(NSString *)pageShortName withCharityId:(NSString *)charityId targetAmount:(NSNumber *)targetAmount withCompletion:(JGJoinEventCompletion)completion;
+- (void)joinEventWithEventId:(NSNumber *)eventId pageTitle:(NSString *)pageTitle pageShortName:(NSString *)pageShortName withCharityId:(NSString *)charityId targetAmount:(NSNumber *)targetAmount withCompletion:(JGJoinEventCompletion)completion;
 {
     JGFundraisingController *fundraisingController = [JGFundraisingController new];
     
