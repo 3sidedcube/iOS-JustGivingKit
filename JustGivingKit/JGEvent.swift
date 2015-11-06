@@ -8,10 +8,24 @@
 
 import UIKit
 
+/**
+An event returned by the API after running a search
+*/
 public class JGEvent: NSObject {
     
+    /**
+    The unique identifier for the event. Also known as the event ID
+    */
     public var eventIdentifier: String?
+    
+    /**
+    The event name as shown on the event page
+    */
     public var eventName: String?
+    
+    /**
+    The event description as shown on the event page
+    */
     public var eventDescription: String?
     
     convenience public init(dictionary: [String: AnyObject]) {
