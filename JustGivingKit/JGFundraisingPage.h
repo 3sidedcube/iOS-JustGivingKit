@@ -58,7 +58,7 @@
 /**
  @abstract The unqiue event identifier
  */
-@property (nonatomic, copy) NSString *eventId;
+@property (nonatomic, copy) NSNumber *eventId;
 
 /**
  @abstract The event's name

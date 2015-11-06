@@ -43,6 +43,6 @@ typedef void (^JGJoinEventCompletion)(JGFundraisingPage *page, NSError *error);
  @param charityId Unique charity Id that the fundraising page is for
  @param targetAmount The target amount of money the page aims to raise
  */
-- (void)joinEventWithEventId:(NSString *)eventId pageTitle:(NSString *)pageTitle pageShortName:(NSString *)pageShortName withCharityId:(NSString *)charityId targetAmount:(NSNumber *)targetAmount withCompletion:(JGJoinEventCompletion)completion;
+- (void)joinEventWithEventId:(NSNumber *)eventId pageTitle:(NSString *)pageTitle pageShortName:(NSString *)pageShortName withCharityId:(NSString *)charityId targetAmount:(NSNumber *)targetAmount withCompletion:(JGJoinEventCompletion)completion;
 
 @end
