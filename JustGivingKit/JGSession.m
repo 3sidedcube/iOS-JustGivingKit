@@ -48,9 +48,12 @@ static JGSession *sharedSession = nil;
 - (void)restoreLoggedInState
 {
     TSCRequestCredential *credential = [TSCRequestCredential retrieveCredentialWithIdentifier:@"JGUserLogin"];
+    
     if (credential) {
+        
         [self loginWithCredential:credential completion:^(NSObject *user, NSError *error) {
             if (!error) {
+                
                 [self willChangeValueForKey:@"loggedIn"];
                 _loggedIn = YES;
                 [self didChangeValueForKey:@"loggedIn"];
@@ -82,6 +85,7 @@ static JGSession *sharedSession = nil;
         self.requestController.sharedRequestHeaders = [[NSMutableDictionary alloc] initWithObjects:@[self.requestController.sharedRequestCredential.authorizationToken] forKeys:@[@"Authorization"]];
         
         if ([TSCRequestCredential storeCredential:credential withIdentifier:@"JGUserLogin"]) {
+            
             [self willChangeValueForKey:@"loggedIn"];
             _loggedIn = YES;
             [self didChangeValueForKey:@"loggedIn"];
@@ -89,6 +93,7 @@ static JGSession *sharedSession = nil;
         
         [self retrieveUserAccountInformationWithCompletion:^(JGUser *user, NSError *error) {
             if (error) {
+                
                 completion(nil, error);
                 return;
             }
@@ -109,11 +114,13 @@ static JGSession *sharedSession = nil;
 {
     [self.requestController get:@"account" completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {
+            
             completion(nil, error);
             return;
         }
         
         if (!response.dictionary) {
+            
             completion(nil, error);
             return;
         }
