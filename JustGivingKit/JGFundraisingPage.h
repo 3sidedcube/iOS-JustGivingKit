@@ -65,7 +65,10 @@
  */
 @property (nonatomic, copy) NSString *eventName;
 
-
+/**
+ @abstract Initialises the object with a dictionary representation of itself
+ @param dictionary A dictionary representation of `JGFundraisingPage`.
+ */
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 

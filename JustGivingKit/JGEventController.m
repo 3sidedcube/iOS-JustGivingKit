@@ -21,6 +21,7 @@
 - (void)getEventsForUser:(JGUser *)user withCharityId:(NSString *)charityId completion:(JGFetchEventsCompletion)completion
 {
     NSString *userEmail = @"";
+    
     if (user) {
         userEmail = user.email;
     }
@@ -31,6 +32,7 @@
     [[JGSession sharedSession].requestController get:getAddress completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
         
         if (error || response.status != 200) {
+            
             completion(nil, error);
             return;
         }
@@ -66,11 +68,9 @@
             
             JGEvent *event = [[JGEvent alloc] initWithDictionary:eventDictionary];
             [eventsArray addObject:event];
-            
         }
         
         completion(eventsArray, nil);
-
     }];
 }
 
@@ -88,7 +88,7 @@
     [fundraisingController createFundraisingPage:page withCompletion:^(JGFundraisingPage *page, NSError *error) {
         
         if (error) {
-            NSLog(@"error %@", error);
+            
             completion(nil, error);
             return;
         }

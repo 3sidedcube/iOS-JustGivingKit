@@ -10,17 +10,23 @@
 #import "JGSearchQuery.h"
 #import "JGDefines.h"
 
+@interface JGSearchController ()
+
+@property (nonatomic, strong) TSCRequestController *requestController;
+
+@end
+
 @implementation JGSearchController
 
 - (instancetype)init
 {
-    self = [super init];
-    if (self) {
+    if (self = [super init]) {
         
         self.requestController = [[TSCRequestController alloc] initWithBaseAddress:[NSString stringWithFormat:@"%@/%@/v1", JGAPIBaseAddress, [[NSBundle mainBundle] infoDictionary][@"JGApplicationId"]]];
         self.requestController.sharedRequestHeaders[@"Accept"] = @"application/json";
         
     }
+    
     return self;
 }
 

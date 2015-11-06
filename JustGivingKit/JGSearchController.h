@@ -14,8 +14,11 @@
 
 typedef void (^JGPerformSearchCompletion)(NSArray *results, NSError *error);
 
-@property (nonatomic, strong) TSCRequestController *requestController;
-
+/**
+ @abstract Searches JustGiving with a given search query
+ @param searchQuery A query to search the api with
+ @param completion Block which returns an array of results which can be varying object types represented as a dictionary
+ */
 - (void)performSearchWithQuery:(JGSearchQuery *)searchQuery withCompletion:(JGPerformSearchCompletion)completion;
 
 @end

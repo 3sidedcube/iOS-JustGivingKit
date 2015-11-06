@@ -19,6 +19,7 @@
 - (void)getFundraisingPagesWithCharityId:(NSString *)charityId forUser:(JGUser *)user withCompletion:(JGFetchPagesCompletion)completion
 {
     NSString *userEmail = @"";
+    
     if (user) {
         userEmail = user.email;
     }
@@ -27,6 +28,7 @@
         
         if (completion) {
             if (!error) {
+                
                 completion(pages, error);
             }
         }
@@ -41,6 +43,7 @@
     [self requestPagesWithAddress:getAddress WithCompletion:^(NSArray *pages, NSError *error) {
         if (completion) {
             if (!error) {
+                
                 completion(pages, error);
             }
         }
@@ -52,6 +55,7 @@
     [self requestPagesWithAddress:@"fundraising/pages" WithCompletion:^(NSArray *pages, NSError *error) {
         if (completion) {
             if (!error) {
+                
                 completion(pages, error);
             }
         }
@@ -65,6 +69,7 @@
     [[JGSession sharedSession].requestController get:getAddress completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
         
         if (error || response.status != 200) {
+            
             completion(nil, error);
             return;
         }
@@ -80,6 +85,7 @@
     
     [[JGSession sharedSession].requestController get:getAddress completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {
+            
             completion(nil, error);
             return;
         }
@@ -99,6 +105,7 @@
     [[JGSession sharedSession].requestController get:address completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
         
         if (error || response.status != 200) {
+            
             completion(nil, error);
             return;
         }
@@ -122,7 +129,9 @@
     [self getFundraisingPagesWithCharityId:charityId forUser:user withCompletion:^(NSArray *pages, NSError *error) {
         
         for (JGFundraisingPage *page in pages) {
+            
             if (page.raisedAmount) {
+                
                 double raisedAmount = page.raisedAmount.doubleValue;
                 totalRaised += raisedAmount;
             }
@@ -144,27 +153,28 @@
     payload[@"justGivingOptIn"] = @"false";
     payload[@"charityOptIn"] = @"false";
     payload[@"charityFunded"] = @"false";
-
     
     [[JGSession sharedSession].requestController put:@"fundraising/pages" bodyParams:payload completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
+        
         if (error || response.status != 201) {
+            
             if (response.status == 409) {
-                // page was not created
-                NSLog(@"error %@", error);
+                
+                // Page was not created
                 completion(nil, error);
                 return;
+                
             } else {
-                NSLog(@"error %@", error);
+                
                 completion(nil, error);
             }
             
         } else {
-            //if the page has been successfully created then we'll go get the full details for it
             
+            // If the page has been successfully created then we'll go get the full details for it
             [self getMoreDetailsForFundraisingPage:fundraisingPage withCompletion:^(JGFundraisingPage *page, NSError *error) {
                 
                 if (error) {
-                    NSLog(@"error %@", error);
                     completion(nil, error);
                     
                 } else {

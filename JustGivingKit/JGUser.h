@@ -18,12 +18,13 @@
 @property (nonatomic, copy) NSString *firstName;
 
 /**
- @abstract The users first name
+ @abstract The users last name
  */
 @property (nonatomic, copy) NSString *lastName;
 
 /**
  @abstract The url to the users profile image
+ @discussion The thumbnail representation of the image will be selected by defualt. If no thumbnail image is found will fall back to whatever image is available
  */
 @property (nonatomic, strong) NSURL *profileUrl;
 
