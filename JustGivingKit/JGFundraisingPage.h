@@ -66,6 +66,12 @@
 @property (nonatomic, copy) NSString *eventName;
 
 /**
+ @abstract The domain of the fundraising page e.g www.justgiving.com
+ */
+@property (nonatomic, copy) NSString *domain;
+
+
+/**
  @abstract Initialises the object with a dictionary representation of itself
  @param dictionary A dictionary representation of `JGFundraisingPage`.
  */

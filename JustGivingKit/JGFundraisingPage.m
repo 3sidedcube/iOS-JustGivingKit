@@ -52,6 +52,10 @@
         if (dictionary[@"eventName"]) {
             self.eventName = dictionary[@"eventName"];
         }
+        
+        if (dictionary[@"domain"]) {
+            self.domain = dictionary[@"domain"];
+        }
 
         
         if (dictionary[@"targetAmount"]) {
