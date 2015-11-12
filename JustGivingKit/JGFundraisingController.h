@@ -96,13 +96,5 @@ typedef void (^JGDeleteFundraisingPageCompletion)(NSError *error);
  */
 - (void)deleteFundraisingPageWithShortName:(NSString *)pageShortName withCompletion:(JGDeleteFundraisingPageCompletion)completion;
 
-/**
- @abstract Creates a donation url for a given fundraising page
- @discussion This method creates a url which you can use to push the user out to a donation page via web view, the url has an exitURL which returns the user back to your app when finished
- @param fundraisingPage The fundraising page to create the url for
- @param donationAmount The amount the user is donating (This is converted to a float)
- @return The donation link as an NSURL
- */
-- (NSURL *)donateUrlForFundraisingPage:(JGFundraisingPage *)fundraisingPage withDonationAmount:(NSNumber *)donationAmount;
 
 @end

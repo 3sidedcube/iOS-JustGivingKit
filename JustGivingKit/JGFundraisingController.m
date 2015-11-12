@@ -7,7 +7,6 @@
 //
 
 @import ThunderRequest;
-@import ThunderBasics;
 
 #import "JGFundraisingController.h"
 #import "JGFundraisingPage.h"
@@ -208,24 +207,6 @@
             completion(nil);
         }
     }];
-}
-
-- (NSURL *)donateUrlForFundraisingPage:(JGFundraisingPage *)fundraisingPage withDonationAmount:(NSNumber *)donationAmount
-{
-    NSString *donateURLString;
-    
-    if (fundraisingPage.domain && fundraisingPage.pageShortName) {
-        donateURLString = [NSString stringWithFormat:@"http://%@/%@", fundraisingPage.domain, fundraisingPage.pageShortName];
-    } else {
-        NSLog(@"The page does not have a domain or short name");
-    }
-    
-    donateURLString = [NSString stringWithFormat:@"%@/4w350m3/donate/?amount=%.2f&exitUrl=%@", donateURLString, [donationAmount floatValue], [@"JGK://" urlEncodedString]];
-    donateURLString = [donateURLString stringByAppendingString:[NSString stringWithFormat:@"&currency=%@", [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode]]];
-    
-    NSLog(@"THE URL: %@", donateURLString);
-    
-    return [NSURL URLWithString:donateURLString];
 }
 
 @end
