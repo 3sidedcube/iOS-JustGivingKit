@@ -26,6 +26,8 @@
 		FF7517211BE2619E00989F27 /* JGSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 368411321BE2225B00FEE624 /* JGSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF7517281BE3715300989F27 /* JGEventController.h in Headers */ = {isa = PBXBuildFile; fileRef = FF7517261BE3715300989F27 /* JGEventController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF7517291BE3715300989F27 /* JGEventController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7517271BE3715300989F27 /* JGEventController.m */; };
+		FFCDF4FB1BF4B19100FA1D49 /* JGDonationController.h in Headers */ = {isa = PBXBuildFile; fileRef = FFCDF4F91BF4B19100FA1D49 /* JGDonationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FFCDF4FC1BF4B19100FA1D49 /* JGDonationController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFCDF4FA1BF4B19100FA1D49 /* JGDonationController.m */; };
 		FFD27FC71BE393F400825CD4 /* JGSearchController.h in Headers */ = {isa = PBXBuildFile; fileRef = FFD27FC51BE393F400825CD4 /* JGSearchController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FFD27FC81BE393F400825CD4 /* JGSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFD27FC61BE393F400825CD4 /* JGSearchController.m */; };
 		FFD27FD01BE3945E00825CD4 /* JGSearchQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = FFD27FCE1BE3945E00825CD4 /* JGSearchQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -87,6 +89,8 @@
 		FF05C93A1BE258530039ADF4 /* JGFundraisingPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGFundraisingPage.m; sourceTree = "<group>"; };
 		FF7517261BE3715300989F27 /* JGEventController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGEventController.h; sourceTree = "<group>"; };
 		FF7517271BE3715300989F27 /* JGEventController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGEventController.m; sourceTree = "<group>"; };
+		FFCDF4F91BF4B19100FA1D49 /* JGDonationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGDonationController.h; sourceTree = "<group>"; };
+		FFCDF4FA1BF4B19100FA1D49 /* JGDonationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGDonationController.m; sourceTree = "<group>"; };
 		FFD27FC51BE393F400825CD4 /* JGSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGSearchController.h; sourceTree = "<group>"; };
 		FFD27FC61BE393F400825CD4 /* JGSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGSearchController.m; sourceTree = "<group>"; };
 		FFD27FCE1BE3945E00825CD4 /* JGSearchQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGSearchQuery.h; sourceTree = "<group>"; };
@@ -175,6 +179,8 @@
 				3684114E1BE23F8C00FEE624 /* JGFundraisingController.m */,
 				FF7517261BE3715300989F27 /* JGEventController.h */,
 				FF7517271BE3715300989F27 /* JGEventController.m */,
+				FFCDF4F91BF4B19100FA1D49 /* JGDonationController.h */,
+				FFCDF4FA1BF4B19100FA1D49 /* JGDonationController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -245,6 +251,7 @@
 				FFD27FC71BE393F400825CD4 /* JGSearchController.h in Headers */,
 				FF7517211BE2619E00989F27 /* JGSession.h in Headers */,
 				36A4A4ED1BE8D92F007EB555 /* JGDonation.h in Headers */,
+				FFCDF4FB1BF4B19100FA1D49 /* JGDonationController.h in Headers */,
 				361DA0761BE2190400F76120 /* JustGivingKit.h in Headers */,
 				496C482D1BE90EE200E653D3 /* JGEvent.swift in Headers */,
 			);
@@ -368,6 +375,7 @@
 				36A4A4EE1BE8D92F007EB555 /* JGDonation.m in Sources */,
 				FFD27FC81BE393F400825CD4 /* JGSearchController.m in Sources */,
 				FFD27FD11BE3945E00825CD4 /* JGSearchQuery.m in Sources */,
+				FFCDF4FC1BF4B19100FA1D49 /* JGDonationController.m in Sources */,
 				36A4A52C1BE91990007EB555 /* NSDate+JGDate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
