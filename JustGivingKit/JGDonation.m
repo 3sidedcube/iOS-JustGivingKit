@@ -39,6 +39,10 @@
             if (dictionary[@"donationDate"]) {
                 self.donationDate = [NSDate dateWithODataString:dictionary[@"donationDate"]];
             }
+            
+            if (dictionary[@"pageShortName"]) {
+                self.pageShortName = dictionary[@"pageShortName"];
+            }
         }
     }
     

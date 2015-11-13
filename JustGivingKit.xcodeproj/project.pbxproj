@@ -28,7 +28,7 @@
 		FF7517291BE3715300989F27 /* JGEventController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7517271BE3715300989F27 /* JGEventController.m */; };
 		FFCDF4FB1BF4B19100FA1D49 /* JGDonationController.h in Headers */ = {isa = PBXBuildFile; fileRef = FFCDF4F91BF4B19100FA1D49 /* JGDonationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FFCDF4FC1BF4B19100FA1D49 /* JGDonationController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFCDF4FA1BF4B19100FA1D49 /* JGDonationController.m */; };
-		FFCDF50F1BF4F85C00FA1D49 /* JGCharityController.h in Headers */ = {isa = PBXBuildFile; fileRef = FFCDF50D1BF4F85C00FA1D49 /* JGCharityController.h */; };
+		FFCDF50F1BF4F85C00FA1D49 /* JGCharityController.h in Headers */ = {isa = PBXBuildFile; fileRef = FFCDF50D1BF4F85C00FA1D49 /* JGCharityController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FFCDF5101BF4F85C00FA1D49 /* JGCharityController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFCDF50E1BF4F85C00FA1D49 /* JGCharityController.m */; };
 		FFD27FC71BE393F400825CD4 /* JGSearchController.h in Headers */ = {isa = PBXBuildFile; fileRef = FFD27FC51BE393F400825CD4 /* JGSearchController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FFD27FC81BE393F400825CD4 /* JGSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFD27FC61BE393F400825CD4 /* JGSearchController.m */; };
@@ -251,13 +251,13 @@
 				FF05C93B1BE258530039ADF4 /* JGFundraisingPage.h in Headers */,
 				FF05C9411BE25BBB0039ADF4 /* JGFundraisingController.h in Headers */,
 				36A4A52B1BE91990007EB555 /* NSDate+JGDate.h in Headers */,
-				FFCDF50F1BF4F85C00FA1D49 /* JGCharityController.h in Headers */,
 				FF7517281BE3715300989F27 /* JGEventController.h in Headers */,
 				3684114B1BE23E8800FEE624 /* JGUser.h in Headers */,
 				FFD27FD01BE3945E00825CD4 /* JGSearchQuery.h in Headers */,
 				FFD27FC71BE393F400825CD4 /* JGSearchController.h in Headers */,
 				FF7517211BE2619E00989F27 /* JGSession.h in Headers */,
 				36A4A4ED1BE8D92F007EB555 /* JGDonation.h in Headers */,
+				FFCDF50F1BF4F85C00FA1D49 /* JGCharityController.h in Headers */,
 				FFCDF4FB1BF4B19100FA1D49 /* JGDonationController.h in Headers */,
 				361DA0761BE2190400F76120 /* JustGivingKit.h in Headers */,
 				496C482D1BE90EE200E653D3 /* JGEvent.swift in Headers */,

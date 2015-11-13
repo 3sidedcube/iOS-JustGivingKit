@@ -41,6 +41,11 @@
 @property (nonatomic, strong) NSURL *donorProfileImageUrl;
 
 /**
+ @abstract Unique page identifier that teh donation belongs to
+ */
+@property (nonatomic, copy)NSString *pageShortName;
+
+/**
  @abstract Initialises the object with a dictionary representation of itself
  @param dictionary A dictionary representation of `JGDonation`.
  */
