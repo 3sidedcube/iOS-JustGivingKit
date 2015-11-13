@@ -41,7 +41,7 @@
 @property (nonatomic, strong) NSURL *donorProfileImageUrl;
 
 /**
- @abstract Unique page identifier that teh donation belongs to
+ @abstract Unique page identifier that the donation belongs to
  */
 @property (nonatomic, copy)NSString *pageShortName;
 

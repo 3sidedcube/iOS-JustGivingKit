@@ -14,6 +14,12 @@
 typedef void (^JGAmountCompletion)(NSNumber *amount, NSError *error);
 typedef void (^JGTotalRaisedCompletion)(NSNumber *totalRaised, NSError *error);
 
+/**
+ @abstract Adds the total amount raised including money donated directly to a charity
+ @param charityId A valid JustGiving charityId
+ @param perAmountCompletion completion block which gets called on every amount being added
+ @param completion completion block which gets called on the total completely added up
+ */
 - (void)totalRaisedForCharity:(NSString *)charityId perAmountCompletion:(JGAmountCompletion)amountCompletion completion:(JGTotalRaisedCompletion)completion;
 
 @end
