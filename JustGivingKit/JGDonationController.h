@@ -8,8 +8,13 @@
 
 #import <Foundation/Foundation.h>
 @class JGFundraisingPage;
+@class JGUser;
+@class JGDonation;
 
 @interface JGDonationController : NSObject
+
+typedef void (^JGDonationsForCharityCompletion)(NSArray<JGDonation *> *donations, NSError *error);
+typedef void (^JGRaisedAmountCompletion)(NSNumber *raisedAmount, NSError *error);
 
 - (NSURL *)donationUrlForCharityId:(NSString *)charityId donationAmount:(NSNumber *)donationAmount;
 
@@ -22,5 +27,6 @@
  */
 - (NSURL *)donateUrlForFundraisingPage:(JGFundraisingPage *)fundraisingPage withDonationAmount:(NSNumber *)donationAmount;
 
+- (void)getDonationsForCharity:(NSString *)charityId completion:(JGDonationsForCharityCompletion)completion;
 
 @end

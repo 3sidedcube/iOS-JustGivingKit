@@ -20,7 +20,7 @@ typedef void (^JGFetchEventsCompletion)(NSArray *events, NSError *error);
 typedef void (^JGJoinEventCompletion)(JGFundraisingPage *page, NSError *error);
 
 /**
- @abstract Returns an arary of fundraising page events for a given user for a charity
+ @abstract Returns an array of fundraising page events for a given user for a charity
  @param user A JustGiving user
  @param charityId A valid JustGiving charityId
  @param completion completion block which returns an array of events if the operation successfully completes

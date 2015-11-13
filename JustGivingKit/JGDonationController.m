@@ -7,10 +7,13 @@
 //
 
 @import ThunderBasics;
+@import ThunderRequest;
 
 #import "JGDonationController.h"
 #import "JGFundraisingPage.h"
 #import "JGDefines.h"
+#import "JGSession.h"
+#import "JGDonation.h"
 
 @implementation JGDonationController
 
@@ -44,6 +47,29 @@
     NSLog(@"THE URL: %@", donateURLString);
     
     return [NSURL URLWithString:donateURLString];
+}
+
+- (void)getDonationsForCharity:(NSString *)charityId completion:(JGDonationsForCharityCompletion)completion
+{
+    NSString *getAddress = [NSString stringWithFormat:@"account/donations?pagesize=%i&pagenum=%i&charityid=%@", 150, 1, charityId];
+    
+    [[JGSession sharedSession].requestController get:getAddress completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
+        
+        if (error || response.status != 200) {
+            
+            completion(nil, error);
+            return;
+        }
+        NSMutableArray *donations = [NSMutableArray new];
+        
+        for (NSDictionary *donationDictionary in response.dictionary[@"donations"]) {
+            JGDonation *donation = [[JGDonation alloc]initWithDictionary:donationDictionary];
+            [donations addObject:donation];
+        }
+        
+        completion([donations copy], error);
+    }];
+
 }
 
 
