@@ -24,6 +24,7 @@ typedef void (^JGRaisedAmountCompletion)(NSNumber *raisedAmount, NSError *error)
 typedef void (^JGFetchPageDonationsCompletion)(NSArray<JGDonation *> *donations, NSError *error);
 typedef void (^JGCreateFundraisingPageCompletion)(JGFundraisingPage *page, NSError *error);
 typedef void (^JGDeleteFundraisingPageCompletion)(NSError *error);
+typedef void (^JGSuggestedNamesCompletion)(NSArray<NSString *> *names, NSError *error);
 
 /**
  @abstract Returns all of a user's fundraising pages
@@ -63,6 +64,14 @@ typedef void (^JGDeleteFundraisingPageCompletion)(NSError *error);
  @param completion completion block which returns an `NSArrary` of `JGDonation` objects if the operation successfully completes
  */
 - (void)getDonationsForFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGFetchPageDonationsCompletion)completion;
+
+/**
+ @abstract Returns an array of `NSString` objects as suggestions for the user for their new fundraising page
+ @discussion Use this method to present options to the user before registering a page. You may let the user choose their own custom short name but you must verify that it is available before attempting to register
+ @param preferredString A string to generate suggestions from. It is recommended that you ask the user to name their fundraising page and then pass that value here
+ @param completion The completion block which returns an `NSArray` of `NSString` objects if the request is successful. It may also return an `NSError` object if there is a problem with the request.
+ */
+- (void)getSuggestedPageShortNamesWithPreferredString:(NSString *)preferredString completion:(JGSuggestedNamesCompletion)completion;
 
 /**
  @abstract Returns the total amount of money raised by a user for a given charity

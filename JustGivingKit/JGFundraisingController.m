@@ -100,6 +100,27 @@
     }];
 }
 
+- (void)getSuggestedPageShortNamesWithPreferredString:(NSString *)preferredString completion:(JGSuggestedNamesCompletion)completion
+{
+    [[JGSession sharedSession].requestController get:@"fundraising/pages/suggest?preferredName=(:preferredName)" withURLParamDictionary:@{@"preferredName":preferredString} completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
+       
+        if (error) {
+            
+            completion(nil, error);
+            return;
+        }
+        
+        if (response.dictionary && [response.dictionary isKindOfClass:[NSDictionary class]] && response.dictionary[@"Names"] && [response.dictionary[@"Names"] isKindOfClass:[NSArray class]]) {
+            
+            completion(response.dictionary[@"Names"], nil);
+            return;
+        }
+        
+        completion(nil, [NSError errorWithDomain:@"com.threesidedcube.JustGivingKit" code:500 userInfo:@{NSLocalizedDescriptionKey: @"The server returned an invalid response"}]);
+        
+    }];
+}
+
 - (void)requestPagesWithAddress:(NSString *)address WithCompletion:(JGFetchPagesCompletion)completion
 {
     [[JGSession sharedSession].requestController get:address completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
