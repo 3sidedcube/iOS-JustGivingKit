@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@import UIKit;
 
 @class JGUser;
 @class JGFundraisingPage;
@@ -26,6 +27,11 @@ typedef void (^JGCreateFundraisingPageCompletion)(JGFundraisingPage *page, NSErr
 typedef void (^JGDeleteFundraisingPageCompletion)(NSError *error);
 typedef void (^JGSuggestedNamesCompletion)(NSArray<NSString *> * _Nullable names, NSError * _Nullable error);
 typedef void (^JGShortPageNameAvailabilityCompletion)(BOOL isAvailable, NSError * _Nullable error);
+
+/**
+ The block that will be called when an image upload request succeeds or fails
+ */
+typedef void (^JGUploadImageCompletion)(NSError * _Nullable error);
 
 /**
  @abstract Returns all of a user's fundraising pages
@@ -114,5 +120,13 @@ typedef void (^JGShortPageNameAvailabilityCompletion)(BOOL isAvailable, NSError 
  */
 - (void)deleteFundraisingPageWithShortName:(NSString *)pageShortName withCompletion:(JGDeleteFundraisingPageCompletion)completion;
 
-
+/**
+ @abstract Uploads a new image to an existing funraising page. Optionally setting it as the default image and also giving it a caption if desired
+ @param fundraisingImage The image to upload to the fundraising page
+ @param imageCaption An optional caption that will be displayed with the image on the Just Giving website
+ @param fundraisingPage The page to upload to
+ @param isDefault Whether or not the image should be set as the fundraising page's default image once upload is complete
+ @param uploadCompletion The completion block containing a potential `NSError` if the request fails
+ */
+ - (void)uploadImage:(nonnull UIImage *)fundraisingImage caption:(nullable NSString *)imageCaption toFundraisingPage:(nonnull JGFundraisingPage *)fundraisingPage isDefault:(BOOL)isDefault completion:(nullable JGUploadImageCompletion)uploadCompletion;
 @end
