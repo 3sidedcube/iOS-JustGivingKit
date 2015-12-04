@@ -24,6 +24,8 @@ typedef void (^JGRaisedAmountCompletion)(NSNumber *raisedAmount, NSError *error)
 typedef void (^JGFetchPageDonationsCompletion)(NSArray<JGDonation *> *donations, NSError *error);
 typedef void (^JGCreateFundraisingPageCompletion)(JGFundraisingPage *page, NSError *error);
 typedef void (^JGDeleteFundraisingPageCompletion)(NSError *error);
+typedef void (^JGSuggestedNamesCompletion)(NSArray<NSString *> * _Nullable names, NSError * _Nullable error);
+typedef void (^JGShortPageNameAvailabilityCompletion)(BOOL isAvailable, NSError * _Nullable error);
 
 /**
  @abstract Returns all of a user's fundraising pages
@@ -57,12 +59,28 @@ typedef void (^JGDeleteFundraisingPageCompletion)(NSError *error);
 - (void)getMoreDetailsForFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGFetchPageDetailCompletion)completion;
 
 /**
+ @abstract Determines whether or not a short name is available to be registered in the JustGiving API
+ @discussion Use this to check if a page URL is available before registering a fundraising page to avoid errors
+ @param shortName The proposed URL to be registered
+ @param completion The completion block which returns a `BOOL` of the availability as well as an `NSError` if it exists
+ */
+- (void)getAvailabilityOfFundraisingPageShortName:(nonnull NSString *)shortName completion:(nonnull JGShortPageNameAvailabilityCompletion)completion;
+
+/**
  @abstract Returns an arrary of `JGDonation` objects for the given `JGFundraisingPage`
  @discussion Use this method get the donations made to a fundraising page
  @param fundraisingPage The fundraising page for which you want to obtain the donations
  @param completion completion block which returns an `NSArrary` of `JGDonation` objects if the operation successfully completes
  */
 - (void)getDonationsForFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGFetchPageDonationsCompletion)completion;
+
+/**
+ @abstract Returns an array of `NSString` objects as suggestions for the user for their new fundraising page
+ @discussion Use this method to present options to the user before registering a page. You may let the user choose their own custom short name but you must verify that it is available before attempting to register
+ @param preferredString A string to generate suggestions from. It is recommended that you ask the user to name their fundraising page and then pass that value here
+ @param completion The completion block which returns an `NSArray` of `NSString` objects if the request is successful. It may also return an `NSError` object if there is a problem with the request.
+ */
+- (void)getSuggestedPageShortNamesWithPreferredString:(nonnull NSString *)preferredString completion:(nonnull JGSuggestedNamesCompletion)completion;
 
 /**
  @abstract Returns the total amount of money raised by a user for a given charity

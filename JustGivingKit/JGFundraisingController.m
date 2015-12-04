@@ -79,6 +79,24 @@
     }];
 }
 
+- (void)getAvailabilityOfFundraisingPageShortName:(nonnull NSString *)shortName completion:(nonnull JGShortPageNameAvailabilityCompletion)completion
+{
+    JGFundraisingPage *fundraisingPage = [JGFundraisingPage new];
+    fundraisingPage.pageShortName = shortName;
+    
+    [self getMoreDetailsForFundraisingPage:fundraisingPage withCompletion:^(JGFundraisingPage *page, NSError *error) {
+        
+        if ((error && error.code != 404) || page) {
+            completion(NO, error);
+            return;
+        }
+        
+        completion(YES, nil);
+        
+    }];
+    
+}
+
 - (void)getDonationsForFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGFetchPageDonationsCompletion)completion
 {
     NSString *getAddress = [NSString stringWithFormat:@"fundraising/pages/%@/donations",fundraisingPage.pageShortName];
@@ -97,6 +115,27 @@
         }
         
         completion([NSArray arrayWithArray:donations], nil);
+    }];
+}
+
+- (void)getSuggestedPageShortNamesWithPreferredString:(nonnull NSString *)preferredString completion:(nonnull JGSuggestedNamesCompletion)completion
+{
+    [[JGSession sharedSession].requestController get:@"fundraising/pages/suggest?preferredName=(:preferredName)" withURLParamDictionary:@{@"preferredName":preferredString} completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
+       
+        if (error) {
+            
+            completion(nil, error);
+            return;
+        }
+        
+        if (response.dictionary && [response.dictionary isKindOfClass:[NSDictionary class]] && response.dictionary[@"Names"] && [response.dictionary[@"Names"] isKindOfClass:[NSArray class]]) {
+            
+            completion(response.dictionary[@"Names"], nil);
+            return;
+        }
+        
+        completion(nil, [NSError errorWithDomain:@"com.threesidedcube.JustGivingKit" code:500 userInfo:@{NSLocalizedDescriptionKey: @"The server returned an invalid response"}]);
+        
     }];
 }
 
