@@ -25,6 +25,7 @@ typedef void (^JGFetchPageDonationsCompletion)(NSArray<JGDonation *> *donations,
 typedef void (^JGCreateFundraisingPageCompletion)(JGFundraisingPage *page, NSError *error);
 typedef void (^JGDeleteFundraisingPageCompletion)(NSError *error);
 typedef void (^JGSuggestedNamesCompletion)(NSArray<NSString *> *names, NSError *error);
+typedef void (^JGShortPageNameAvailabilityCompletion)(BOOL isAvailable, NSError * _Nullable error);
 
 /**
  @abstract Returns all of a user's fundraising pages
@@ -56,6 +57,14 @@ typedef void (^JGSuggestedNamesCompletion)(NSArray<NSString *> *names, NSError *
  @param completion completion block which returns a fundraising page object if the operation successfully completes
  */
 - (void)getMoreDetailsForFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGFetchPageDetailCompletion)completion;
+
+/**
+ @abstract Determines whether or not a short name is available to be registered in the JustGiving API
+ @discussion Use this to check if a page URL is available before registering a fundraising page to avoid errors
+ @param shortName The proposed URL to be registered
+ @param completion The completion block which returns a `BOOL` of the availability as well as an `NSError` if it exists
+ */
+- (void)getAvailabilityOfFundraisingPageShortName:(nonnull NSString *)shortName completion:(nonnull JGShortPageNameAvailabilityCompletion)completion;
 
 /**
  @abstract Returns an arrary of `JGDonation` objects for the given `JGFundraisingPage`

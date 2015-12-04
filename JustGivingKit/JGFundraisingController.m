@@ -79,6 +79,24 @@
     }];
 }
 
+- (void)getAvailabilityOfFundraisingPageShortName:(nonnull NSString *)shortName completion:(nonnull JGShortPageNameAvailabilityCompletion)completion
+{
+    JGFundraisingPage *fundraisingPage = [JGFundraisingPage new];
+    fundraisingPage.pageShortName = shortName;
+    
+    [self getMoreDetailsForFundraisingPage:fundraisingPage withCompletion:^(JGFundraisingPage *page, NSError *error) {
+        
+        if ((error && error.code != 404) || page) {
+            completion(NO, error);
+            return;
+        }
+        
+        completion(YES, nil);
+        
+    }];
+    
+}
+
 - (void)getDonationsForFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGFetchPageDonationsCompletion)completion
 {
     NSString *getAddress = [NSString stringWithFormat:@"fundraising/pages/%@/donations",fundraisingPage.pageShortName];
