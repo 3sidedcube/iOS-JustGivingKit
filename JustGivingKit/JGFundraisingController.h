@@ -24,7 +24,7 @@ typedef void (^JGRaisedAmountCompletion)(NSNumber *raisedAmount, NSError *error)
 typedef void (^JGFetchPageDonationsCompletion)(NSArray<JGDonation *> *donations, NSError *error);
 typedef void (^JGCreateFundraisingPageCompletion)(JGFundraisingPage *page, NSError *error);
 typedef void (^JGDeleteFundraisingPageCompletion)(NSError *error);
-typedef void (^JGSuggestedNamesCompletion)(NSArray<NSString *> *names, NSError *error);
+typedef void (^JGSuggestedNamesCompletion)(NSArray<NSString *> * _Nullable names, NSError * _Nullable error);
 typedef void (^JGShortPageNameAvailabilityCompletion)(BOOL isAvailable, NSError * _Nullable error);
 
 /**
@@ -80,7 +80,7 @@ typedef void (^JGShortPageNameAvailabilityCompletion)(BOOL isAvailable, NSError 
  @param preferredString A string to generate suggestions from. It is recommended that you ask the user to name their fundraising page and then pass that value here
  @param completion The completion block which returns an `NSArray` of `NSString` objects if the request is successful. It may also return an `NSError` object if there is a problem with the request.
  */
-- (void)getSuggestedPageShortNamesWithPreferredString:(NSString *)preferredString completion:(JGSuggestedNamesCompletion)completion;
+- (void)getSuggestedPageShortNamesWithPreferredString:(nonnull NSString *)preferredString completion:(nonnull JGSuggestedNamesCompletion)completion;
 
 /**
  @abstract Returns the total amount of money raised by a user for a given charity

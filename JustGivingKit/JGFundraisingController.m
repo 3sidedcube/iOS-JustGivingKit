@@ -118,7 +118,7 @@
     }];
 }
 
-- (void)getSuggestedPageShortNamesWithPreferredString:(NSString *)preferredString completion:(JGSuggestedNamesCompletion)completion
+- (void)getSuggestedPageShortNamesWithPreferredString:(nonnull NSString *)preferredString completion:(nonnull JGSuggestedNamesCompletion)completion
 {
     [[JGSession sharedSession].requestController get:@"fundraising/pages/suggest?preferredName=(:preferredName)" withURLParamDictionary:@{@"preferredName":preferredString} completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
        
