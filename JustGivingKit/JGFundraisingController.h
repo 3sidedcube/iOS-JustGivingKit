@@ -105,6 +105,15 @@ typedef void (^JGUploadImageCompletion)(NSError * _Nullable error);
 - (void)createFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGCreateFundraisingPageCompletion)completion;
 
 /**
+ @abstract Creates/registers a fundraising page using the JustGivingApi and also uploads an image
+ @discussion Make sure the fundraisingpage object you give the method has at least a charityId, pageShortName and pageTitle. The method is used in the wrapper method joinEventWithEventId
+ @param fundraisingPage A fundraising page with a charityId, pageShortName and pageTitle
+ @param fundraisingImage An image to be uploaded to the page once it is created
+ @param completion completion block which returns the a fully detailed fundraisingPage or an error
+ */
+- (void)createFundraisingPage:(nonnull JGFundraisingPage *)fundraisingPage image:(nonnull UIImage *)fundraisingImage completion:(nullable JGCreateFundraisingPageCompletion)completion;
+
+/**
  @abstract Deletes a given fundraising page
  @discussion Convenience method which calls deleteFundraisingPageWithShortName the deleted page will still appear in requests but will have a status of 'Cancelled'
  @param fundraisingPage A fundraising page with a pageShortName
