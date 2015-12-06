@@ -224,6 +224,30 @@
     }];
 }
 
+- (void)createFundraisingPage:(nonnull JGFundraisingPage *)fundraisingPage image:(nonnull UIImage *)fundraisingImage completion:(nullable JGCreateFundraisingPageCompletion)completion
+{
+    [self createFundraisingPage:fundraisingPage withCompletion:^(JGFundraisingPage *page, NSError *error) {
+        
+        if (error || !fundraisingPage) {
+            
+            if (completion) {
+                completion(fundraisingPage, error);
+            }
+            return;
+        }
+        
+        [self uploadImage:fundraisingImage caption:nil toFundraisingPage:fundraisingPage isDefault:true completion:^(NSError * _Nullable error) {
+            
+            if (completion) {
+                completion(fundraisingPage, error);
+            }
+            
+        }];
+        
+    }];
+    
+}
+
 - (void)deleteFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGDeleteFundraisingPageCompletion)completion;
 {
     [self deleteFundraisingPageWithShortName:fundraisingPage.pageShortName withCompletion:^(NSError *error) {
@@ -245,6 +269,17 @@
         } else {
             completion(nil);
         }
+    }];
+}
+
+- (void)uploadImage:(nonnull UIImage *)fundraisingImage caption:(nullable NSString *)imageCaption toFundraisingPage:(nonnull JGFundraisingPage *)fundraisingPage isDefault:(BOOL)isDefault completion:(nullable JGUploadImageCompletion)uploadCompletion
+{
+    [[JGSession sharedSession].requestController post:@"fundraising/pages/(:pageShortName)/images/(:isDefault)?caption=(:imageCaption)" withURLParamDictionary:@{@"pageShortName":fundraisingPage.pageShortName, @"isDefault": isDefault ? @"default" : @""} bodyParams:@{@"image":fundraisingImage} contentType:TSCRequestContentTypeImagePNG completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
+        
+        if (uploadCompletion) {
+            uploadCompletion(error);
+        }
+        
     }];
 }
 
