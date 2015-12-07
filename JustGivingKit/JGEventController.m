@@ -74,7 +74,7 @@
     }];
 }
 
-- (void)joinEventWithEventId:(NSNumber *)eventId pageTitle:(NSString *)pageTitle pageShortName:(NSString *)pageShortName withCharityId:(NSString *)charityId targetAmount:(NSNumber *)targetAmount withCompletion:(JGJoinEventCompletion)completion;
+- (void)joinEventWithEventId:(NSNumber *)eventId pageTitle:(NSString *)pageTitle pageShortName:(NSString *)pageShortName withCharityId:(NSString *)charityId targetAmount:(NSNumber *)targetAmount eventImage:(UIImage *)image withCompletion:(JGJoinEventCompletion)completion;
 {
     JGFundraisingController *fundraisingController = [JGFundraisingController new];
     
@@ -85,7 +85,7 @@
     page.charityId = charityId;
     page.targetAmount = targetAmount;
     
-    [fundraisingController createFundraisingPage:page withCompletion:^(JGFundraisingPage *page, NSError *error) {
+    [fundraisingController createFundraisingPage:page image:image completion:^(JGFundraisingPage *page, NSError *error) {
         
         if (error) {
             
