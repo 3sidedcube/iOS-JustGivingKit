@@ -274,7 +274,7 @@
 
 - (void)uploadImage:(nonnull UIImage *)fundraisingImage caption:(nullable NSString *)imageCaption toFundraisingPage:(nonnull JGFundraisingPage *)fundraisingPage isDefault:(BOOL)isDefault completion:(nullable JGUploadImageCompletion)uploadCompletion
 {
-    [[JGSession sharedSession].requestController post:@"fundraising/pages/(:pageShortName)/images/(:isDefault)?caption=(:imageCaption)" withURLParamDictionary:@{@"pageShortName":fundraisingPage.pageShortName, @"isDefault": isDefault ? @"default" : @""} bodyParams:@{@"image":fundraisingImage} contentType:TSCRequestContentTypeImagePNG completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
+    [[JGSession sharedSession].requestController post:@"fundraising/pages/(:pageShortName)/images/(:isDefault)?caption=(:imageCaption)" withURLParamDictionary:@{@"pageShortName":fundraisingPage.pageShortName, @"isDefault": isDefault ? @"default" : @"", @"imageCaption" : imageCaption ?: @""} bodyParams:@{@"image":fundraisingImage} contentType:TSCRequestContentTypeImagePNG completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
         
         if (uploadCompletion) {
             uploadCompletion(error);
