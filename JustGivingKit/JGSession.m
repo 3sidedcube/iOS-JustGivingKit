@@ -51,6 +51,8 @@ static JGSession *sharedSession = nil;
     
     if (credential) {
         
+        self.requestController.sharedRequestHeaders[@"Authorization"] = credential.authorizationToken;
+
         [self loginWithCredential:credential completion:^(NSObject *user, NSError *error) {
             if (!error) {
                 

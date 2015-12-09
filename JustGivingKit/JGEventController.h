@@ -42,7 +42,8 @@ typedef void (^JGJoinEventCompletion)(JGFundraisingPage *page, NSError *error);
  @param pageShortName Unique identifier short name for the craeted fundraising page
  @param charityId Unique charity Id that the fundraising page is for
  @param targetAmount The target amount of money the page aims to raise
+ @param image The image to upload with the event to be the default image
  */
-- (void)joinEventWithEventId:(NSNumber *)eventId pageTitle:(NSString *)pageTitle pageShortName:(NSString *)pageShortName withCharityId:(NSString *)charityId targetAmount:(NSNumber *)targetAmount withCompletion:(JGJoinEventCompletion)completion;
+- (void)joinEventWithEventId:(NSNumber *)eventId pageTitle:(NSString *)pageTitle pageShortName:(NSString *)pageShortName withCharityId:(NSString *)charityId targetAmount:(NSNumber *)targetAmount eventImage:(UIImage *)image withCompletion:(JGJoinEventCompletion)completion;
 
 @end
