@@ -30,3 +30,6 @@ FOUNDATION_EXPORT const unsigned char JustGivingKitVersionString[];
 #import <JustGivingKit/JGEventController.h>
 #import <JustGivingKit/JGDonationController.h>
 #import <JustGivingKit/JGCharityController.h>
+
+// Defines
+#import <JustGivingKit/JGDefines.h>
