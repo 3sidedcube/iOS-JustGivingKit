@@ -18,7 +18,7 @@ public class JGFormatter: NSObject {
     - parameter activityType: The activity type in enum form to be converted
     - returns: A string that can be passed to the JustGiving API
     */
-    public func stringForActivityType(activityType: JGFundraisingActivityType) -> String {
+    public class func stringForActivityType(activityType: JGFundraisingActivityType) -> String {
         
         switch activityType {
         case .RunningMarathon:
@@ -86,7 +86,7 @@ public class JGFormatter: NSObject {
     - parameter activityType: The activity type in enum form to be converted
     - returns: A string that can be passed to the JustGiving API
     */
-    public func activityTypeForString(activityString: String) -> JGFundraisingActivityType {
+    public class func activityTypeForString(activityString: String) -> JGFundraisingActivityType {
         
         switch activityString {
             
