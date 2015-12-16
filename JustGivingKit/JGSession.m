@@ -64,6 +64,11 @@ static JGSession *sharedSession = nil;
     }
 }
 
+- (void)logoutCurrentUser
+{
+    [TSCRequestCredential deleteCredentialWithIdentifier:@"JGUserLogin"];
+}
+
 - (void)loginWithEmail:(NSString *)email password:(NSString *)password completion:(JGSessionLoginCompletion)completion
 {
     [self.requestController post:@"account/validate" withURLParamDictionary:nil bodyParams:@{@"email":email, @"password":password} completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
