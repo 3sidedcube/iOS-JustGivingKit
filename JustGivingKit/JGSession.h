@@ -47,4 +47,9 @@ typedef void (^JGSessionLoginCompletion)(JGUser *user, NSError *error);
  */
 - (void)loginWithEmail:(NSString *)email password:(NSString *)password completion:(JGSessionLoginCompletion)completion;
 
+/**
+@abstract Logs out the current user and removes any stored credentials from the keychain
+*/
+- (void)logoutCurrentUser;
+
 @end
