@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JGDefines.h"
 
 @interface JGFundraisingPage : NSObject
 
@@ -70,6 +71,10 @@
  */
 @property (nonatomic, copy) NSString *domain;
 
+/**
+ @abstract The type of the event assosicated with the event (If any)
+ */
+@property (nonatomic, assign) JGFundraisingActivityType activityType;
 
 /**
  @abstract Initialises the object with a dictionary representation of itself

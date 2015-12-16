@@ -13,6 +13,7 @@
 #import "JGSession.h"
 #import "JGUser.h"
 #import "JGDonation.h"
+#import <JustGivingKit/JustGivingKit-Swift.h>
 
 @implementation JGFundraisingController
 
@@ -192,6 +193,9 @@
     payload[@"justGivingOptIn"] = @"false";
     payload[@"charityOptIn"] = @"false";
     payload[@"charityFunded"] = @"false";
+    if (fundraisingPage.activityType) {
+        payload[@"activityType"] = [JGFormatter stringForActivityType:fundraisingPage.activityType];
+    }
     
     [[JGSession sharedSession].requestController put:@"fundraising/pages" bodyParams:payload completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
         

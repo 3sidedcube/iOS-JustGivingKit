@@ -18,6 +18,8 @@
 		36A4A52C1BE91990007EB555 /* NSDate+JGDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4A52A1BE91990007EB555 /* NSDate+JGDate.m */; };
 		496C48281BE9030D00E653D3 /* JGEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496C48271BE9030D00E653D3 /* JGEvent.swift */; };
 		496C482D1BE90EE200E653D3 /* JGEvent.swift in Headers */ = {isa = PBXBuildFile; fileRef = 496C48271BE9030D00E653D3 /* JGEvent.swift */; settings = {ATTRIBUTES = (Public, ); }; };
+		4979B52D1C1B29A400DD6405 /* JGFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979B52C1C1B29A400DD6405 /* JGFormatter.swift */; };
+		4979B5321C1B31AA00DD6405 /* JGDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 3684113E1BE22AEA00FEE624 /* JGDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4993E4691BECD58C0029D0D8 /* ThunderBasics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 368411081BE21A2B00FEE624 /* ThunderBasics.framework */; };
 		4993E46A1BECD58C0029D0D8 /* ThunderRequest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 368411111BE21A3200FEE624 /* ThunderRequest.framework */; };
 		FF05C93B1BE258530039ADF4 /* JGFundraisingPage.h in Headers */ = {isa = PBXBuildFile; fileRef = FF05C9391BE258530039ADF4 /* JGFundraisingPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -85,6 +87,7 @@
 		36A4A5291BE91990007EB555 /* NSDate+JGDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+JGDate.h"; sourceTree = "<group>"; };
 		36A4A52A1BE91990007EB555 /* NSDate+JGDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+JGDate.m"; sourceTree = "<group>"; };
 		496C48271BE9030D00E653D3 /* JGEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JGEvent.swift; sourceTree = "<group>"; };
+		4979B52C1C1B29A400DD6405 /* JGFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JGFormatter.swift; sourceTree = "<group>"; };
 		4993E4651BECD5640029D0D8 /* ThunderBasics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ThunderBasics.framework; path = "../Thunder Basics/build/Debug-iphoneos/ThunderBasics.framework"; sourceTree = "<group>"; };
 		4993E4661BECD5640029D0D8 /* ThunderRequest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ThunderRequest.framework; path = "../Thunder Request/build/Debug-iphoneos/ThunderRequest.framework"; sourceTree = "<group>"; };
 		FF05C9391BE258530039ADF4 /* JGFundraisingPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGFundraisingPage.h; sourceTree = "<group>"; };
@@ -219,6 +222,7 @@
 			children = (
 				36A4A5291BE91990007EB555 /* NSDate+JGDate.h */,
 				36A4A52A1BE91990007EB555 /* NSDate+JGDate.m */,
+				4979B52C1C1B29A400DD6405 /* JGFormatter.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -259,6 +263,7 @@
 				36A4A4ED1BE8D92F007EB555 /* JGDonation.h in Headers */,
 				FFCDF50F1BF4F85C00FA1D49 /* JGCharityController.h in Headers */,
 				FFCDF4FB1BF4B19100FA1D49 /* JGDonationController.h in Headers */,
+				4979B5321C1B31AA00DD6405 /* JGDefines.h in Headers */,
 				361DA0761BE2190400F76120 /* JustGivingKit.h in Headers */,
 				496C482D1BE90EE200E653D3 /* JGEvent.swift in Headers */,
 			);
@@ -381,6 +386,7 @@
 				3684114C1BE23E8800FEE624 /* JGUser.m in Sources */,
 				FF7517291BE3715300989F27 /* JGEventController.m in Sources */,
 				36A4A4EE1BE8D92F007EB555 /* JGDonation.m in Sources */,
+				4979B52D1C1B29A400DD6405 /* JGFormatter.swift in Sources */,
 				FFD27FC81BE393F400825CD4 /* JGSearchController.m in Sources */,
 				FFD27FD11BE3945E00825CD4 /* JGSearchQuery.m in Sources */,
 				FFCDF4FC1BF4B19100FA1D49 /* JGDonationController.m in Sources */,
