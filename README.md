@@ -1,5 +1,7 @@
 # iOS-JustGivingKit
 
+[![Build Status](https://travis-ci.org/3sidedcube/iOS-JustGivingKit.svg)](https://travis-ci.org/3sidedcube/iOS-JustGivingKit)
+
 An iOS framework for easily interfacing with the JustGiving API
 
 #Installation
