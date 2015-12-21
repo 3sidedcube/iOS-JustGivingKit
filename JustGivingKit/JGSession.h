@@ -52,4 +52,7 @@ typedef void (^JGSessionLoginCompletion)(JGUser *user, NSError *error);
 */
 - (void)logoutCurrentUser;
 
+- (void)requestUserAuthentication;
+- (void)handleAuthenticationCallbackWithUrl:(NSURL *)url;
+
 @end

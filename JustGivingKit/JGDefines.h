@@ -10,6 +10,7 @@
 
 static NSString * const JGAPIBaseAddress = @"https://api.justgiving.com";
 static NSString * const JGAPISandboxBaseAddress = @"https://api-sandbox.justgiving.com";
+static NSString * const JGAPIAuthBaseAddress = @"https://identity.justgiving.com";
 
 /** A list of possible activityTypes for a `JGFundraisingPage` */
 typedef NS_ENUM(NSInteger, JGFundraisingActivityType) {
