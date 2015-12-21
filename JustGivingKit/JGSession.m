@@ -15,7 +15,6 @@
 @interface JGSession ()
 
 @property (nonatomic, strong) NSString *applicationId;
-@property (nonatomic, copy) NSString *oauthCallbackUrl;
 
 @end
 
@@ -68,77 +67,6 @@ static JGSession *sharedSession = nil;
 - (void)logoutCurrentUser
 {
     [TSCRequestCredential deleteCredentialWithIdentifier:@"JGUserLogin"];
-}
-
-- (void)requestUserAuthentication
-{
-    NSString *kickoutUrl = [NSString stringWithFormat:@"%@/connect/authorize?client_id=%@&response_type=code&scope=openid+profile+email+account+fundraise+offline_access&redirect_uri=", JGAPIAuthBaseAddress, self.applicationId];
-    
-    NSString *callbackIdentifier = [NSString stringWithFormat:@"%@.JGAuthUrl", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]];
-    
-    NSArray *urlTypes = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleURLTypes"];
-    
-    NSString *callBackUrl;
-    
-    if (urlTypes && urlTypes.count > 0) {
-        
-        for (NSDictionary *urlInfoDictionary in urlTypes) {
-            
-            if (urlInfoDictionary && urlInfoDictionary[@"CFBundleURLName"]
-                && [urlInfoDictionary[@"CFBundleURLName"] isEqualToString:callbackIdentifier]) {
-                
-                NSArray *urlSchemes = urlInfoDictionary[@"CFBundleURLSchemes"];
-                
-                if (urlSchemes && urlSchemes.count > 0) {
-                    callBackUrl = urlSchemes.firstObject;
-                }
-            }
-        }
-    }
-    
-    if (!callBackUrl) {
-        NSLog(@"No Auth callback url implmented please add to url types");
-        return;
-    }
-    
-    callBackUrl = [[NSString stringWithFormat:@"%@://oauth", callBackUrl] urlEncodedString];
-    
-    self.oauthCallbackUrl = callBackUrl;
-    
-    kickoutUrl = [NSString stringWithFormat:@"%@%@&nonce=ba3c9a58dff94a86aa633e71e6afc4e3", kickoutUrl, callBackUrl];
-    
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kickoutUrl]];
-}
-
-- (void)handleAuthenticationCallbackWithUrl:(NSURL *)url
-{
-    NSMutableDictionary *queryStringDictionary = [[NSMutableDictionary alloc] init];
-    NSArray *urlComponents = [[url.absoluteString componentsSeparatedByString:@"?"].lastObject componentsSeparatedByString:@"&"];
-    
-    for (NSString *keyValuePair in urlComponents)
-    {
-        NSArray *pairComponents = [keyValuePair componentsSeparatedByString:@"="];
-        NSString *key = [[pairComponents firstObject] stringByRemovingPercentEncoding];
-        NSString *value = [[pairComponents lastObject] stringByRemovingPercentEncoding];
-        
-        [queryStringDictionary setObject:value forKey:key];
-    }
-    
-    NSString *authCode = queryStringDictionary[@"code"];
-    
-    TSCRequestController *authRequestController = [[TSCRequestController alloc] initWithBaseAddress:JGAPIAuthBaseAddress];
-    
-    NSMutableDictionary *postDictionary = [NSMutableDictionary new];
-    [postDictionary setValue:authCode forKey:@"code"];
-    [postDictionary setValue:@"authorization_code" forKey:@"grant_type"];
-    [postDictionary setValue:self.oauthCallbackUrl forKey:@"redirect_uri"];
-    
-    [authRequestController post:@"connect/token" withURLParamDictionary:nil bodyParams:postDictionary contentType:TSCRequestContentTypeFormURLEncoded completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
-        
-        if (!error) {
-            
-        }
-    }];
 }
 
 - (void)loginWithEmail:(NSString *)email password:(NSString *)password completion:(JGSessionLoginCompletion)completion
