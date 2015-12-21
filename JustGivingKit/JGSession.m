@@ -101,9 +101,9 @@ static JGSession *sharedSession = nil;
         return;
     }
     
-    callBackUrl = [[NSString stringWithFormat:@"%@://oauth", callBackUrl] urlEncodedString];
+    self.oauthCallbackUrl = [NSString stringWithFormat:@"%@://oauth", callBackUrl];
     
-    self.oauthCallbackUrl = callBackUrl;
+    callBackUrl = [self.oauthCallbackUrl urlEncodedString];
     
     kickoutUrl = [NSString stringWithFormat:@"%@%@&nonce=ba3c9a58dff94a86aa633e71e6afc4e3", kickoutUrl, callBackUrl];
     
@@ -132,6 +132,14 @@ static JGSession *sharedSession = nil;
     [postDictionary setValue:authCode forKey:@"code"];
     [postDictionary setValue:@"authorization_code" forKey:@"grant_type"];
     [postDictionary setValue:self.oauthCallbackUrl forKey:@"redirect_uri"];
+    
+    NSMutableDictionary *requestHeaders = [NSMutableDictionary new];
+    
+    NSString *baseEncodedAppDetails = [[[NSString stringWithFormat:@"%@:%@", [[NSBundle mainBundle] infoDictionary][@"JGApplicationId"], [[NSBundle mainBundle] infoDictionary][@"JGApplicationSecret"]] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:kNilOptions];
+    
+    [requestHeaders setValue:[NSString stringWithFormat:@"Basic %@", baseEncodedAppDetails] forKey:@"Authorization"];
+    
+    [authRequestController setSharedRequestHeaders:requestHeaders];
     
     [authRequestController post:@"connect/token" withURLParamDictionary:nil bodyParams:postDictionary contentType:TSCRequestContentTypeFormURLEncoded completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
         
