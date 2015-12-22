@@ -12,7 +12,7 @@
 #import "JGDefines.h"
 #import "JGUser.h"
 
-@interface JGSession ()
+@interface JGSession () <TSCOAuth2Manager>
 
 @property (nonatomic, strong) NSString *applicationId;
 @property (nonatomic, copy) NSString *oauthCallbackUrl;
@@ -40,6 +40,7 @@ static JGSession *sharedSession = nil;
         
         self.applicationId = [[NSBundle mainBundle] infoDictionary][@"JGApplicationId"];
         self.requestController = [[TSCRequestController alloc] initWithBaseAddress:[NSString stringWithFormat:@"%@/%@/v1", JGAPIBaseAddress, self.applicationId]];
+        self.requestController.OAuth2Delegate = self;
         [self restoreLoggedInState];
     }
     
@@ -115,8 +116,8 @@ static JGSession *sharedSession = nil;
     NSMutableDictionary *queryStringDictionary = [[NSMutableDictionary alloc] init];
     NSArray *urlComponents = [[url.absoluteString componentsSeparatedByString:@"?"].lastObject componentsSeparatedByString:@"&"];
     
-    for (NSString *keyValuePair in urlComponents)
-    {
+    for (NSString *keyValuePair in urlComponents) {
+        
         NSArray *pairComponents = [keyValuePair componentsSeparatedByString:@"="];
         NSString *key = [[pairComponents firstObject] stringByRemovingPercentEncoding];
         NSString *value = [[pairComponents lastObject] stringByRemovingPercentEncoding];
@@ -145,6 +146,44 @@ static JGSession *sharedSession = nil;
         
         if (!error) {
             
+            TSCOAuth2Credential *credential = [[TSCOAuth2Credential alloc] initWithAuthorizationToken:response.dictionary[@"access_token"] refreshToken:response.dictionary[@"refresh_token"] expiryDate:[[NSDate date] dateByAddingTimeInterval:[response.dictionary[@"expires_in"] doubleValue]]];
+            
+            [self.requestController setSharedRequestCredential:credential andSaveToKeychain:true];
+        }
+    }];
+}
+
+- (void)reAuthenticateCredential:(TSCOAuth2Credential *)credential withCompletion:(TSCOAuthAuthenticateCompletion)completion
+{
+    TSCRequestController *authRequestController = [[TSCRequestController alloc] initWithBaseAddress:JGAPIAuthBaseAddress];
+    
+    NSMutableDictionary *postDictionary = [NSMutableDictionary new];
+    [postDictionary setValue:credential.refreshToken forKey:@"code"];
+    [postDictionary setValue:@"refresh_token" forKey:@"grant_type"];
+    
+    NSMutableDictionary *requestHeaders = [NSMutableDictionary new];
+    
+    NSString *baseEncodedAppDetails = [[[NSString stringWithFormat:@"%@:%@", [[NSBundle mainBundle] infoDictionary][@"JGApplicationId"], [[NSBundle mainBundle] infoDictionary][@"JGApplicationSecret"]] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:kNilOptions];
+    
+    [requestHeaders setValue:[NSString stringWithFormat:@"Basic %@", baseEncodedAppDetails] forKey:@"Authorization"];
+    
+    [authRequestController setSharedRequestHeaders:requestHeaders];
+    
+    [authRequestController post:@"connect/token" withURLParamDictionary:nil bodyParams:postDictionary contentType:TSCRequestContentTypeFormURLEncoded completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
+        
+        if (response.status  == TSCResponseStatusOK) {
+            
+            TSCOAuth2Credential *credential = [[TSCOAuth2Credential alloc] initWithAuthorizationToken:response.dictionary[@"access_token"] refreshToken:response.dictionary[@"refresh_token"] expiryDate:[[NSDate date] dateByAddingTimeInterval:[response.dictionary[@"expires_in"] doubleValue]]];
+            
+            if (completion) {
+                completion(credential, nil, YES);
+            }
+            
+        } else {
+            
+            if (completion) {
+                completion(nil, [NSError errorWithDomain:self.requestController.sharedBaseURL.absoluteString code:response.status userInfo:nil], NO);
+            }
         }
     }];
 }
