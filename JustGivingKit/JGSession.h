@@ -41,6 +41,18 @@ typedef void (^JGSessionAuthenticationCompletion)(NSError *error);
 + (JGSession *)sharedSession;
 
 /**
+ @abstract Kicks the user out to the JustGiving Authentication flow
+ @param completion The completion block to be fired when the request is complete.
+ */
+- (void)requestUserAuthenticationWithCompletion:(JGSessionAuthenticationCompletion)completion;
+
+/**
+ @abstract Handles callback from JustGiving login flow. Put this method in the handleOpenURL method in your app delegate
+ @param url The callback url that has opened the app
+ */
+- (void)handleAuthenticationCallbackWithUrl:(NSURL *)url;
+
+/**
  @abstract Logs a user into the JustGiving API.
  @param username The email of an existing account.
  @param password The password of an exisiting account.
@@ -52,8 +64,5 @@ typedef void (^JGSessionAuthenticationCompletion)(NSError *error);
 @abstract Logs out the current user and removes any stored credentials from the keychain
 */
 - (void)logoutCurrentUser;
-
-- (void)requestUserAuthenticationWithCompletion:(JGSessionAuthenticationCompletion)completion;
-- (void)handleAuthenticationCallbackWithUrl:(NSURL *)url;
 
 @end
