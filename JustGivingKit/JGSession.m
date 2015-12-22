@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) NSString *applicationId;
 @property (nonatomic, copy) NSString *oauthCallbackUrl;
+@property (nonatomic, copy) JGSessionAuthenticationCompletion authenticationCompletion;
 
 @end
 
@@ -41,29 +42,9 @@ static JGSession *sharedSession = nil;
         self.applicationId = [[NSBundle mainBundle] infoDictionary][@"JGApplicationId"];
         self.requestController = [[TSCRequestController alloc] initWithBaseAddress:[NSString stringWithFormat:@"%@/%@/v1", JGAPIBaseAddress, self.applicationId]];
         self.requestController.OAuth2Delegate = self;
-        [self restoreLoggedInState];
     }
     
     return self;
-}
-
-- (void)restoreLoggedInState
-{
-    TSCRequestCredential *credential = [TSCRequestCredential retrieveCredentialWithIdentifier:@"JGUserLogin"];
-    
-    if (credential) {
-        
-        self.requestController.sharedRequestHeaders[@"Authorization"] = credential.authorizationToken;
-
-        [self loginWithCredential:credential completion:^(NSObject *user, NSError *error) {
-            if (!error) {
-                
-                [self willChangeValueForKey:@"loggedIn"];
-                _loggedIn = YES;
-                [self didChangeValueForKey:@"loggedIn"];
-            }
-        }];
-    }
 }
 
 - (void)logoutCurrentUser
@@ -71,8 +52,10 @@ static JGSession *sharedSession = nil;
     [TSCRequestCredential deleteCredentialWithIdentifier:@"JGUserLogin"];
 }
 
-- (void)requestUserAuthentication
+- (void)requestUserAuthenticationWithCompletion:(JGSessionAuthenticationCompletion)completion
 {
+    self.authenticationCompletion = completion;
+    
     NSString *kickoutUrl = [NSString stringWithFormat:@"%@/connect/authorize?client_id=%@&response_type=code&scope=openid+profile+email+account+fundraise+offline_access&redirect_uri=", JGAPIAuthBaseAddress, self.applicationId];
     
     NSString *callbackIdentifier = [NSString stringWithFormat:@"%@.JGAuthUrl", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]];
@@ -99,6 +82,9 @@ static JGSession *sharedSession = nil;
     
     if (!callBackUrl) {
         NSLog(@"No Auth callback url implmented please add to url types");
+        
+        self.authenticationCompletion([NSError errorWithDomain:@"com.justGivingKit.error" code:0 userInfo:@{ NSLocalizedDescriptionKey : @"No Auth callback url implmented"} ]);
+        
         return;
     }
     
@@ -150,7 +136,14 @@ static JGSession *sharedSession = nil;
             
             [self.requestController setSharedRequestCredential:credential andSaveToKeychain:true];
         }
+        
+        self.authenticationCompletion(error);
     }];
+}
+
+- (NSString *)serviceIdentifier
+{
+    return NSStringFromClass([self class]);
 }
 
 - (void)reAuthenticateCredential:(TSCOAuth2Credential *)credential withCompletion:(TSCOAuthAuthenticateCompletion)completion

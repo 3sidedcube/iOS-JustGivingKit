@@ -18,6 +18,7 @@
 @interface JGSession : NSObject
 
 typedef void (^JGSessionLoginCompletion)(JGUser *user, NSError *error);
+typedef void (^JGSessionAuthenticationCompletion)(NSError *error);
 
 /**
  @abstract A request controller with a baseURL to the JustGiving API as defined in JGDefines.
@@ -52,7 +53,7 @@ typedef void (^JGSessionLoginCompletion)(JGUser *user, NSError *error);
 */
 - (void)logoutCurrentUser;
 
-- (void)requestUserAuthentication;
+- (void)requestUserAuthenticationWithCompletion:(JGSessionAuthenticationCompletion)completion;
 - (void)handleAuthenticationCallbackWithUrl:(NSURL *)url;
 
 @end
