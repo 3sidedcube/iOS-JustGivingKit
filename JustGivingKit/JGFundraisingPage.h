@@ -82,5 +82,10 @@
  */
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
+/**
+ @abstract Returns the URL for the fundraising page
+ @discussion This is constructed each time from the domain and pageShortName
+ */
+@property (nonatomic, weak) NSURL *pageURL;
 
 @end
