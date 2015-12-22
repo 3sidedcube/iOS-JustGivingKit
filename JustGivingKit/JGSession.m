@@ -12,9 +12,11 @@
 #import "JGDefines.h"
 #import "JGUser.h"
 
-@interface JGSession ()
+@interface JGSession () <TSCOAuth2Manager>
 
 @property (nonatomic, strong) NSString *applicationId;
+@property (nonatomic, copy) NSString *oauthCallbackUrl;
+@property (nonatomic, copy) JGSessionAuthenticationCompletion authenticationCompletion;
 
 @end
 
@@ -38,35 +40,166 @@ static JGSession *sharedSession = nil;
     if (self = [super init]) {
         
         self.applicationId = [[NSBundle mainBundle] infoDictionary][@"JGApplicationId"];
+        
         self.requestController = [[TSCRequestController alloc] initWithBaseAddress:[NSString stringWithFormat:@"%@/%@/v1", JGAPIBaseAddress, self.applicationId]];
-        [self restoreLoggedInState];
+        
+        NSMutableDictionary *requestHeaders = [NSMutableDictionary new];
+        [requestHeaders setValue:[[NSBundle mainBundle] infoDictionary][@"JGApplicationId"] forKey:@"x-api-key"];
+        [requestHeaders setValue:[[NSBundle mainBundle] infoDictionary][@"JGApplicationSecret"] forKey:@"x-application-key"];
+        [self.requestController setSharedRequestHeaders:requestHeaders];
+        
+        self.requestController.OAuth2Delegate = self;
     }
     
     return self;
 }
 
-- (void)restoreLoggedInState
-{
-    TSCRequestCredential *credential = [TSCRequestCredential retrieveCredentialWithIdentifier:@"JGUserLogin"];
-    
-    if (credential) {
-        
-        self.requestController.sharedRequestHeaders[@"Authorization"] = credential.authorizationToken;
-
-        [self loginWithCredential:credential completion:^(NSObject *user, NSError *error) {
-            if (!error) {
-                
-                [self willChangeValueForKey:@"loggedIn"];
-                _loggedIn = YES;
-                [self didChangeValueForKey:@"loggedIn"];
-            }
-        }];
-    }
-}
-
 - (void)logoutCurrentUser
 {
     [TSCRequestCredential deleteCredentialWithIdentifier:@"JGUserLogin"];
+}
+
+- (void)requestUserAuthenticationWithCompletion:(JGSessionAuthenticationCompletion)completion
+{
+    self.authenticationCompletion = completion;
+    
+    NSString *kickoutUrl = [NSString stringWithFormat:@"%@/connect/authorize?client_id=%@&response_type=code&scope=openid+profile+email+account+fundraise+offline_access&redirect_uri=", JGAPIAuthBaseAddress, self.applicationId];
+    
+    NSString *callbackIdentifier = [NSString stringWithFormat:@"%@.JGAuthUrl", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]];
+    
+    NSArray *urlTypes = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleURLTypes"];
+    
+    NSString *callBackUrl;
+    
+    if (urlTypes && urlTypes.count > 0) {
+        
+        for (NSDictionary *urlInfoDictionary in urlTypes) {
+            
+            if (urlInfoDictionary && urlInfoDictionary[@"CFBundleURLName"]
+                && [urlInfoDictionary[@"CFBundleURLName"] isEqualToString:callbackIdentifier]) {
+                
+                NSArray *urlSchemes = urlInfoDictionary[@"CFBundleURLSchemes"];
+                
+                if (urlSchemes && urlSchemes.count > 0) {
+                    callBackUrl = urlSchemes.firstObject;
+                }
+            }
+        }
+    }
+    
+    if (!callBackUrl) {
+        
+        NSLog(@"No Auth callback url implmented please add to url types");
+        
+        self.authenticationCompletion([NSError errorWithDomain:@"com.justGivingKit.error" code:0 userInfo:@{ NSLocalizedDescriptionKey : @"No Auth callback url implmented"} ]);
+        
+        return;
+    }
+    
+    self.oauthCallbackUrl = [NSString stringWithFormat:@"%@://oauth", callBackUrl];
+    
+    callBackUrl = [self.oauthCallbackUrl urlEncodedString];
+    kickoutUrl = [NSString stringWithFormat:@"%@%@&nonce=ba3c9a58dff94a86aa633e71e6afc4e3", kickoutUrl, callBackUrl];
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kickoutUrl]];
+}
+
+- (void)handleAuthenticationCallbackWithUrl:(NSURL *)url
+{
+    NSMutableDictionary *queryStringDictionary = [[NSMutableDictionary alloc] init];
+    NSArray *urlComponents = [[url.absoluteString componentsSeparatedByString:@"?"].lastObject componentsSeparatedByString:@"&"];
+    
+    for (NSString *keyValuePair in urlComponents) {
+        
+        NSArray *pairComponents = [keyValuePair componentsSeparatedByString:@"="];
+        NSString *key = [[pairComponents firstObject] stringByRemovingPercentEncoding];
+        NSString *value = [[pairComponents lastObject] stringByRemovingPercentEncoding];
+        
+        [queryStringDictionary setObject:value forKey:key];
+    }
+    
+    NSString *authCode = queryStringDictionary[@"code"];
+    
+    TSCRequestController *authRequestController = [[TSCRequestController alloc] initWithBaseAddress:JGAPIAuthBaseAddress];
+    
+    NSMutableDictionary *postDictionary = [NSMutableDictionary new];
+    [postDictionary setValue:authCode forKey:@"code"];
+    [postDictionary setValue:@"authorization_code" forKey:@"grant_type"];
+    [postDictionary setValue:self.oauthCallbackUrl forKey:@"redirect_uri"];
+    
+    NSMutableDictionary *requestHeaders = [NSMutableDictionary new];
+    
+    NSString *baseEncodedAppDetails = [[[NSString stringWithFormat:@"%@:%@", [[NSBundle mainBundle] infoDictionary][@"JGApplicationId"], [[NSBundle mainBundle] infoDictionary][@"JGApplicationSecret"]] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:kNilOptions];
+    
+    [requestHeaders setValue:[NSString stringWithFormat:@"Basic %@", baseEncodedAppDetails] forKey:@"Authorization"];
+    
+    [authRequestController setSharedRequestHeaders:requestHeaders];
+    
+    [authRequestController post:@"connect/token" withURLParamDictionary:nil bodyParams:postDictionary contentType:TSCRequestContentTypeFormURLEncoded completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
+        
+        if (!error) {
+            
+            TSCOAuth2Credential *credential = [[TSCOAuth2Credential alloc] initWithAuthorizationToken:response.dictionary[@"access_token"] refreshToken:response.dictionary[@"refresh_token"] expiryDate:[[NSDate date] dateByAddingTimeInterval:[response.dictionary[@"expires_in"] doubleValue]]];
+            
+            [self.requestController setSharedRequestCredential:credential andSaveToKeychain:true];
+            
+            [self willChangeValueForKey:@"loggedIn"];
+            _loggedIn = YES;
+            [self didChangeValueForKey:@"loggedIn"];
+            
+            [self retrieveUserAccountInformationWithCompletion:^(JGUser *user, NSError *error) {
+                
+                if (error) {
+                    
+                    self.authenticationCompletion(error);
+                    return;
+                }
+                
+                self.currentUser = user;
+                self.authenticationCompletion(error);
+            }];
+        }
+    }];
+}
+
+- (NSString *)serviceIdentifier
+{
+    return NSStringFromClass([self class]);
+}
+
+- (void)reAuthenticateCredential:(TSCOAuth2Credential *)credential withCompletion:(TSCOAuthAuthenticateCompletion)completion
+{
+    TSCRequestController *authRequestController = [[TSCRequestController alloc] initWithBaseAddress:JGAPIAuthBaseAddress];
+    
+    NSMutableDictionary *postDictionary = [NSMutableDictionary new];
+    [postDictionary setValue:credential.refreshToken forKey:@"code"];
+    [postDictionary setValue:@"refresh_token" forKey:@"grant_type"];
+    
+    NSMutableDictionary *requestHeaders = [NSMutableDictionary new];
+    
+    NSString *baseEncodedAppDetails = [[[NSString stringWithFormat:@"%@:%@", [[NSBundle mainBundle] infoDictionary][@"JGApplicationId"], [[NSBundle mainBundle] infoDictionary][@"JGApplicationSecret"]] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:kNilOptions];
+    
+    [requestHeaders setValue:[NSString stringWithFormat:@"Basic %@", baseEncodedAppDetails] forKey:@"Authorization"];
+    
+    [authRequestController setSharedRequestHeaders:requestHeaders];
+    
+    [authRequestController post:@"connect/token" withURLParamDictionary:nil bodyParams:postDictionary contentType:TSCRequestContentTypeFormURLEncoded completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
+        
+        if (response.status  == TSCResponseStatusOK) {
+            
+            TSCOAuth2Credential *credential = [[TSCOAuth2Credential alloc] initWithAuthorizationToken:response.dictionary[@"access_token"] refreshToken:response.dictionary[@"refresh_token"] expiryDate:[[NSDate date] dateByAddingTimeInterval:[response.dictionary[@"expires_in"] doubleValue]]];
+            
+            if (completion) {
+                completion(credential, nil, YES);
+            }
+            
+        } else {
+            
+            if (completion) {
+                completion(nil, [NSError errorWithDomain:self.requestController.sharedBaseURL.absoluteString code:response.status userInfo:nil], NO);
+            }
+        }
+    }];
 }
 
 - (void)loginWithEmail:(NSString *)email password:(NSString *)password completion:(JGSessionLoginCompletion)completion

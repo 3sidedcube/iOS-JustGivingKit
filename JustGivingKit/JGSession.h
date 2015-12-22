@@ -18,6 +18,7 @@
 @interface JGSession : NSObject
 
 typedef void (^JGSessionLoginCompletion)(JGUser *user, NSError *error);
+typedef void (^JGSessionAuthenticationCompletion)(NSError *error);
 
 /**
  @abstract A request controller with a baseURL to the JustGiving API as defined in JGDefines.
@@ -38,6 +39,18 @@ typedef void (^JGSessionLoginCompletion)(JGUser *user, NSError *error);
  @abstract Returns a shared session. Use this by default.
  */
 + (JGSession *)sharedSession;
+
+/**
+ @abstract Kicks the user out to the JustGiving Authentication flow
+ @param completion The completion block to be fired when the request is complete.
+ */
+- (void)requestUserAuthenticationWithCompletion:(JGSessionAuthenticationCompletion)completion;
+
+/**
+ @abstract Handles callback from JustGiving login flow. Put this method in the handleOpenURL method in your app delegate
+ @param url The callback url that has opened the app
+ */
+- (void)handleAuthenticationCallbackWithUrl:(NSURL *)url;
 
 /**
  @abstract Logs a user into the JustGiving API.
