@@ -40,7 +40,14 @@ static JGSession *sharedSession = nil;
     if (self = [super init]) {
         
         self.applicationId = [[NSBundle mainBundle] infoDictionary][@"JGApplicationId"];
+        
         self.requestController = [[TSCRequestController alloc] initWithBaseAddress:[NSString stringWithFormat:@"%@/%@/v1", JGAPIBaseAddress, self.applicationId]];
+        
+        NSMutableDictionary *requestHeaders = [NSMutableDictionary new];
+        [requestHeaders setValue:[[NSBundle mainBundle] infoDictionary][@"JGApplicationId"] forKey:@"x-api-key"];
+        [requestHeaders setValue:[[NSBundle mainBundle] infoDictionary][@"JGApplicationSecret"] forKey:@"x-application-key"];
+        [self.requestController setSharedRequestHeaders:requestHeaders];
+        
         self.requestController.OAuth2Delegate = self;
     }
     
@@ -81,6 +88,7 @@ static JGSession *sharedSession = nil;
     }
     
     if (!callBackUrl) {
+        
         NSLog(@"No Auth callback url implmented please add to url types");
         
         self.authenticationCompletion([NSError errorWithDomain:@"com.justGivingKit.error" code:0 userInfo:@{ NSLocalizedDescriptionKey : @"No Auth callback url implmented"} ]);
@@ -91,7 +99,6 @@ static JGSession *sharedSession = nil;
     self.oauthCallbackUrl = [NSString stringWithFormat:@"%@://oauth", callBackUrl];
     
     callBackUrl = [self.oauthCallbackUrl urlEncodedString];
-    
     kickoutUrl = [NSString stringWithFormat:@"%@%@&nonce=ba3c9a58dff94a86aa633e71e6afc4e3", kickoutUrl, callBackUrl];
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kickoutUrl]];
@@ -135,9 +142,23 @@ static JGSession *sharedSession = nil;
             TSCOAuth2Credential *credential = [[TSCOAuth2Credential alloc] initWithAuthorizationToken:response.dictionary[@"access_token"] refreshToken:response.dictionary[@"refresh_token"] expiryDate:[[NSDate date] dateByAddingTimeInterval:[response.dictionary[@"expires_in"] doubleValue]]];
             
             [self.requestController setSharedRequestCredential:credential andSaveToKeychain:true];
+            
+            [self willChangeValueForKey:@"loggedIn"];
+            _loggedIn = YES;
+            [self didChangeValueForKey:@"loggedIn"];
+            
+            [self retrieveUserAccountInformationWithCompletion:^(JGUser *user, NSError *error) {
+                
+                if (error) {
+                    
+                    self.authenticationCompletion(error);
+                    return;
+                }
+                
+                self.currentUser = user;
+                self.authenticationCompletion(error);
+            }];
         }
-        
-        self.authenticationCompletion(error);
     }];
 }
 
