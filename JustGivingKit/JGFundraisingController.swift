@@ -11,7 +11,7 @@ import UIKit
 /**
 Responsible for handling all interactions with fundraising pages
 */
-public class JGFundraisingController: NSObject {
+public extension JGFundraisingController {
     
     public func getSupportedCurrencies(completion: (currencies: [Currency]?, error: NSError?) -> Void) {
      
