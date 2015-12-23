@@ -14,6 +14,8 @@
 		36A4A4EE1BE8D92F007EB555 /* JGDonation.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4A4EC1BE8D92F007EB555 /* JGDonation.m */; };
 		36A4A52B1BE91990007EB555 /* NSDate+JGDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A4A5291BE91990007EB555 /* NSDate+JGDate.h */; };
 		36A4A52C1BE91990007EB555 /* NSDate+JGDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4A52A1BE91990007EB555 /* NSDate+JGDate.m */; };
+		4909872E1C2A9256000EEE99 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4909872D1C2A9256000EEE99 /* ModelTests.swift */; };
+		490987301C2A9446000EEE99 /* RetrieveAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 4909872F1C2A9446000EEE99 /* RetrieveAccount.json */; };
 		490AE5451C295A65007DE933 /* AccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490AE5441C295A65007DE933 /* AccountController.swift */; };
 		490AE5511C295ED5007DE933 /* JustGivingKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490AE5501C295ED5007DE933 /* JustGivingKitTests.swift */; };
 		490AE5531C295ED5007DE933 /* JustGivingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 361DA0721BE2190400F76120 /* JustGivingKit.framework */; };
@@ -97,6 +99,8 @@
 		36A4A4EC1BE8D92F007EB555 /* JGDonation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGDonation.m; sourceTree = "<group>"; };
 		36A4A5291BE91990007EB555 /* NSDate+JGDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+JGDate.h"; sourceTree = "<group>"; };
 		36A4A52A1BE91990007EB555 /* NSDate+JGDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+JGDate.m"; sourceTree = "<group>"; };
+		4909872D1C2A9256000EEE99 /* ModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
+		4909872F1C2A9446000EEE99 /* RetrieveAccount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RetrieveAccount.json; sourceTree = "<group>"; };
 		490AE5441C295A65007DE933 /* AccountController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountController.swift; sourceTree = "<group>"; };
 		490AE54E1C295ED5007DE933 /* JustGivingKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JustGivingKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		490AE5501C295ED5007DE933 /* JustGivingKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustGivingKitTests.swift; sourceTree = "<group>"; };
@@ -263,6 +267,8 @@
 		490AE54F1C295ED5007DE933 /* JustGivingKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				4909872F1C2A9446000EEE99 /* RetrieveAccount.json */,
+				4909872D1C2A9256000EEE99 /* ModelTests.swift */,
 				490AE5501C295ED5007DE933 /* JustGivingKitTests.swift */,
 				490AE5591C295EFF007DE933 /* AccountControllerTests.swift */,
 				490AE5521C295ED5007DE933 /* Info.plist */,
@@ -439,6 +445,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				490987301C2A9446000EEE99 /* RetrieveAccount.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,6 +480,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4909872E1C2A9256000EEE99 /* ModelTests.swift in Sources */,
 				490AE5511C295ED5007DE933 /* JustGivingKitTests.swift in Sources */,
 				490AE55A1C295EFF007DE933 /* AccountControllerTests.swift in Sources */,
 			);
@@ -667,6 +675,7 @@
 				490AE5581C295ED5007DE933 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

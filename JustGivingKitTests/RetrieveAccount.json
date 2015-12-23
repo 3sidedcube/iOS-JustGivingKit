@@ -1,0 +1,66 @@
+{
+    "accountId": 123,
+    "accountTypes": [
+        "Standard"
+    ],
+    "activePageCount": 1,
+    "address": {
+        "country": "United Kingdom",
+        "countyOrState": "Bedfordshire",
+        "line1": "1 Poppy Lane",
+        "line2": null,
+        "postcodeOrZipcode": "MK41 0TA",
+        "townOrCity": "Bedford"
+    },
+    "completedPagesCount": 5,
+    "country": "United Kingdom",
+    "donationTotalsInSupportedCurrencies": [
+        {
+            "amount": 150,
+            "currencyCode": 0,
+            "currencySymbol": "£"
+        },
+        {
+            "amount": 80,
+            "currencyCode": 5,
+            "currencySymbol": "$"
+        },
+        {
+            "amount": 120,
+            "currencyCode": 7,
+            "currencySymbol": "$"
+        }
+    ],
+    "email": "what-a-lovely@dog.com",
+    "firstName": "firstName",
+    "joinDate": "/Date(1257379200000+0000)/",
+    "lastName": "lastName",
+    "profileImageUrls": [
+        {
+            "Key": "OriginalSize",
+            "Value": "http://images.dev.justgiving.com/image/e60e776a-e4f4-4e02-95a6-6107fa7d0400.jpg"
+        },
+        {
+            "Key": "Size150x150Face",
+            "Value": "http://images.dev.justgiving.com/image/e60e776a-e4f4-4e02-95a6-6107fa7d0400.jpg?template=size150x150face"
+        }
+    ],
+    "raisedTotalsInSupportedCurrencies": [
+        {
+            "amount": 2200,
+            "currencyCode": 0,
+            "currencySymbol": "£"
+        },
+        {
+            "amount": 80,
+            "currencyCode": 3,
+            "currencySymbol": "HK$"
+        }
+    ],
+    "totalDonated": 0,
+    "totalDonatedGiftAid": 12.5,
+    "totalGiftAid": 2.5,
+    "totalRaised": 0,
+    "town": "Bedford",
+    "userId": "ec8c3ee5-40df-444c-8e3c-a31530b9bf32"
+}

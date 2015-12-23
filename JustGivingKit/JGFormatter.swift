@@ -166,12 +166,14 @@ extension NSDate {
             
             let firstRange = dateRegex.rangeOfFirstMatchInString(ODataString, options: NSMatchingOptions(rawValue: 0), range: NSMakeRange(0, ODataString.characters.count))
         
-            if NSEqualRanges(firstRange, NSMakeRange(NSNotFound, 0)) {
+            if !NSEqualRanges(firstRange, NSMakeRange(NSNotFound, 0)) {
                 
                 let oDataStringAsNSString = ODataString as NSString
-                let matchingSubstring = oDataStringAsNSString.substringWithRange(firstRange)
+                let matchingSubstring = oDataStringAsNSString.substringWithRange(firstRange) as NSString
                 
-                if let timestampDouble = Double(matchingSubstring) {
+                let trimmedString = matchingSubstring.substringToIndex(10)
+                
+                if let timestampDouble = Double(trimmedString) {
                     
                     self.init(timeIntervalSince1970: timestampDouble)
                     return
