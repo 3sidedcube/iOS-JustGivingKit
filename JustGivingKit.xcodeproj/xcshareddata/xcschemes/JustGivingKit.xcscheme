@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "490AE54D1C295ED5007DE933"
+               BuildableName = "JustGivingKitTests.xctest"
+               BlueprintName = "JustGivingKitTests"
+               ReferencedContainer = "container:JustGivingKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "361DA0711BE2190400F76120"
+            BuildableName = "JustGivingKit.framework"
+            BlueprintName = "JustGivingKit"
+            ReferencedContainer = "container:JustGivingKit.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
