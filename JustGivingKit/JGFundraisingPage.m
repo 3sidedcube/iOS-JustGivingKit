@@ -82,4 +82,12 @@
     return self;
 }
 
+- (NSURL *)pageURL
+{
+    if (self.domain && self.pageShortName) {
+        return [NSURL URLWithString:[self.domain stringByAppendingPathComponent:self.pageShortName]];
+    }
+    return nil;
+}
+
 @end
