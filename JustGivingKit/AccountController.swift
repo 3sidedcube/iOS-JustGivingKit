@@ -76,6 +76,7 @@ public class AccountController: NSObject {
     
     /**
      Loads information about a the currently authenticated user
+     - parameter completion: A closure to fire once the request is completed. This block contains an error object if an error or occurs and also returns the user object
      */
     public func retrieveUserAccountInformation(completion: (user: JGUser?, error: NSError?) -> Void) {
         
