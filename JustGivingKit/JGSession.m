@@ -147,7 +147,8 @@ static JGSession *sharedSession = nil;
             _loggedIn = YES;
             [self didChangeValueForKey:@"loggedIn"];
             
-            [self retrieveUserAccountInformationWithCompletion:^(JGUser *user, NSError *error) {
+            AccountController *accountController = [AccountController new];
+            [accountController retrieveUserAccountInformation:^(JGUser * _Nullable user, NSError * _Nullable error) {
                 
                 if (error) {
                     
@@ -231,7 +232,8 @@ static JGSession *sharedSession = nil;
             [self didChangeValueForKey:@"loggedIn"];
         }
         
-        [self retrieveUserAccountInformationWithCompletion:^(JGUser *user, NSError *error) {
+        AccountController *accountController = [AccountController new];
+        [accountController retrieveUserAccountInformation:^(JGUser * _Nullable user, NSError * _Nullable error) {
             if (error) {
                 
                 completion(nil, error);
@@ -248,25 +250,6 @@ static JGSession *sharedSession = nil;
 - (void)loginWithCredential:(TSCRequestCredential *)credential completion:(JGSessionLoginCompletion)completion
 {
     [self loginWithEmail:credential.username password:credential.password completion:completion];
-}
-
-- (void)retrieveUserAccountInformationWithCompletion:(JGSessionLoginCompletion)completion
-{
-    [self.requestController get:@"account" completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
-        if (error) {
-            
-            completion(nil, error);
-            return;
-        }
-        
-        if (!response.dictionary) {
-            
-            completion(nil, error);
-            return;
-        }
-        
-        completion([[JGUser alloc] initWithDictionary:response.dictionary], error);
-    }];
 }
 
 @end
