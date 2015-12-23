@@ -35,4 +35,7 @@ public class Currency: NSObject {
         code = dictionary["currencyCode"] as? String
     }
 
+    public override init () {
+        
+    }
 }
