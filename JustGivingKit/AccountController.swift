@@ -73,4 +73,33 @@ public class AccountController: NSObject {
         }
         
     }
+    
+    /**
+     Loads information about a the currently authenticated user
+     - parameter completion: A closure to fire once the request is completed. This block contains an error object if an error or occurs and also returns the user object
+     */
+    public func retrieveUserAccountInformation(completion: (user: JGUser?, error: NSError?) -> Void) {
+        
+        JGSession.sharedSession().requestController.get("account") { (response: TSCRequestResponse?, error: NSError?) -> Void in
+            
+            if let requestError = error {
+                
+                completion(user: nil, error: requestError)
+                return
+            }
+            
+            guard let responseDictionary = response?.dictionary as? [String: AnyObject] else {
+                
+                completion(user: nil, error: NSError(domain: "com.threesidedcube.JustGivingKit", code: 500, userInfo: [NSLocalizedDescriptionKey: "The server did not return valid data for a user account"]))
+                return
+            }
+            
+            let user = JGUser(dictionary: responseDictionary)
+            
+            completion(user: user, error: nil)
+            return
+            
+        }
+        
+    }
 }
