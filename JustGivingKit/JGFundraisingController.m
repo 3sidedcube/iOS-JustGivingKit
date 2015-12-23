@@ -11,7 +11,6 @@
 #import "JGFundraisingController.h"
 #import "JGFundraisingPage.h"
 #import "JGSession.h"
-#import "JGUser.h"
 #import "JGDonation.h"
 #import <JustGivingKit/JustGivingKit-Swift.h>
 

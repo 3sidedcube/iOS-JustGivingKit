@@ -10,7 +10,7 @@
 @import ThunderBasics;
 @import ThunderRequest;
 #import "JGDefines.h"
-#import "JGUser.h"
+#import <JustGivingKit/JustGivingKit-Swift.h>
 
 @interface JGSession () <TSCOAuth2Manager>
 

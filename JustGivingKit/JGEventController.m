@@ -9,7 +9,6 @@
 @import ThunderRequest;
 #import "JGEventController.h"
 #import "JGSession.h"
-#import "JGUser.h"
 #import "JGFundraisingPage.h"
 #import "JGFundraisingController.h"
 #import "JGSearchController.h"

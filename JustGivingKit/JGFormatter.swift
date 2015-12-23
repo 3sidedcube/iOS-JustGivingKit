@@ -151,3 +151,40 @@ public class JGFormatter: NSObject {
         }
     }
 }
+
+extension NSDate {
+    
+    /**
+     Initialises a new date from an OData DateTime string (E.g. /Date(1278688766000+0000)/)
+     - parameter ODataString: The OData DateTime string to convert to NSDate
+     */
+    convenience init(ODataString: String!) {
+        
+        let regex = try? NSRegularExpression(pattern: "[0-9]+(?:[0-9]*)?", options: .CaseInsensitive)
+
+        if let dateRegex = regex {
+            
+            let firstRange = dateRegex.rangeOfFirstMatchInString(ODataString, options: NSMatchingOptions(rawValue: 0), range: NSMakeRange(0, ODataString.characters.count))
+        
+            if !NSEqualRanges(firstRange, NSMakeRange(NSNotFound, 0)) {
+                
+                let oDataStringAsNSString = ODataString as NSString
+                let matchingSubstring = oDataStringAsNSString.substringWithRange(firstRange) as NSString
+                
+                let trimmedString = matchingSubstring.substringToIndex(10)
+                
+                if let timestampDouble = Double(trimmedString) {
+                    
+                    self.init(timeIntervalSince1970: timestampDouble)
+                    return
+                }
+                
+            }
+            
+        }
+        
+        self.init()
+        
+    }
+
+}
