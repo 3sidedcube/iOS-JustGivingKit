@@ -64,6 +64,13 @@
 
 - (void)getMoreDetailsForFundraisingPage:(JGFundraisingPage *)fundraisingPage withCompletion:(JGFetchPageDetailCompletion)completion
 {
+    if (fundraisingPage.pageShortName && [fundraisingPage.pageShortName isEqualToString:@""]) {
+        
+        NSError *emptyError = [NSError errorWithDomain:@"com.threesidedcube.JustGivingKit" code:400 userInfo:@{NSLocalizedDescriptionKey: @"Unable to search using a blank page name. Please provide a valid fundraising page object with a real page short name"}];
+        completion(nil, emptyError);
+        return;
+    }
+    
     NSString *getAddress = [NSString stringWithFormat:@"fundraising/pages/%@",fundraisingPage.pageShortName];
     
     [[JGSession sharedSession].requestController get:getAddress completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
@@ -83,6 +90,13 @@
 {
     JGFundraisingPage *fundraisingPage = [JGFundraisingPage new];
     fundraisingPage.pageShortName = shortName;
+    
+    if ([shortName isEqualToString:@""]) {
+        
+        NSError *emptyError = [NSError errorWithDomain:@"com.threesidedcube.JustGivingKit" code:400 userInfo:@{NSLocalizedDescriptionKey: @"Unable to search using a blank page name. Please provide a valid string to search for"}];
+        completion(NO, emptyError);
+        return;
+    }
     
     [self getMoreDetailsForFundraisingPage:fundraisingPage withCompletion:^(JGFundraisingPage *page, NSError *error) {
         
