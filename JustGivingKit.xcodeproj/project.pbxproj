@@ -16,6 +16,8 @@
 		36A4A4EE1BE8D92F007EB555 /* JGDonation.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4A4EC1BE8D92F007EB555 /* JGDonation.m */; };
 		36A4A52B1BE91990007EB555 /* NSDate+JGDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A4A5291BE91990007EB555 /* NSDate+JGDate.h */; };
 		36A4A52C1BE91990007EB555 /* NSDate+JGDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4A52A1BE91990007EB555 /* NSDate+JGDate.m */; };
+		490987401C2AB2F6000EEE99 /* JGFundraisingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4909873F1C2AB2F6000EEE99 /* JGFundraisingController.swift */; };
+		490987461C2AB3A1000EEE99 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490987451C2AB3A1000EEE99 /* Currency.swift */; };
 		490AE5451C295A65007DE933 /* AccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490AE5441C295A65007DE933 /* AccountController.swift */; };
 		490AE5511C295ED5007DE933 /* JustGivingKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490AE5501C295ED5007DE933 /* JustGivingKitTests.swift */; };
 		490AE5531C295ED5007DE933 /* JustGivingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 361DA0721BE2190400F76120 /* JustGivingKit.framework */; };
@@ -97,6 +99,8 @@
 		36A4A4EC1BE8D92F007EB555 /* JGDonation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGDonation.m; sourceTree = "<group>"; };
 		36A4A5291BE91990007EB555 /* NSDate+JGDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+JGDate.h"; sourceTree = "<group>"; };
 		36A4A52A1BE91990007EB555 /* NSDate+JGDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+JGDate.m"; sourceTree = "<group>"; };
+		4909873F1C2AB2F6000EEE99 /* JGFundraisingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JGFundraisingController.swift; sourceTree = "<group>"; };
+		490987451C2AB3A1000EEE99 /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		490AE5441C295A65007DE933 /* AccountController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountController.swift; sourceTree = "<group>"; };
 		490AE54E1C295ED5007DE933 /* JustGivingKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JustGivingKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		490AE5501C295ED5007DE933 /* JustGivingKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustGivingKitTests.swift; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 		3684113A1BE22A6D00FEE624 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4909873F1C2AB2F6000EEE99 /* JGFundraisingController.swift */,
 				FFD27FCD1BE3941A00825CD4 /* Search */,
 				490AE5441C295A65007DE933 /* AccountController.swift */,
 				368411321BE2225B00FEE624 /* JGSession.h */,
@@ -224,6 +229,7 @@
 		3684113C1BE22AAD00FEE624 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				490987451C2AB3A1000EEE99 /* Currency.swift */,
 				FFD27FD21BE3946500825CD4 /* Search */,
 				368411491BE23E8800FEE624 /* JGUser.h */,
 				3684114A1BE23E8800FEE624 /* JGUser.m */,
@@ -448,7 +454,9 @@
 				FFCDF5101BF4F85C00FA1D49 /* JGCharityController.m in Sources */,
 				496C48281BE9030D00E653D3 /* JGEvent.swift in Sources */,
 				368411351BE2225B00FEE624 /* JGSession.m in Sources */,
+				490987461C2AB3A1000EEE99 /* Currency.swift in Sources */,
 				FF05C93C1BE258530039ADF4 /* JGFundraisingPage.m in Sources */,
+				490987401C2AB2F6000EEE99 /* JGFundraisingController.swift in Sources */,
 				3684114C1BE23E8800FEE624 /* JGUser.m in Sources */,
 				FF7517291BE3715300989F27 /* JGEventController.m in Sources */,
 				490AE5451C295A65007DE933 /* AccountController.swift in Sources */,
@@ -659,6 +667,7 @@
 				490AE5581C295ED5007DE933 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
