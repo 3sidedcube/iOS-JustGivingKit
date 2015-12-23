@@ -73,4 +73,32 @@ public class AccountController: NSObject {
         }
         
     }
+    
+    /**
+    Check whether or not an account can be registered with the supplied email address.
+    - parameter emailAddress: The email address to check the JustGiving system for
+    - parameter completion: A closure to fire once the request is completed. This block contains a boolean determining whether or not that address is availabile to be registered. True means that you can register a new account with that email.
+    */
+    public func checkAvailability(emailAddress: String!, completion: (isAvailable: Bool, error: NSError?) -> Void) {
+        
+        JGSession.sharedSession().requestController.get("account/\(emailAddress)") { (response: TSCRequestResponse?, error: NSError?) -> Void in
+            
+            if let requestError = error {
+                
+                if requestError.code == 404 {
+                    
+                    completion(isAvailable: true, error: nil)
+                    return
+                } else {
+                    completion(isAvailable: false, error: requestError)
+                    return
+                }
+                
+            }
+            
+            completion(isAvailable: false, error: nil)
+            
+        }
+        
+    }
 }
