@@ -146,6 +146,8 @@ static JGSession *sharedSession = nil;
             [self willChangeValueForKey:@"loggedIn"];
             _loggedIn = YES;
             [self didChangeValueForKey:@"loggedIn"];
+
+			[[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"JGUserLoggedIn"];
             
             AccountController *accountController = [AccountController new];
             [accountController retrieveUserAccountInformation:^(JGUser * _Nullable user, NSError * _Nullable error) {
