@@ -9,6 +9,7 @@
 #import "JGSession.h"
 @import ThunderBasics;
 @import ThunderRequest;
+@import SafariServices;
 #import "JGDefines.h"
 #import <JustGivingKit/JustGivingKit-Swift.h>
 
@@ -101,7 +102,17 @@ static JGSession *sharedSession = nil;
     callBackUrl = [self.oauthCallbackUrl urlEncodedString];
     kickoutUrl = [NSString stringWithFormat:@"%@%@&nonce=ba3c9a58dff94a86aa633e71e6afc4e3", kickoutUrl, callBackUrl];
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kickoutUrl]];
+    NSOperatingSystemVersion iOS9 = (NSOperatingSystemVersion){9, 0, 0};
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:iOS9]) {
+        
+        SFSafariViewController *safariView = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:kickoutUrl]];
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:safariView animated:true completion:nil];
+        
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kickoutUrl]];
+    }
+    
+
 }
 
 - (void)handleAuthenticationCallbackWithUrl:(NSURL *)url
