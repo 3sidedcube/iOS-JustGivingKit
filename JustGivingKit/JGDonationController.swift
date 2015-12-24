@@ -19,7 +19,7 @@ public extension JGDonationController {
     - parameter pageNumber: The page number to load. Used for basic pagination.
     - parameter completion: The closure to call when the request succeeds or fails
     */
-    public func getDonationsForFundraisingPage(fundraisingPage: JGFundraisingPage!, pageNumber: Int!, completion: (donations: [JGDonation]?, error: NSError?) -> Void) {
+    public func getDonationsForFundraisingPage(fundraisingPage: JGFundraisingPage!, pageNumber: Int!, completion: (donations: [Donation]?, error: NSError?) -> Void) {
         
         JGSession.sharedSession().requestController.get("account/donations?pagenum=\(pageNumber)") { (response: TSCRequestResponse?, error: NSError?) -> Void in
             
@@ -32,8 +32,8 @@ public extension JGDonationController {
             if let responseDictionary = response?.dictionary as? [String: AnyObject], let donationsArray = responseDictionary["donations"] as? [[String: AnyObject]] {
                 
                 let donations = donationsArray.map({
-                    JGDonation(dictionary: $0)
-                }) as? [JGDonation]
+                    Donation(dictionary: $0)
+                }) as? [Donation]
                 
                 completion(donations: donations, error: nil)
                 return
@@ -51,7 +51,7 @@ public extension JGDonationController {
     - parameter donationId: The unique identifier for the donation to look up in the JustGiving API
     - parameter completion: The closure to call when the request succeeds or fails. Contains a `JGDonation` object.
     */
-    public func getDonation(donationId: Int!, completion: (donation: JGDonation?, error: NSError?) -> Void) {
+    public func getDonation(donationId: Int!, completion: (donation: Donation?, error: NSError?) -> Void) {
         
         JGSession.sharedSession().requestController.get("donation/\(donationId)") { (response: TSCRequestResponse?, error: NSError?) -> Void in
             
@@ -63,7 +63,7 @@ public extension JGDonationController {
             
             if let responseDictionary = response?.dictionary as? [String: AnyObject] {
                 
-                let donation = JGDonation(dictionary: responseDictionary)
+                let donation = Donation(dictionary: responseDictionary)
                 completion(donation: donation, error: nil)
 
             }

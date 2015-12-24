@@ -9,9 +9,9 @@
 #import "JGCharityController.h"
 #import "JGFundraisingController.h"
 #import "JGFundraisingPage.h"
-#import "JGDonation.h"
 #import "JGDonationController.h"
 #import "JGSession.h"
+#import <JustGivingKit/JustGivingKit-Swift.h>
 
 @interface JGCharityController ()
 
@@ -36,11 +36,11 @@ typedef void (^JGPageNamesCompletion)(NSDictionary *pageNames, NSError *error);
         [donationController getDonationsForCharity:charityId completion:^(NSArray<JGDonation *> *donations, NSError *error) {
             NSDictionary *pageNames = [self dictionaryForPages:pages];
             
-            for (JGDonation *donation in donations) {
+            for (Donation *donation in donations) {
                 //if the pageName which the donation belongs to is not in the dictionary then add it to the total
                 if (![pageNames objectForKey:donation.pageShortName]) {
                     
-                    totalRaised += [donation.donationAmount integerValue];
+                    totalRaised += [donation.amount integerValue];
                     amountCompletion(@(totalRaised), nil);
                 }
             }

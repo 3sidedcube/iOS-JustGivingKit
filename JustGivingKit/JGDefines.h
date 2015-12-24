@@ -71,3 +71,33 @@ typedef NS_ENUM(NSInteger, JGFundraisingActivityType) {
     /** A personal parachuting skydive that is not part of an organised parachuting skydive */
     JGFundraisingActivityTypePersonalParachutingSkydive = 27
 };
+
+/** All possible states of a donation on a Donation object */
+typedef NS_ENUM(NSInteger, JGDonationStatus) {
+    /** Unknown status */
+    JGDonationStatusUnknown = 0,
+    /** The donation has been accepted */
+    JGDonationStatusAccepted = 1,
+    /** The donation has been rejected */
+    JGDonationStatusRejected = 2,
+    /** The donation has been cancelled */
+    JGDonationStatusCancelled = 3,
+    /** The donation has been refunded */
+    JGDonationStatusRefunded = 4,
+    /** The donation is still pending */
+    JGDonationStatusPending = 5
+};
+
+/** The different sources of donations that are available. */
+typedef NS_ENUM(NSInteger, JGDonationSource) {
+    /** Unknown source */
+    JGDonationSourceUnknown = 0,
+    /** Direct donation */
+    JGDonationSourceDirectDonation = 1,
+    /** Sponsorship donation */
+    JGDonationSourceSponsorshipDonation = 2,
+    /** In person direct donation */
+    JGDonationSourceIPDD = 3,
+    /** Via SMS */
+    JGDonationSourceSMS = 4
+};

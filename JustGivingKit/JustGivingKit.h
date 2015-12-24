@@ -18,7 +18,6 @@ FOUNDATION_EXPORT const unsigned char JustGivingKitVersionString[];
 
 // Models
 #import <JustGivingKit/JGSession.h>
-#import <JustGivingKit/JGDonation.h>
 #import <JustGivingKit/JGSearchQuery.h>
 
 // Controllers

@@ -10,14 +10,12 @@
 		361DA0761BE2190400F76120 /* JustGivingKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 361DA0751BE2190400F76120 /* JustGivingKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		368411351BE2225B00FEE624 /* JGSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 368411331BE2225B00FEE624 /* JGSession.m */; };
 		368411501BE23F8C00FEE624 /* JGFundraisingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3684114E1BE23F8C00FEE624 /* JGFundraisingController.m */; };
-		36A4A4ED1BE8D92F007EB555 /* JGDonation.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A4A4EB1BE8D92F007EB555 /* JGDonation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		36A4A4EE1BE8D92F007EB555 /* JGDonation.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4A4EC1BE8D92F007EB555 /* JGDonation.m */; };
 		36A4A52B1BE91990007EB555 /* NSDate+JGDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A4A5291BE91990007EB555 /* NSDate+JGDate.h */; };
 		36A4A52C1BE91990007EB555 /* NSDate+JGDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4A52A1BE91990007EB555 /* NSDate+JGDate.m */; };
-		490987401C2AB2F6000EEE99 /* JGFundraisingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4909873F1C2AB2F6000EEE99 /* JGFundraisingController.swift */; };
-		490987461C2AB3A1000EEE99 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490987451C2AB3A1000EEE99 /* Currency.swift */; };
 		4909872E1C2A9256000EEE99 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4909872D1C2A9256000EEE99 /* ModelTests.swift */; };
 		490987301C2A9446000EEE99 /* RetrieveAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 4909872F1C2A9446000EEE99 /* RetrieveAccount.json */; };
+		490987401C2AB2F6000EEE99 /* JGFundraisingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4909873F1C2AB2F6000EEE99 /* JGFundraisingController.swift */; };
+		490987461C2AB3A1000EEE99 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490987451C2AB3A1000EEE99 /* Currency.swift */; };
 		4909874A1C2ABD79000EEE99 /* JGDonationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490987491C2ABD79000EEE99 /* JGDonationController.swift */; };
 		490AE5451C295A65007DE933 /* AccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490AE5441C295A65007DE933 /* AccountController.swift */; };
 		490AE5511C295ED5007DE933 /* JustGivingKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490AE5501C295ED5007DE933 /* JustGivingKitTests.swift */; };
@@ -27,6 +25,7 @@
 		490AE56F1C299A7F007DE933 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490AE56E1C299A7F007DE933 /* Avatar.swift */; };
 		490AE5731C29A00B007DE933 /* PostalAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490AE5721C29A00B007DE933 /* PostalAddress.swift */; };
 		490AE5751C29AFDB007DE933 /* MonetaryAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490AE5741C29AFDB007DE933 /* MonetaryAmount.swift */; };
+		496A35C11C2BFEB600809545 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496A35C01C2BFEB600809545 /* Donation.swift */; };
 		496C48281BE9030D00E653D3 /* JGEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496C48271BE9030D00E653D3 /* JGEvent.swift */; };
 		496C482D1BE90EE200E653D3 /* JGEvent.swift in Headers */ = {isa = PBXBuildFile; fileRef = 496C48271BE9030D00E653D3 /* JGEvent.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 		4979B52D1C1B29A400DD6405 /* JGFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979B52C1C1B29A400DD6405 /* JGFormatter.swift */; };
@@ -98,14 +97,12 @@
 		3684113E1BE22AEA00FEE624 /* JGDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGDefines.h; sourceTree = "<group>"; };
 		3684114D1BE23F8C00FEE624 /* JGFundraisingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGFundraisingController.h; sourceTree = "<group>"; };
 		3684114E1BE23F8C00FEE624 /* JGFundraisingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGFundraisingController.m; sourceTree = "<group>"; };
-		36A4A4EB1BE8D92F007EB555 /* JGDonation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGDonation.h; sourceTree = "<group>"; };
-		36A4A4EC1BE8D92F007EB555 /* JGDonation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGDonation.m; sourceTree = "<group>"; };
 		36A4A5291BE91990007EB555 /* NSDate+JGDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+JGDate.h"; sourceTree = "<group>"; };
 		36A4A52A1BE91990007EB555 /* NSDate+JGDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+JGDate.m"; sourceTree = "<group>"; };
-		4909873F1C2AB2F6000EEE99 /* JGFundraisingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JGFundraisingController.swift; sourceTree = "<group>"; };
-		490987451C2AB3A1000EEE99 /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		4909872D1C2A9256000EEE99 /* ModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		4909872F1C2A9446000EEE99 /* RetrieveAccount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RetrieveAccount.json; sourceTree = "<group>"; };
+		4909873F1C2AB2F6000EEE99 /* JGFundraisingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JGFundraisingController.swift; sourceTree = "<group>"; };
+		490987451C2AB3A1000EEE99 /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		490987491C2ABD79000EEE99 /* JGDonationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JGDonationController.swift; sourceTree = "<group>"; };
 		490AE5441C295A65007DE933 /* AccountController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountController.swift; sourceTree = "<group>"; };
 		490AE54E1C295ED5007DE933 /* JustGivingKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JustGivingKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +113,7 @@
 		490AE56E1C299A7F007DE933 /* Avatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		490AE5721C29A00B007DE933 /* PostalAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostalAddress.swift; sourceTree = "<group>"; };
 		490AE5741C29AFDB007DE933 /* MonetaryAmount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonetaryAmount.swift; sourceTree = "<group>"; };
+		496A35C01C2BFEB600809545 /* Donation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
 		496C48271BE9030D00E653D3 /* JGEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JGEvent.swift; sourceTree = "<group>"; };
 		4979B52C1C1B29A400DD6405 /* JGFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JGFormatter.swift; sourceTree = "<group>"; };
 		4993E4651BECD5640029D0D8 /* ThunderBasics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ThunderBasics.framework; path = "../Thunder Basics/build/Debug-iphoneos/ThunderBasics.framework"; sourceTree = "<group>"; };
@@ -248,8 +246,7 @@
 				490AE5671C298FD6007DE933 /* JGUser.swift */,
 				FF05C9391BE258530039ADF4 /* JGFundraisingPage.h */,
 				FF05C93A1BE258530039ADF4 /* JGFundraisingPage.m */,
-				36A4A4EB1BE8D92F007EB555 /* JGDonation.h */,
-				36A4A4EC1BE8D92F007EB555 /* JGDonation.m */,
+				496A35C01C2BFEB600809545 /* Donation.swift */,
 				496C48271BE9030D00E653D3 /* JGEvent.swift */,
 			);
 			name = Models;
@@ -317,7 +314,6 @@
 				FFD27FD01BE3945E00825CD4 /* JGSearchQuery.h in Headers */,
 				FFD27FC71BE393F400825CD4 /* JGSearchController.h in Headers */,
 				FF7517211BE2619E00989F27 /* JGSession.h in Headers */,
-				36A4A4ED1BE8D92F007EB555 /* JGDonation.h in Headers */,
 				FFCDF50F1BF4F85C00FA1D49 /* JGCharityController.h in Headers */,
 				FFCDF4FB1BF4B19100FA1D49 /* JGDonationController.h in Headers */,
 				4979B5321C1B31AA00DD6405 /* JGDefines.h in Headers */,
@@ -465,6 +461,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				496A35C11C2BFEB600809545 /* Donation.swift in Sources */,
 				368411501BE23F8C00FEE624 /* JGFundraisingController.m in Sources */,
 				FFCDF5101BF4F85C00FA1D49 /* JGCharityController.m in Sources */,
 				496C48281BE9030D00E653D3 /* JGEvent.swift in Sources */,
@@ -474,12 +471,10 @@
 				FF05C93C1BE258530039ADF4 /* JGFundraisingPage.m in Sources */,
 				490987401C2AB2F6000EEE99 /* JGFundraisingController.swift in Sources */,
 				4909874A1C2ABD79000EEE99 /* JGDonationController.swift in Sources */,
-				3684114C1BE23E8800FEE624 /* JGUser.m in Sources */,
 				490AE5681C298FD6007DE933 /* JGUser.swift in Sources */,
 				490AE5731C29A00B007DE933 /* PostalAddress.swift in Sources */,
 				FF7517291BE3715300989F27 /* JGEventController.m in Sources */,
 				490AE5451C295A65007DE933 /* AccountController.swift in Sources */,
-				36A4A4EE1BE8D92F007EB555 /* JGDonation.m in Sources */,
 				4979B52D1C1B29A400DD6405 /* JGFormatter.swift in Sources */,
 				FFD27FC81BE393F400825CD4 /* JGSearchController.m in Sources */,
 				490AE5751C29AFDB007DE933 /* MonetaryAmount.swift in Sources */,

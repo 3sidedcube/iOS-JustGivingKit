@@ -11,7 +11,6 @@
 #import "JGFundraisingController.h"
 #import "JGFundraisingPage.h"
 #import "JGSession.h"
-#import "JGDonation.h"
 #import <JustGivingKit/JustGivingKit-Swift.h>
 
 @implementation JGFundraisingController
@@ -125,7 +124,7 @@
         NSMutableArray *donations = [NSMutableArray new];
         
         for (NSDictionary *donationDictionary in response.dictionary[@"donations"]) {
-            [donations addObject:[[JGDonation alloc] initWithDictionary:donationDictionary]];
+            [donations addObject:[[Donation alloc] initWithDictionary:donationDictionary]];
         }
         
         completion([NSArray arrayWithArray:donations], nil);

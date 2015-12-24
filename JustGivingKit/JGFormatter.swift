@@ -14,6 +14,100 @@ The formatter is responsible for converting enums to values and back
 public class JGFormatter: NSObject {
     
     /**
+    Converts a donation status enum into a String that can be passed to the JustGivign API or shown to a user
+    - parameter donationStatus: The donation status enum to convert
+    - returns: A string that can be used with the JustGiving API
+    */
+    public class func stringForDonationStatus(donationStatus: JGDonationStatus) -> String {
+        
+        switch donationStatus {
+        case .Accepted:
+            return "Accepted"
+        case .Cancelled:
+            return "Cancelled"
+        case .Pending:
+            return "Pending"
+        case .Refunded:
+            return "Refunded"
+        case .Rejected:
+            return "Rejected"
+        case .Unknown:
+            return "Unknown"
+        }
+        
+    }
+    
+    /**
+     Converts a donation status string into an enum
+     - parameter donationStatusString: The donation status in enum form to be converted
+     - returns: An enum of the donationtype
+     */
+    public class func donationStatusForString(donationStatusString: String) -> JGDonationStatus {
+        
+        switch donationStatusString {
+            case "Accepted":
+                return .Accepted
+            case "Cancelled":
+                return .Cancelled
+            case "Pending":
+                return .Pending
+            case "Refunded":
+                return .Rejected
+            case "Unknown":
+                return .Unknown
+            default:
+                return .Unknown
+        }
+        
+    }
+    
+    /**
+     Converts a donation source enum into a String that can be passed to the JustGivign API or shown to a user
+     - parameter donationSource: The donation source enum to convert
+     - returns: A string that can be used with the JustGiving API
+     */
+    public class func stringForDonationSource(donationSource: JGDonationSource) -> String {
+        
+        switch donationSource {
+        case .Unknown:
+            return "Unknown"
+        case .DirectDonation:
+            return "DirectDonations"
+        case .SponsorshipDonation:
+            return "SponsorshipDonations"
+        case .IPDD:
+            return "Ipdd"
+        case .SMS:
+            return "Sms"
+        }
+        
+    }
+    
+    /**
+     Converts a donation source string into an enum
+     - parameter donationSourceString: The donation source in enum form to be converted
+     - returns: An enum of the donationSource
+     */
+    public class func donationSourceForString(donationSourceString: String) -> JGDonationSource {
+        
+        switch donationSourceString {
+        case "Unknown":
+            return .Unknown
+        case "DirectDonations":
+            return .DirectDonation
+        case "SponsorshipDonations":
+            return .SponsorshipDonation
+        case "Ipdd":
+            return .IPDD
+        case "Sms":
+            return .SMS
+        default:
+            return .Unknown
+        }
+        
+    }
+    
+    /**
     Converts an activityType enum into an String that can be passed to the JustGiving API
     - parameter activityType: The activity type in enum form to be converted
     - returns: A string that can be passed to the JustGiving API

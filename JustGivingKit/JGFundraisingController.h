@@ -11,7 +11,7 @@
 
 @class JGUser;
 @class JGFundraisingPage;
-@class JGDonation;
+@class Donation;
 
 /**
  @class JGFundraisingController
@@ -22,7 +22,7 @@
 typedef void (^JGFetchPagesCompletion)(NSArray<JGFundraisingPage *> *pages, NSError *error);
 typedef void (^JGFetchPageDetailCompletion)(JGFundraisingPage *page, NSError *error);
 typedef void (^JGRaisedAmountCompletion)(NSNumber *raisedAmount, NSError *error);
-typedef void (^JGFetchPageDonationsCompletion)(NSArray<JGDonation *> *donations, NSError *error);
+typedef void (^JGFetchPageDonationsCompletion)(NSArray<Donation *> *donations, NSError *error);
 typedef void (^JGCreateFundraisingPageCompletion)(JGFundraisingPage *page, NSError *error);
 typedef void (^JGDeleteFundraisingPageCompletion)(NSError *error);
 typedef void (^JGSuggestedNamesCompletion)(NSArray<NSString *> * _Nullable names, NSError * _Nullable error);
