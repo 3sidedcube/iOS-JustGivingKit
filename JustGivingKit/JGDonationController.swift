@@ -45,5 +45,34 @@ public extension JGDonationController {
         }
         
     }
+    
+    /**
+    Loads a detailed donation object for a donation ID
+    - parameter donationId: The unique identifier for the donation to look up in the JustGiving API
+    - parameter completion: The closure to call when the request succeeds or fails. Contains a `JGDonation` object.
+    */
+    public func getDonation(donationId: Int!, completion: (donation: JGDonation?, error: NSError?) -> Void) {
+        
+        JGSession.sharedSession().requestController.get("donation/\(donationId)") { (response: TSCRequestResponse?, error: NSError?) -> Void in
+            
+            if let requestError = error {
+                
+                completion(donation: nil, error: requestError)
+                return
+            }
+            
+            if let responseDictionary = response?.dictionary as? [String: AnyObject] {
+                
+                let donation = JGDonation(dictionary: responseDictionary)
+                completion(donation: donation, error: nil)
+
+            }
+            
+            let error = NSError(domain: "com.threesidedcube.JustGivingKit", code: 500, userInfo: [NSLocalizedDescriptionKey: "The JustGiving API did not return a valid donation"])
+            completion(donation: nil, error: error)
+            return
+        }
+        
+    }
 
 }
