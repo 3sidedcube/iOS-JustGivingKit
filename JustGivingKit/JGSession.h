@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class TSCRequestController;
-@class JGUser;
+@class User;
 
 /**
  @class JGSession
@@ -17,7 +17,7 @@
  */
 @interface JGSession : NSObject
 
-typedef void (^JGSessionLoginCompletion)(JGUser *user, NSError *error);
+typedef void (^JGSessionLoginCompletion)(User *user, NSError *error);
 typedef void (^JGSessionAuthenticationCompletion)(NSError *error);
 
 /**
@@ -33,7 +33,7 @@ typedef void (^JGSessionAuthenticationCompletion)(NSError *error);
 /**
  @abstract The current authenticated user
  */
-@property (nonatomic, strong) JGUser *currentUser;
+@property (nonatomic, strong) User *currentUser;
 
 /**
  @abstract Returns a shared session. Use this by default.

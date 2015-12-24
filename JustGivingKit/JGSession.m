@@ -56,7 +56,7 @@ static JGSession *sharedSession = nil;
 
 - (void)logoutCurrentUser
 {
-    [TSCRequestCredential deleteCredentialWithIdentifier:@"JGUserLogin"];
+    [TSCRequestCredential deleteCredentialWithIdentifier:@"UserLogin"];
 }
 
 - (void)requestUserAuthenticationWithCompletion:(JGSessionAuthenticationCompletion)completion
@@ -147,10 +147,10 @@ static JGSession *sharedSession = nil;
             _loggedIn = YES;
             [self didChangeValueForKey:@"loggedIn"];
 
-			[[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"JGUserLoggedIn"];
+			[[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"UserLoggedIn"];
             
             AccountController *accountController = [AccountController new];
-            [accountController retrieveUserAccountInformation:^(JGUser * _Nullable user, NSError * _Nullable error) {
+            [accountController retrieveUserAccountInformation:^(User * _Nullable user, NSError * _Nullable error) {
                 
                 if (error) {
                     
@@ -227,7 +227,7 @@ static JGSession *sharedSession = nil;
         
         self.requestController.sharedRequestHeaders = [[NSMutableDictionary alloc] initWithObjects:@[self.requestController.sharedRequestCredential.authorizationToken] forKeys:@[@"Authorization"]];
         
-        if ([TSCRequestCredential storeCredential:credential withIdentifier:@"JGUserLogin"]) {
+        if ([TSCRequestCredential storeCredential:credential withIdentifier:@"UserLogin"]) {
             
             [self willChangeValueForKey:@"loggedIn"];
             _loggedIn = YES;
@@ -235,7 +235,7 @@ static JGSession *sharedSession = nil;
         }
         
         AccountController *accountController = [AccountController new];
-        [accountController retrieveUserAccountInformation:^(JGUser * _Nullable user, NSError * _Nullable error) {
+        [accountController retrieveUserAccountInformation:^(User * _Nullable user, NSError * _Nullable error) {
             if (error) {
                 
                 completion(nil, error);

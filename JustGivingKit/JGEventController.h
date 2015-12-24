@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class JGUser;
+@class User;
 @class JGFundraisingPage;
 
 /**
@@ -25,7 +25,7 @@ typedef void (^JGJoinEventCompletion)(JGFundraisingPage *page, NSError *error);
  @param charityId A valid JustGiving charityId
  @param completion completion block which returns an array of events if the operation successfully completes
  */
-- (void)getEventsForUser:(JGUser *)user withCharityId:(NSString *)charityId completion:(JGFetchEventsCompletion)completion;
+- (void)getEventsForUser:(User *)user withCharityId:(NSString *)charityId completion:(JGFetchEventsCompletion)completion;
 
 /**
  @abstract Searches for events using OneSearch and returns an array of events

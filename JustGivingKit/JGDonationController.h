@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class JGFundraisingPage;
-@class JGUser;
+@class User;
 @class JGDonation;
 
 @interface JGDonationController : NSObject

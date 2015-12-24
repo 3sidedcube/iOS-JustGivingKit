@@ -16,7 +16,7 @@
 
 @implementation JGFundraisingController
 
-- (void)getFundraisingPagesWithCharityId:(NSString *)charityId forUser:(JGUser *)user withCompletion:(JGFetchPagesCompletion)completion
+- (void)getFundraisingPagesWithCharityId:(NSString *)charityId forUser:(User *)user withCompletion:(JGFetchPagesCompletion)completion
 {
     NSString *userEmail = @"";
     
@@ -176,7 +176,7 @@
     }];
 }
 
-- (void)totalFundsRaisedByUser:(JGUser *)user ForCharityId:(NSString *)charityId completion:(JGRaisedAmountCompletion)completion
+- (void)totalFundsRaisedByUser:(User *)user ForCharityId:(NSString *)charityId completion:(JGRaisedAmountCompletion)completion
 {
     __block double totalRaised = 0;
     [self getFundraisingPagesWithCharityId:charityId forUser:user withCompletion:^(NSArray *pages, NSError *error) {

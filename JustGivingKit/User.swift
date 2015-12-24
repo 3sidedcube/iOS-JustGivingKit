@@ -1,5 +1,5 @@
 //
-//  JGUser.swift
+//  User.swift
 //  JustGivingKit
 //
 //  Created by Matthew Cheetham on 22/12/2015.
@@ -11,7 +11,7 @@ import UIKit
 /**
 A model representation of a user in the JustGiving API.
 */
-public class JGUser: NSObject {
+public class User: NSObject {
     
     /**
     The first name on the account

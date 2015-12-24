@@ -17,7 +17,7 @@
 
 @implementation JGEventController
 
-- (void)getEventsForUser:(JGUser *)user withCharityId:(NSString *)charityId completion:(JGFetchEventsCompletion)completion
+- (void)getEventsForUser:(User *)user withCharityId:(NSString *)charityId completion:(JGFetchEventsCompletion)completion
 {
     NSString *userEmail = @"";
     
@@ -65,7 +65,7 @@
         NSMutableArray *eventsArray = [NSMutableArray array];
         for (NSDictionary *eventDictionary in results) {
             
-            JGEvent *event = [[JGEvent alloc] initWithDictionary:eventDictionary];
+            Event *event = [[Event alloc] initWithDictionary:eventDictionary];
             [eventsArray addObject:event];
         }
         

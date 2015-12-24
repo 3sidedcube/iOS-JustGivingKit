@@ -48,7 +48,7 @@ class ModelTests: XCTestCase {
         
         if let userDictionary = userObject {
             
-            let user = JGUser(dictionary: userDictionary)
+            let user = User(dictionary: userDictionary)
             
             XCTAssertNotNil(user.firstName)
             XCTAssertNotNil(user.lastName)

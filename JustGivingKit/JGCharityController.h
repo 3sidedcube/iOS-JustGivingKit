@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class JGUser;
+@class User;
 
 @interface JGCharityController : NSObject
 

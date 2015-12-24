@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 @import UIKit;
 
-@class JGUser;
+@class User;
 @class JGFundraisingPage;
 @class JGDonation;
 
@@ -45,7 +45,7 @@ typedef void (^JGUploadImageCompletion)(NSError * _Nullable error);
  @param user The user who created the fundraising page
  @param completion completion block which returns an array of fundraising pages if operation successfully completes
  */
-- (void)getFundraisingPagesWithCharityId:(NSString *)charityId forUser:(JGUser *)user withCompletion:(JGFetchPagesCompletion)completion;
+- (void)getFundraisingPagesWithCharityId:(NSString *)charityId forUser:(User *)user withCompletion:(JGFetchPagesCompletion)completion;
 
 /**
  @abstract Returns all of a user's fundraising pages for a given charity
@@ -94,7 +94,7 @@ typedef void (^JGUploadImageCompletion)(NSError * _Nullable error);
  @param charityId A valid justgiving charityId
  @param completion completion block which returns the total amount raised if the operation successfully completes
  */
-- (void)totalFundsRaisedByUser:(JGUser *)user ForCharityId:(NSString *)charityId completion:(JGRaisedAmountCompletion)completion;
+- (void)totalFundsRaisedByUser:(User *)user ForCharityId:(NSString *)charityId completion:(JGRaisedAmountCompletion)completion;
 
 /**
  @abstract Creates/registers a fundraising page using the JustGivingApi

@@ -1,5 +1,5 @@
 //
-//  JGEvent.swift
+//  Event.swift
 //  JustGivingKit
 //
 //  Created by Matthew Cheetham on 03/11/2015.
@@ -11,7 +11,7 @@ import UIKit
 /**
 An event returned by the API after running a search
 */
-public class JGEvent: NSObject {
+public class Event: NSObject {
     
     /**
     The unique identifier for the event. Also known as the event ID
