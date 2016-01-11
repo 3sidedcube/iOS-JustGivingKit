@@ -210,6 +210,10 @@
         payload[@"activityType"] = [JGFormatter stringForActivityType:fundraisingPage.activityType];
     }
     
+    if (fundraisingPage.customCodes) {
+        payload[@"customCodes"] = fundraisingPage.customCodes;
+    }
+    
     [[JGSession sharedSession].requestController put:@"fundraising/pages" bodyParams:payload completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
         
         if (error || response.status != 201) {
