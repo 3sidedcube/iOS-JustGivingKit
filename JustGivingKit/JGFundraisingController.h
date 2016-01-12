@@ -13,6 +13,7 @@
 @class JGFundraisingPage;
 @class JGDonation;
 
+
 /**
  @class JGFundraisingController
  @abstract A fundraising controller provides a set of useful methods to obtain fundraising page information from the JustGiving API

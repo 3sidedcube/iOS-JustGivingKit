@@ -168,7 +168,6 @@
         
         for (NSDictionary *pageInfo in response.array) {
             
-            NSLog(@"pageinfo: %@",pageInfo);
             JGFundraisingPage *page = [[JGFundraisingPage alloc]initWithDictionary:pageInfo];
             [pages addObject:page];
         }
@@ -199,28 +198,52 @@
 {
     NSMutableDictionary *payload = [NSMutableDictionary new];
     
-    payload[@"charityId"] = fundraisingPage.charityId;
-    payload[@"pageShortName"] = fundraisingPage.pageShortName;
-    payload[@"pageTitle"] = fundraisingPage.pageTitle;
-    payload[@"eventId"] = fundraisingPage.eventId;
-    if (fundraisingPage.targetAmount) { payload[@"targetAmount"] = [fundraisingPage.targetAmount stringValue]; }
+    if (fundraisingPage.charityId) {
+        payload[JGFundraisingPageCharityIdKey] = fundraisingPage.charityId;
+    }
+    
+    if (fundraisingPage.pageShortName) {
+        payload[JGFundraisingPageShortNameKey] = fundraisingPage.pageShortName;
+    }
+    
+    if (fundraisingPage.pageTitle) {
+        payload[JGFundraisingPageTitleKey] = fundraisingPage.pageTitle;
+    }
+    
+    if (fundraisingPage.eventId) {
+        payload[JGFundraisingPageEventIdKey] = fundraisingPage.eventId;
+    }
+    
+    if (fundraisingPage.targetAmount) {
+        payload[JGFundraisingPageTargetAmountKey] = [fundraisingPage.targetAmount stringValue];
+    }
+    
     payload[@"justGivingOptIn"] = @"false";
     payload[@"charityOptIn"] = @"false";
     payload[@"charityFunded"] = @"false";
-    if (fundraisingPage.activityType) {
-        payload[@"activityType"] = [JGFormatter stringForActivityType:fundraisingPage.activityType];
+    
+    if (fundraisingPage.activityType && fundraisingPage.activityType != JGFundraisingActivityTypeUnknown) {
+        payload[JGFundraisingPageActivityTypeKey] = [JGFormatter stringForActivityType:fundraisingPage.activityType];
     }
     
     if (fundraisingPage.customCodes) {
-        payload[@"customCodes"] = fundraisingPage.customCodes;
+        payload[JGFundraisingPageCustomCodesKey] = fundraisingPage.customCodes;
     }
     
     if (fundraisingPage.pageEndDate) {
-        payload[@"expiryDate"] = [fundraisingPage.pageEndDate ISO8601String];
+        payload[JGFundraisingPageEndDateKey] = [fundraisingPage.pageEndDate ISO8601String];
     }
     
     if (fundraisingPage.pageEventDate) {
-        payload[@"eventDate"] = [fundraisingPage.pageEventDate ISO8601String];
+        payload[JGFundraisingPageEventDateKey] = [fundraisingPage.pageEventDate ISO8601String];
+    }
+    
+    if (fundraisingPage.pageSummaryWhy) {
+        payload[JGFundraisingPageSummaryWhyKey] = fundraisingPage.pageSummaryWhy;
+    }
+    
+    if (fundraisingPage.pageSummaryWhat) {
+        payload[JGFundraisingPageSummaryWhatKey] = fundraisingPage.pageSummaryWhat;
     }
     
     [[JGSession sharedSession].requestController put:@"fundraising/pages" bodyParams:payload completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
