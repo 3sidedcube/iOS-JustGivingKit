@@ -77,6 +77,12 @@
 @property (nonatomic, assign) JGFundraisingActivityType activityType;
 
 /**
+ @abstract A dictionary of custom codes associated with the page
+ @discussion These will be stored under keys: customCode1 e.t.c.
+ */
+@property (nonatomic, strong) NSDictionary *customCodes;
+
+/**
  @abstract Initialises the object with a dictionary representation of itself
  @param dictionary A dictionary representation of `JGFundraisingPage`.
  */

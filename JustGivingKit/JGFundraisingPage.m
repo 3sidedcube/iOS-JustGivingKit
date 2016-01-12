@@ -66,6 +66,10 @@
             }
         }
         
+        if (dictionary[@"customCodes"] && [dictionary[@"customCodes"] isKindOfClass:[NSDictionary class]]) {
+            self.customCodes = dictionary[@"customCodes"];
+        }
+        
         NSMutableArray<NSURL *> *imageUrls = [NSMutableArray new];
         
         if (dictionary[@"images"]) {

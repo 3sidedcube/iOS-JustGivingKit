@@ -210,6 +210,10 @@
         payload[@"activityType"] = [JGFormatter stringForActivityType:fundraisingPage.activityType];
     }
     
+    if (fundraisingPage.customCodes) {
+        payload[@"customCodes"] = fundraisingPage.customCodes;
+    }
+    
     [[JGSession sharedSession].requestController put:@"fundraising/pages" bodyParams:payload completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
         
         if (error || response.status != 201) {
@@ -253,13 +257,19 @@
             return;
         }
         
-        [self uploadImage:fundraisingImage caption:nil toFundraisingPage:fundraisingPage isDefault:true completion:^(NSError * _Nullable error) {
+        if (fundraisingImage) {
             
-            if (completion) {
-                completion(fundraisingPage, error);
-            }
+            [self uploadImage:fundraisingImage caption:nil toFundraisingPage:fundraisingPage isDefault:true completion:^(NSError * _Nullable error) {
+                
+                if (completion) {
+                    completion(fundraisingPage, error);
+                }
+                
+            }];
             
-        }];
+        } else if (completion) {
+            completion(fundraisingPage, error);
+        }
         
     }];
     
@@ -291,6 +301,15 @@
 
 - (void)uploadImage:(nonnull UIImage *)fundraisingImage caption:(nullable NSString *)imageCaption toFundraisingPage:(nonnull JGFundraisingPage *)fundraisingPage isDefault:(BOOL)isDefault completion:(nullable JGUploadImageCompletion)uploadCompletion
 {
+    if (!fundraisingImage) {
+        
+        NSError *emptyError = [NSError errorWithDomain:@"com.threesidedcube.JustGivingKit" code:400 userInfo:@{NSLocalizedDescriptionKey: @"Unable to search using a blank page name. Please provide a valid image"}];
+        if (uploadCompletion) {
+            uploadCompletion(emptyError);
+        }
+        return;
+    }
+    
     [[JGSession sharedSession].requestController post:@"fundraising/pages/(:pageShortName)/images/(:isDefault)?caption=(:imageCaption)" withURLParamDictionary:@{@"pageShortName":fundraisingPage.pageShortName, @"isDefault": isDefault ? @"default" : @"", @"imageCaption" : imageCaption ?: @""} bodyParams:@{@"image":fundraisingImage} contentType:TSCRequestContentTypeImagePNG completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
         
         if (uploadCompletion) {
