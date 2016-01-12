@@ -99,8 +99,16 @@ public class JGUser: NSObject {
      */
     public init(dictionary: [String: AnyObject]) {
         
-        firstName = dictionary["firstName"] as? String
-        lastName = dictionary["lastName"] as? String
+        let blankSpaceSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()
+        
+        if let aFirstName = dictionary["firstName"] as? String {
+            firstName = aFirstName.stringByTrimmingCharactersInSet(blankSpaceSet)
+        }
+        
+        if let aLastName = dictionary["lastName"] as? String {
+            lastName = aLastName.stringByTrimmingCharactersInSet(blankSpaceSet)
+        }
+        
         email = dictionary["email"] as? String
         numberOfActivePages = dictionary["activePageCount"] as? Int
         numberOfCompletedPages = dictionary["completedPagesCount"] as? Int

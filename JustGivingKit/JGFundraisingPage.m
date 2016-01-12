@@ -7,7 +7,29 @@
 //
 
 #import "JGFundraisingPage.h"
+#import <JustGivingKit/JustGivingKit-Swift.h>
 @import ThunderBasics;
+
+NSString * const JGFundraisingPageIdKey = @"pageId";
+NSString * const JGFundraisingPageTitleKey = @"pageTitle";
+NSString * const JGFundraisingPageSummaryKey = @"pageSummary";
+NSString * const JGFundraisingPageSummaryWhatKey = @"pageSummaryWhat";
+NSString * const JGFundraisingPageSummaryWhyKey = @"pageSummaryWhy";
+NSString * const JGFundraisingPageShortNameKey = @"pageShortName";
+NSString * const JGFundraisingPageEndDateKey = @"expiryDate";
+NSString * const JGFundraisingPageEventDateKey = @"eventDate";
+NSString * const JGFundraisingPagePageStatusKey = @"pageStatus";
+NSString * const JGFundraisingPageStatusKey = @"status";
+NSString * const JGFundraisingPageRaisedAmountKey = @"raisedAmount";
+NSString * const JGFundraisingPageTargetAmountKey = @"targetAmount";
+NSString * const JGFundraisingPageImageUrlsKey = @"images";
+NSString * const JGFundraisingPageImageAbsoluteUrlKey = @"absoluteUrl";
+NSString * const JGFundraisingPageCharityIdKey = @"charityId";
+NSString * const JGFundraisingPageEventIdKey = @"eventId";
+NSString * const JGFundraisingPageEventNameKey = @"eventName";
+NSString * const JGFundraisingPageDomainKey = @"domain";
+NSString * const JGFundraisingPageActivityTypeKey = @"activityType";
+NSString * const JGFundraisingPageCustomCodesKey = @"customCodes";
 
 @implementation JGFundraisingPage
 
@@ -15,77 +37,96 @@
 {
     if (self = [super init]) {
         
-        if (dictionary[@"pageId"]) {
-            self.pageId = dictionary[@"pageId"];
+        if (dictionary[JGFundraisingPageIdKey] && [dictionary[JGFundraisingPageIdKey] isKindOfClass:[NSString class]]) {
+            self.pageId = dictionary[JGFundraisingPageIdKey];
         }
         
-        if (dictionary[@"pageTitle"]) {
-            self.pageTitle = dictionary[@"pageTitle"];
+        if (dictionary[JGFundraisingPageTitleKey] && [dictionary[JGFundraisingPageTitleKey] isKindOfClass:[NSString class]]) {
+            self.pageTitle = dictionary[JGFundraisingPageTitleKey];
         }
         
-        if (dictionary[@"pageSummary"]) {
-            self.pageSummary = dictionary[@"pageSummary"];
+        if (dictionary[JGFundraisingPageActivityTypeKey] && [dictionary[JGFundraisingPageActivityTypeKey] isKindOfClass:[NSString class]]) {
+            self.activityType = [JGFormatter activityTypeForString:dictionary[JGFundraisingPageActivityTypeKey]];
         }
         
-        if (dictionary[@"pageShortName"]) {
-            self.pageShortName = dictionary[@"pageShortName"];
+        if (dictionary[JGFundraisingPageSummaryKey] && [dictionary[JGFundraisingPageSummaryKey] isKindOfClass:[NSString class]]) {
+            self.pageSummary = dictionary[JGFundraisingPageSummaryKey];
         }
         
-        if (dictionary[@"pageStatus"]) {
-            self.pageStatus = dictionary[@"pageStatus"];
+        if (dictionary[JGFundraisingPageSummaryWhatKey] && [dictionary[JGFundraisingPageSummaryWhatKey] isKindOfClass:[NSString class]]) {
+            self.pageSummaryWhat = dictionary[JGFundraisingPageSummaryWhatKey];
+        }
+        
+        if (dictionary[JGFundraisingPageSummaryWhyKey] && [dictionary[JGFundraisingPageSummaryWhyKey] isKindOfClass:[NSString class]]) {
+            self.pageSummaryWhy = dictionary[JGFundraisingPageSummaryWhyKey];
+        }
+        
+        if (dictionary[JGFundraisingPageShortNameKey] && [dictionary[JGFundraisingPageShortNameKey] isKindOfClass:[NSString class]]) {
+            self.pageShortName = dictionary[JGFundraisingPageShortNameKey];
+        }
+        
+        if (dictionary[JGFundraisingPagePageStatusKey] && [dictionary[JGFundraisingPagePageStatusKey] isKindOfClass:[NSString class]]) {
+            self.pageStatus = dictionary[JGFundraisingPagePageStatusKey];
             // we have to check for 'status' aswell as the API uses this in some places
-        } else if (dictionary[@"status"]) {
-            self.pageStatus = dictionary[@"status"];
+        } else if (dictionary[JGFundraisingPageStatusKey] && [dictionary[JGFundraisingPageStatusKey] isKindOfClass:[NSString class]]) {
+            self.pageStatus = dictionary[JGFundraisingPageStatusKey];
         }
         
-        if (dictionary[@"raisedAmount"]) {
-            self.raisedAmount = dictionary[@"raisedAmount"];
+        if (dictionary[JGFundraisingPageRaisedAmountKey] && [dictionary[JGFundraisingPageRaisedAmountKey] isKindOfClass:[NSNumber class]]) {
+            self.raisedAmount = dictionary[JGFundraisingPageRaisedAmountKey];
             
             if (!self.raisedAmount) {
                 self.raisedAmount = @(0);
             }
+        } else {
+            self.raisedAmount = @(0);
         }
         
-        if (dictionary[@"eventId"]) {
-            self.eventId = dictionary[@"eventId"];
+        if (dictionary[JGFundraisingPageEventIdKey] && [dictionary[JGFundraisingPageEventIdKey] isKindOfClass:[NSNumber class]]) {
+            self.eventId = dictionary[JGFundraisingPageEventIdKey];
         }
         
-        if (dictionary[@"eventName"]) {
-            self.eventName = dictionary[@"eventName"];
+        if (dictionary[JGFundraisingPageEventNameKey] && [dictionary[JGFundraisingPageEventNameKey] isKindOfClass:[NSString class]]) {
+            self.eventName = dictionary[JGFundraisingPageEventNameKey];
         }
         
-        if (dictionary[@"domain"]) {
-            self.domain = dictionary[@"domain"];
+        if (dictionary[JGFundraisingPageDomainKey]) {
+            self.domain = dictionary[JGFundraisingPageDomainKey];
         }
 
         
-        if (dictionary[@"targetAmount"]) {
-            self.targetAmount = dictionary[@"targetAmount"];
+        if (dictionary[JGFundraisingPageTargetAmountKey] && [dictionary[JGFundraisingPageTargetAmountKey] isKindOfClass:[NSNumber class]]) {
+            
+            self.targetAmount = dictionary[JGFundraisingPageTargetAmountKey];
             
             if (!self.targetAmount) {
                 self.targetAmount = @(0);
             }
+        } else {
+            self.targetAmount = @(0);
         }
         
-        if (dictionary[@"customCodes"] && [dictionary[@"customCodes"] isKindOfClass:[NSDictionary class]]) {
-            self.customCodes = dictionary[@"customCodes"];
+        if (dictionary[JGFundraisingPageCustomCodesKey] && [dictionary[JGFundraisingPageCustomCodesKey] isKindOfClass:[NSDictionary class]]) {
+            self.customCodes = dictionary[JGFundraisingPageCustomCodesKey];
         }
         
         
-        if (dictionary[@"expiryDate"] && [dictionary[@"expiryDate"] isKindOfClass:[NSString class]]) {
-            self.pageEndDate = [NSDate dateWithISO8601String:dictionary[@"expiryDate"]];
+        if (dictionary[JGFundraisingPageEndDateKey] && [dictionary[JGFundraisingPageEndDateKey] isKindOfClass:[NSString class]]) {
+            self.pageEndDate = [NSDate dateWithISO8601String:dictionary[JGFundraisingPageEndDateKey]];
         }
         
-        if (dictionary[@"eventDate"] && [dictionary[@"eventDate"] isKindOfClass:[NSString class]]) {
-            self.pageEventDate = [NSDate dateWithISO8601String:dictionary[@"eventDate"]];
+        if (dictionary[JGFundraisingPageEventDateKey] && [dictionary[JGFundraisingPageEventDateKey] isKindOfClass:[NSString class]]) {
+            self.pageEventDate = [NSDate dateWithISO8601String:dictionary[JGFundraisingPageEventDateKey]];
         }
         
         NSMutableArray<NSURL *> *imageUrls = [NSMutableArray new];
         
-        if (dictionary[@"images"]) {
-            for (NSDictionary *imageDictionary in dictionary[@"images"]) {
-                if (imageDictionary[@"absoluteUrl"]) {
-                    [imageUrls addObject:[NSURL URLWithString:imageDictionary[@"absoluteUrl"]]];
+        if (dictionary[JGFundraisingPageImageUrlsKey] && [dictionary[JGFundraisingPageImageUrlsKey] isKindOfClass:[NSArray class]]) {
+            
+            for (NSDictionary *imageDictionary in dictionary[JGFundraisingPageImageUrlsKey]) {
+                
+                if (imageDictionary[JGFundraisingPageImageAbsoluteUrlKey]) {
+                    [imageUrls addObject:[NSURL URLWithString:imageDictionary[JGFundraisingPageImageAbsoluteUrlKey]]];
                 }
             }
         }
