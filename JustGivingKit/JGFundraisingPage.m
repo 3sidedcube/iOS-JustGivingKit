@@ -7,6 +7,7 @@
 //
 
 #import "JGFundraisingPage.h"
+@import ThunderBasics;
 
 @implementation JGFundraisingPage
 
@@ -68,6 +69,15 @@
         
         if (dictionary[@"customCodes"] && [dictionary[@"customCodes"] isKindOfClass:[NSDictionary class]]) {
             self.customCodes = dictionary[@"customCodes"];
+        }
+        
+        
+        if (dictionary[@"expiryDate"] && [dictionary[@"expiryDate"] isKindOfClass:[NSString class]]) {
+            self.pageEndDate = [NSDate dateWithISO8601String:dictionary[@"expiryDate"]];
+        }
+        
+        if (dictionary[@"eventDate"] && [dictionary[@"eventDate"] isKindOfClass:[NSString class]]) {
+            self.pageEventDate = [NSDate dateWithISO8601String:dictionary[@"eventDate"]];
         }
         
         NSMutableArray<NSURL *> *imageUrls = [NSMutableArray new];

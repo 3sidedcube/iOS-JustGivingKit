@@ -32,6 +32,16 @@
 @property (nonatomic, copy) NSString *pageShortName;
 
 /**
+ @abstract The ending date of the fundraising page
+ */
+@property (nonatomic, strong) NSDate *pageEndDate;
+
+/**
+ @abstract The event date of the fundraising page
+ */
+@property (nonatomic, strong) NSDate *pageEventDate;
+
+/**
  @abstract The page status i.e Active/Cancelled
  */
 @property (nonatomic, copy) NSString *pageStatus;

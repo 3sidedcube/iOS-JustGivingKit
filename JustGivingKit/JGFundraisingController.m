@@ -7,6 +7,7 @@
 //
 
 @import ThunderRequest;
+@import ThunderBasics;
 
 #import "JGFundraisingController.h"
 #import "JGFundraisingPage.h"
@@ -212,6 +213,14 @@
     
     if (fundraisingPage.customCodes) {
         payload[@"customCodes"] = fundraisingPage.customCodes;
+    }
+    
+    if (fundraisingPage.pageEndDate) {
+        payload[@"expiryDate"] = [fundraisingPage.pageEndDate ISO8601String];
+    }
+    
+    if (fundraisingPage.pageEventDate) {
+        payload[@"eventDate"] = [fundraisingPage.pageEventDate ISO8601String];
     }
     
     [[JGSession sharedSession].requestController put:@"fundraising/pages" bodyParams:payload completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
