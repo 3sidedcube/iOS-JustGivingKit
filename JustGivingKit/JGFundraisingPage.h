@@ -15,7 +15,7 @@ FOUNDATION_EXPORT NSString * const JGFundraisingPageIdKey;
 /**
  @abstract A unique fundraising page Id
  */
-@property (nonatomic, copy) NSString *pageId;
+@property (nonatomic, copy) NSNumber *pageId;
 
 FOUNDATION_EXPORT NSString * const JGFundraisingPageTitleKey;
 /**
@@ -58,6 +58,18 @@ FOUNDATION_EXPORT NSString * const JGFundraisingPageEventDateKey;
  @abstract The event date of the fundraising page
  */
 @property (nonatomic, strong) NSDate *pageEventDate;
+
+FOUNDATION_EXPORT NSString * const JGFundraisingPageCurrencyCodeKey;
+/**
+ @abstract The currency code of the fundraising page
+ */
+@property (nonatomic, copy) NSString *currencyCode;
+
+FOUNDATION_EXPORT NSString * const JGFundraisingPageCurrencySymbolKey;
+/**
+ @abstract The currency symbol of the fundraising page
+ */
+@property (nonatomic, copy) NSString *currencySymbol;
 
 FOUNDATION_EXPORT NSString * const JGFundraisingPagePageStatusKey;
 FOUNDATION_EXPORT NSString * const JGFundraisingPageStatusKey;

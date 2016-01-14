@@ -30,6 +30,8 @@ NSString * const JGFundraisingPageEventNameKey = @"eventName";
 NSString * const JGFundraisingPageDomainKey = @"domain";
 NSString * const JGFundraisingPageActivityTypeKey = @"activityType";
 NSString * const JGFundraisingPageCustomCodesKey = @"customCodes";
+NSString * const JGFundraisingPageCurrencyCodeKey = @"currencyCode";
+NSString * const JGFundraisingPageCurrencySymbolKey = @"currencySymbol";
 
 @implementation JGFundraisingPage
 
@@ -37,7 +39,7 @@ NSString * const JGFundraisingPageCustomCodesKey = @"customCodes";
 {
     if (self = [super init]) {
         
-        if (dictionary[JGFundraisingPageIdKey] && [dictionary[JGFundraisingPageIdKey] isKindOfClass:[NSString class]]) {
+        if (dictionary[JGFundraisingPageIdKey] && [dictionary[JGFundraisingPageIdKey] isKindOfClass:[NSNumber class]]) {
             self.pageId = dictionary[JGFundraisingPageIdKey];
         }
         
@@ -70,6 +72,14 @@ NSString * const JGFundraisingPageCustomCodesKey = @"customCodes";
             // we have to check for 'status' aswell as the API uses this in some places
         } else if (dictionary[JGFundraisingPageStatusKey] && [dictionary[JGFundraisingPageStatusKey] isKindOfClass:[NSString class]]) {
             self.pageStatus = dictionary[JGFundraisingPageStatusKey];
+        }
+        
+        if (dictionary[JGFundraisingPageCurrencyCodeKey] && dictionary[JGFundraisingPageCurrencyCodeKey]) {
+            self.currencyCode = dictionary[JGFundraisingPageCurrencyCodeKey];
+        }
+        
+        if (dictionary[JGFundraisingPageCurrencySymbolKey] && dictionary[JGFundraisingPageCurrencySymbolKey]) {
+            self.currencySymbol = dictionary[JGFundraisingPageCurrencySymbolKey];
         }
         
         if (dictionary[JGFundraisingPageRaisedAmountKey] && [dictionary[JGFundraisingPageRaisedAmountKey] isKindOfClass:[NSNumber class]]) {
