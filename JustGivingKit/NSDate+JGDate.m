@@ -28,7 +28,7 @@
         NSString *substringForFirstMatch = [oDataString substringWithRange:rangeOfFirstMatch];
         
         // return the matching string
-        return [NSDate dateWithTimeIntervalSince1970:substringForFirstMatch.doubleValue];
+        return [NSDate dateWithTimeIntervalSince1970:substringForFirstMatch.doubleValue/1000];
     }
     
     //Error, return nothing

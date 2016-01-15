@@ -63,7 +63,7 @@
         NSMutableArray *donations = [NSMutableArray new];
         
         for (NSDictionary *donationDictionary in response.dictionary[@"donations"]) {
-            JGDonation *donation = [[JGDonation alloc]initWithDictionary:donationDictionary];
+            JGDonation *donation = [[JGDonation alloc] initWithDictionary:donationDictionary];
             [donations addObject:donation];
         }
         
