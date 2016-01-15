@@ -13,6 +13,10 @@
 #import "JGDefines.h"
 #import <JustGivingKit/JustGivingKit-Swift.h>
 
+NSString * const JGLoginAttemptStartedNotification = @"JGLoginStarted";
+NSString * const JGLoginAttemptFinishedNotification = @"JGLoginFinished";
+NSString * const JGLoginAttemptFinishedErrorKey = @"JGLoginFinishedErrorKey";
+
 @interface JGSession () <TSCOAuth2Manager>
 
 @property (nonatomic, strong) NSString *applicationId;
@@ -24,6 +28,8 @@
 @implementation JGSession
 
 static JGSession *sharedSession = nil;
+
+@synthesize loggedIn = _loggedIn;
 
 + (JGSession *)sharedSession
 {
@@ -117,6 +123,8 @@ static JGSession *sharedSession = nil;
 
 - (void)handleAuthenticationCallbackWithUrl:(NSURL *)url
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:JGLoginAttemptStartedNotification object:nil];
+    
     NSMutableDictionary *queryStringDictionary = [[NSMutableDictionary alloc] init];
     NSArray *urlComponents = [[url.absoluteString componentsSeparatedByString:@"?"].lastObject componentsSeparatedByString:@"&"];
     
@@ -154,11 +162,7 @@ static JGSession *sharedSession = nil;
             
             [self.requestController setSharedRequestCredential:credential andSaveToKeychain:true];
             
-            [self willChangeValueForKey:@"loggedIn"];
-            _loggedIn = YES;
-            [self didChangeValueForKey:@"loggedIn"];
-
-			[[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"JGUserLoggedIn"];
+            self.loggedIn = true;
             
             AccountController *accountController = [AccountController new];
             [accountController retrieveUserAccountInformation:^(JGUser * _Nullable user, NSError * _Nullable error) {
@@ -168,12 +172,24 @@ static JGSession *sharedSession = nil;
                     self.authenticationCompletion(error);
                     return;
                 }
-                
+                                
                 self.currentUser = user;
                 self.authenticationCompletion(error);
             }];
         }
     }];
+}
+
+- (BOOL)isLoggedIn
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"JGUserLoggedIn"];
+}
+
+- (void)setLoggedIn:(BOOL)loggedIn
+{
+    [self willChangeValueForKey:@"loggedIn"];
+    [[NSUserDefaults standardUserDefaults] setObject:@(loggedIn) forKey:@"JGUserLoggedIn"];
+    [self didChangeValueForKey:@"loggedIn"];
 }
 
 - (NSString *)serviceIdentifier
@@ -186,8 +202,9 @@ static JGSession *sharedSession = nil;
     TSCRequestController *authRequestController = [[TSCRequestController alloc] initWithBaseAddress:JGAPIAuthBaseAddress];
     
     NSMutableDictionary *postDictionary = [NSMutableDictionary new];
-    [postDictionary setValue:credential.refreshToken forKey:@"code"];
+    [postDictionary setValue:credential.refreshToken forKey:@"refresh_token"];
     [postDictionary setValue:@"refresh_token" forKey:@"grant_type"];
+    [postDictionary setValue:self.oauthCallbackUrl forKey:@"redirect_uri"];
     
     NSMutableDictionary *requestHeaders = [NSMutableDictionary new];
     

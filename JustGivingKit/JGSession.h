@@ -11,6 +11,10 @@
 @class TSCRequestController;
 @class JGUser;
 
+FOUNDATION_EXPORT NSString * const JGLoginAttemptStartedNotification;
+FOUNDATION_EXPORT NSString * const JGLoginAttemptFinishedNotification;
+FOUNDATION_EXPORT NSString * const JGLoginAttemptFinishedErrorKey;
+
 /**
  @class JGSession
  @abstract  A session is used to access endpoints and represent a user in the JustGiving API.
@@ -27,6 +31,7 @@ typedef void (^JGSessionAuthenticationCompletion)(NSError *error);
 
 /**
  @abstract Returns YES if a user is logged in.
+ @discussion This will return true before the current user object has been returned. To see whether the user account has been pulled yet look at currentUser isntead
  */
 @property (nonatomic, readwrite, getter = isLoggedIn) BOOL loggedIn;
 
