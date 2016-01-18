@@ -64,6 +64,9 @@ static JGSession *sharedSession = nil;
 - (void)logoutCurrentUser
 {
     [TSCRequestCredential deleteCredentialWithIdentifier:@"JGUserLogin"];
+    [self.requestController setSharedRequestCredential:nil andSaveToKeychain:true];
+    self.currentUser = nil;
+    self.loggedIn = false;
 }
 
 - (void)requestUserAuthenticationWithCompletion:(JGSessionAuthenticationCompletion)completion
