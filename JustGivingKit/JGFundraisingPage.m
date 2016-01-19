@@ -68,10 +68,25 @@ NSString * const JGFundraisingPageCurrencySymbolKey = @"currencySymbol";
         }
         
         if (dictionary[JGFundraisingPagePageStatusKey] && [dictionary[JGFundraisingPagePageStatusKey] isKindOfClass:[NSString class]]) {
-            self.pageStatus = dictionary[JGFundraisingPagePageStatusKey];
+            self.pageStatusString = dictionary[JGFundraisingPagePageStatusKey];
             // we have to check for 'status' aswell as the API uses this in some places
         } else if (dictionary[JGFundraisingPageStatusKey] && [dictionary[JGFundraisingPageStatusKey] isKindOfClass:[NSString class]]) {
-            self.pageStatus = dictionary[JGFundraisingPageStatusKey];
+            self.pageStatusString = dictionary[JGFundraisingPageStatusKey];
+        }
+        
+        if (!self.pageStatusString) {
+            self.pageStatus = JGFundraisingPageStatusUnknown;
+        } else {
+            
+            if ([self.pageStatusString.lowercaseString isEqualToString:@"active"]) {
+                self.pageStatus = JGFundraisingPageStatusActive;
+            } else if ([self.pageStatusString.lowercaseString isEqualToString:@"cancelled"]) {
+                self.pageStatus = JGFundraisingPageStatusCancelled;
+            } else if ([self.pageStatusString.lowercaseString isEqualToString:@"completed"]) {
+                self.pageStatus = JGFundraisingPageStatusCompleted;
+            } else {
+                self.pageStatus = JGFundraisingPageStatusUnknown;
+            }
         }
         
         if (dictionary[JGFundraisingPageCurrencyCodeKey] && dictionary[JGFundraisingPageCurrencyCodeKey]) {
