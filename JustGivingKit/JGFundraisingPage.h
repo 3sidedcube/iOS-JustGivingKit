@@ -9,6 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "JGDefines.h"
 
+typedef NS_ENUM(NSUInteger, JGFundraisingPageStatus) {
+    JGFundraisingPageStatusUnknown = 0,
+    JGFundraisingPageStatusActive = 1,
+    JGFundraisingPageStatusCompleted = 2,
+    JGFundraisingPageStatusCancelled = 3
+};
+
 @interface JGFundraisingPage : NSObject
 
 FOUNDATION_EXPORT NSString * const JGFundraisingPageIdKey;
@@ -74,9 +81,14 @@ FOUNDATION_EXPORT NSString * const JGFundraisingPageCurrencySymbolKey;
 FOUNDATION_EXPORT NSString * const JGFundraisingPagePageStatusKey;
 FOUNDATION_EXPORT NSString * const JGFundraisingPageStatusKey;
 /**
- @abstract The page status i.e Active/Cancelled
+ @abstract The page status string i.e Active/Cancelled
  */
-@property (nonatomic, copy) NSString *pageStatus;
+@property (nonatomic, copy) NSString *pageStatusString;
+
+/**
+ @abstract The page status
+ */
+@property (nonatomic, assign) JGFundraisingPageStatus pageStatus;
 
 FOUNDATION_EXPORT NSString * const JGFundraisingPageRaisedAmountKey;
 /**
