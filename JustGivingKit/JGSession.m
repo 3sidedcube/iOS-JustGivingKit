@@ -49,11 +49,12 @@ static JGSession *sharedSession = nil;
         self.applicationId = [[NSBundle mainBundle] infoDictionary][@"JGApplicationId"];
         
         self.requestController = [[TSCRequestController alloc] initWithBaseAddress:[NSString stringWithFormat:@"%@/%@/v1", JGAPIBaseAddress, self.applicationId]];
+        self.requestController.sharedRequestHeaders[@"Accept-Type"] = @"application/json";
         
         NSMutableDictionary *requestHeaders = [NSMutableDictionary new];
         [requestHeaders setValue:[[NSBundle mainBundle] infoDictionary][@"JGApplicationId"] forKey:@"x-api-key"];
         [requestHeaders setValue:[[NSBundle mainBundle] infoDictionary][@"JGApplicationSecret"] forKey:@"x-application-key"];
-        [self.requestController setSharedRequestHeaders:requestHeaders];
+        [self.requestController.sharedRequestHeaders addEntriesFromDictionary:requestHeaders];
         
         self.requestController.OAuth2Delegate = self;
     }
@@ -256,7 +257,9 @@ static JGSession *sharedSession = nil;
         credential.authorizationToken = [NSString stringWithFormat:@"Basic %@", credential.authorizationToken];
         self.requestController.sharedRequestCredential = credential;
         
-        self.requestController.sharedRequestHeaders = [[NSMutableDictionary alloc] initWithObjects:@[self.requestController.sharedRequestCredential.authorizationToken] forKeys:@[@"Authorization"]];
+        if (self.requestController.sharedRequestCredential.authorizationToken) {
+            self.requestController.sharedRequestHeaders[@"Authorization"] = self.requestController.sharedRequestCredential.authorizationToken;
+        }
         
         if ([TSCRequestCredential storeCredential:credential withIdentifier:@"JGUserLogin"]) {
             

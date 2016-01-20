@@ -253,12 +253,12 @@
             if (response.status == 409) {
                 
                 // Page was not created
-                completion(nil, error);
+                completion(nil, error, nil);
                 return;
                 
             } else {
                 
-                completion(nil, error);
+                completion(nil, error, nil);
             }
             
         } else {
@@ -267,10 +267,10 @@
             [self getMoreDetailsForFundraisingPage:fundraisingPage withCompletion:^(JGFundraisingPage *page, NSError *error) {
                 
                 if (error) {
-                    completion(nil, error);
+                    completion(nil, error, nil);
                     
                 } else {
-                    completion(page, error);
+                    completion(page, error, nil);
                 }
             }];
         }
@@ -279,12 +279,12 @@
 
 - (void)createFundraisingPage:(nonnull JGFundraisingPage *)fundraisingPage image:(nonnull UIImage *)fundraisingImage completion:(nullable JGCreateFundraisingPageCompletion)completion
 {
-    [self createFundraisingPage:fundraisingPage withCompletion:^(JGFundraisingPage *page, NSError *error) {
+    [self createFundraisingPage:fundraisingPage withCompletion:^(JGFundraisingPage *page, NSError *creationError, NSError *imageError) {
         
-        if (error || !fundraisingPage) {
+        if (creationError || imageError || !fundraisingPage) {
             
             if (completion) {
-                completion(fundraisingPage, error);
+                completion(fundraisingPage, creationError, imageError);
             }
             return;
         }
@@ -294,13 +294,13 @@
             [self uploadImage:fundraisingImage caption:nil toFundraisingPage:fundraisingPage isDefault:true completion:^(NSError * _Nullable error) {
                 
                 if (completion) {
-                    completion(fundraisingPage, error);
+                    completion(fundraisingPage, nil, error);
                 }
                 
             }];
             
         } else if (completion) {
-            completion(fundraisingPage, error);
+            completion(fundraisingPage, creationError, nil);
         }
         
     }];
@@ -342,7 +342,22 @@
         return;
     }
     
-    [[JGSession sharedSession].requestController post:@"fundraising/pages/(:pageShortName)/images/(:isDefault)?caption=(:imageCaption)" withURLParamDictionary:@{@"pageShortName":fundraisingPage.pageShortName, @"isDefault": isDefault ? @"default" : @"", @"imageCaption" : imageCaption ?: @""} bodyParams:@{@"image":fundraisingImage} contentType:TSCRequestContentTypeImagePNG completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
+    NSData *imageData = UIImagePNGRepresentation(fundraisingImage);
+    CGFloat compression = 0.9;
+    
+    while (imageData.length > 1024 * 1024 * 5 && compression > 0.1) {
+        imageData = UIImageJPEGRepresentation(fundraisingImage, compression);
+        compression -= 0.1;
+    }
+    
+    NSString *postString = @"";
+    if (imageCaption) {
+        postString = @"fundraising/pages/(:pageShortName)/images/(:isDefault)?caption=(:imageCaption)";
+    } else {
+        postString = @"fundraising/pages/(:pageShortName)/images/(:isDefault)";
+    }
+    
+    [[JGSession sharedSession].requestController post:postString withURLParamDictionary:@{@"pageShortName":fundraisingPage.pageShortName, @"isDefault": isDefault ? @"default" : @"", @"imageCaption" : imageCaption ?: @""} bodyParams:@{@"image":imageData} contentType:TSCRequestContentTypeImagePNG completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
         
         if (uploadCompletion) {
             uploadCompletion(error);

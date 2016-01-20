@@ -24,7 +24,7 @@ typedef void (^JGFetchPagesCompletion)(NSArray<JGFundraisingPage *> * _Nullable 
 typedef void (^JGFetchPageDetailCompletion)(JGFundraisingPage * _Nullable page, NSError * _Nullable error);
 typedef void (^JGRaisedAmountCompletion)(NSNumber * _Nullable raisedAmount, NSError * _Nullable error);
 typedef void (^JGFetchPageDonationsCompletion)(NSArray<JGDonation *> * _Nullable donations, NSError * _Nullable error);
-typedef void (^JGCreateFundraisingPageCompletion)(JGFundraisingPage * _Nullable page, NSError * _Nullable error);
+typedef void (^JGCreateFundraisingPageCompletion)(JGFundraisingPage * _Nullable page, NSError * _Nullable creationError, NSError * _Nullable imageError);
 typedef void (^JGDeleteFundraisingPageCompletion)(NSError * _Nullable error);
 typedef void (^JGSuggestedNamesCompletion)(NSArray<NSString *> * _Nullable names, NSError * _Nullable error);
 typedef void (^JGShortPageNameAvailabilityCompletion)(BOOL isAvailable, NSError * _Nullable error);
