@@ -179,6 +179,7 @@
 - (void)totalFundsRaisedByUser:(JGUser *)user ForCharityId:(NSString *)charityId completion:(JGRaisedAmountCompletion)completion
 {
     __block double totalRaised = 0;
+    __weak typeof(self) welf = self;
     [self getFundraisingPagesWithCharityId:charityId forUser:user withCompletion:^(NSArray *pages, NSError *error) {
         
         for (JGFundraisingPage *page in pages) {
@@ -190,6 +191,7 @@
             }
         }
         
+        welf.totalRaisedByUser = [NSNumber numberWithDouble:totalRaised];
         completion([NSNumber numberWithDouble:totalRaised], error);
     }];
 }

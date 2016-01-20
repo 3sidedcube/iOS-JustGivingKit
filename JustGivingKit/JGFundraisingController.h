@@ -20,6 +20,12 @@
  */
 @interface JGFundraisingController : NSObject
 
+/**
+ The total amount raised by a user accross all fundraising pages with a compatible currency type
+ @note: This amount is only set once `totalFundsRaisedByUser:ForCharityId:completion` has been called
+ */
+@property (nullable, nonatomic, strong) NSNumber *totalRaisedByUser;
+
 typedef void (^JGFetchPagesCompletion)(NSArray<JGFundraisingPage *> * _Nullable pages, NSError * _Nullable error);
 typedef void (^JGFetchPageDetailCompletion)(JGFundraisingPage * _Nullable page, NSError * _Nullable error);
 typedef void (^JGRaisedAmountCompletion)(NSNumber * _Nullable raisedAmount, NSError * _Nullable error);
