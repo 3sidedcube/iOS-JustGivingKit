@@ -246,6 +246,10 @@
         payload[JGFundraisingPageSummaryWhatKey] = fundraisingPage.pageSummaryWhat;
     }
     
+    if (fundraisingPage.currencyCode) {
+        payload[@"currency"] = fundraisingPage.currencyCode;
+    }
+    
     [[JGSession sharedSession].requestController put:@"fundraising/pages" bodyParams:payload completion:^(TSCRequestResponse * _Nullable response, NSError * _Nullable error) {
         
         if (error || response.status != 201) {
