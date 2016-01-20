@@ -11,22 +11,29 @@ import UIKit
 /**
 Represents a collection of donations as a total with currency information.
 */
+@objc(JGMonetaryAmount)
 public class MonetaryAmount: NSObject {
     
     /**
     The amount of units for this currency
     */
-    public let amount: Double?
+    public var amount: Double = 0
     
     /**
     Not documented in the JustGiving API
     */
-    public let currencyCode: Int?
+    public var currencyCode: Int?
+    
+    /**
+    The currency as a three letter country code
+    - note: This is not part of the JustGiving API so may not be available on all objects of this type
+    */
+    public var currencyCodeString: String?
     
     /**
     The currency symbol to be displayed with the amount
     */
-    public let currencySymbol: String?
+    public var currencySymbol: String?
     
     /**
      Initialises the object from a dictionary supplied by the JustGiving API
@@ -34,9 +41,15 @@ public class MonetaryAmount: NSObject {
      */
     internal init(dictionary: [String: AnyObject]) {
         
-        amount = dictionary["amount"] as? Double
+        if let dictionaryAmount = dictionary["amount"] as? Double {
+            amount = dictionaryAmount
+        }
         currencyCode = dictionary["currencyCode"] as? Int
         currencySymbol = dictionary["currencySymbol"] as? String
+        
+    }
+    
+    override init() {
         
     }
 
