@@ -12,6 +12,7 @@
 @class JGUser;
 @class JGFundraisingPage;
 @class JGDonation;
+@class JGMonetaryAmount;
 
 
 /**
@@ -20,9 +21,15 @@
  */
 @interface JGFundraisingController : NSObject
 
+/**
+ Monetery amounts for each currency that the user has raised money in, specifically for the current charity ID.
+ @note: This amount is only set once `totalFundsRaisedByUser:ForCharityId:completion` has been called
+ */
+@property (nullable, nonatomic, strong) NSArray<JGMonetaryAmount *> *totalMonetaryAmountsRaisedForCurrentCharity;
+
 typedef void (^JGFetchPagesCompletion)(NSArray<JGFundraisingPage *> * _Nullable pages, NSError * _Nullable error);
 typedef void (^JGFetchPageDetailCompletion)(JGFundraisingPage * _Nullable page, NSError * _Nullable error);
-typedef void (^JGRaisedAmountCompletion)(NSNumber * _Nullable raisedAmount, NSError * _Nullable error);
+typedef void (^JGRaisedAmountCompletion)(NSArray<JGMonetaryAmount *> * _Nullable monetaryAmounts, NSError * _Nullable error);
 typedef void (^JGFetchPageDonationsCompletion)(NSArray<JGDonation *> * _Nullable donations, NSError * _Nullable error);
 typedef void (^JGCreateFundraisingPageCompletion)(JGFundraisingPage * _Nullable page, NSError * _Nullable creationError, NSError * _Nullable imageError);
 typedef void (^JGDeleteFundraisingPageCompletion)(NSError * _Nullable error);

@@ -179,18 +179,38 @@
 - (void)totalFundsRaisedByUser:(JGUser *)user ForCharityId:(NSString *)charityId completion:(JGRaisedAmountCompletion)completion
 {
     __block double totalRaised = 0;
+    __weak typeof(self) welf = self;
+    __block NSMutableArray *amountsArray = [NSMutableArray array];
     [self getFundraisingPagesWithCharityId:charityId forUser:user withCompletion:^(NSArray *pages, NSError *error) {
         
         for (JGFundraisingPage *page in pages) {
             
-            if (page.raisedAmount) {
+            if (page.raisedAmount && page.currencyCode && page.currencySymbol) {
                 
-                double raisedAmount = page.raisedAmount.doubleValue;
-                totalRaised += raisedAmount;
+                BOOL matched = false;
+                for (JGMonetaryAmount *amount in amountsArray) {
+                    
+                    if ([amount.currencyCodeString isEqualToString:page.currencyCode]) {
+                        
+                        amount.amount += page.raisedAmount.doubleValue;
+                        matched = true;
+                    }
+                    
+                }
+                
+                if (!matched) {
+                    JGMonetaryAmount *amount = [JGMonetaryAmount new];
+                    amount.currencySymbol = page.currencySymbol;
+                    amount.amount = page.raisedAmount.doubleValue;
+                    amount.currencyCodeString = page.currencyCode;
+                    [amountsArray addObject:amount];
+                }
+            
             }
         }
         
-        completion([NSNumber numberWithDouble:totalRaised], error);
+        welf.totalMonetaryAmountsRaisedForCurrentCharity = amountsArray;
+        completion(amountsArray, error);
     }];
 }
 
