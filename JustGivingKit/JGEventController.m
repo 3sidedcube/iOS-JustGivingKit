@@ -84,7 +84,7 @@
     page.charityId = charityId;
     page.targetAmount = targetAmount;
     
-    [fundraisingController createFundraisingPage:page image:image completion:^(JGFundraisingPage *page, NSError *error) {
+    [fundraisingController createFundraisingPage:page image:image completion:^(JGFundraisingPage *page, NSError *error, NSError *imageError) {
         
         if (error) {
             
