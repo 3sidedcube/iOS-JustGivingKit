@@ -28,7 +28,7 @@ public class Currency: NSObject {
     */
     public var code: String?
     
-    internal init(dictionary: [String: AnyObject]) {
+    public init(dictionary: [String: AnyObject]) {
         
         name = dictionary["description"] as? String
         symbol = dictionary["currencySymbol"] as? String
@@ -37,5 +37,24 @@ public class Currency: NSObject {
 
     public override init () {
         
+    }
+    
+    public func serialisableRepresentation() -> [String: AnyObject] {
+        
+        var serialisable = [String : AnyObject]()
+        
+        if let aName = name {
+            serialisable["description"] = aName
+        }
+        
+        if let aSymbol = symbol {
+            serialisable["currencySymbol"] = aSymbol
+        }
+        
+        if let aCode = code {
+            serialisable["currencyCode"] = aCode
+        }
+        
+        return serialisable
     }
 }
