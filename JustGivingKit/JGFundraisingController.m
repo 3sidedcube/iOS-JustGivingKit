@@ -28,10 +28,7 @@
     [self getFundraisingPagesWithCharityId:charityId forUserEmail:userEmail withCompletion:^(NSArray *pages, NSError *error) {
         
         if (completion) {
-            if (!error) {
-                
-                completion(pages, error);
-            }
+            completion(pages, error);
         }
     }];
 }
@@ -42,11 +39,9 @@
     NSString *getAddress = [NSString stringWithFormat:@"account/%@/pages?charityid=%@",encodedEmail, charityId];
     
     [self requestPagesWithAddress:getAddress WithCompletion:^(NSArray *pages, NSError *error) {
+        
         if (completion) {
-            if (!error) {
-                
-                completion(pages, error);
-            }
+            completion(pages, error);
         }
     }];
 }
@@ -54,11 +49,9 @@
 - (void)getFundraisingPagesWithCompletion:(JGFetchPagesCompletion)completion
 {
     [self requestPagesWithAddress:@"fundraising/pages" WithCompletion:^(NSArray *pages, NSError *error) {
+        
         if (completion) {
-            if (!error) {
-                
-                completion(pages, error);
-            }
+            completion(pages, error);
         }
     }];
 }
@@ -178,7 +171,6 @@
 
 - (void)totalFundsRaisedByUser:(JGUser *)user ForCharityId:(NSString *)charityId completion:(JGRaisedAmountCompletion)completion
 {
-    __block double totalRaised = 0;
     __weak typeof(self) welf = self;
     __block NSMutableArray *amountsArray = [NSMutableArray array];
     [self getFundraisingPagesWithCharityId:charityId forUser:user withCompletion:^(NSArray *pages, NSError *error) {
