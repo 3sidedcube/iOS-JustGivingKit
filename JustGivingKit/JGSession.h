@@ -38,7 +38,7 @@ typedef void (^JGSessionAuthenticationCompletion)(NSError *error);
 /**
  @abstract The current authenticated user
  */
-@property (nonatomic, strong) JGUser *currentUser;
+@property (nullable, nonatomic, strong) JGUser *currentUser;
 
 /**
  @abstract Returns a shared session. Use this by default.
