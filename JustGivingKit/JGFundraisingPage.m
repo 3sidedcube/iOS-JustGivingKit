@@ -164,8 +164,11 @@ NSString * const JGFundraisingPageCurrencySymbolKey = @"currencySymbol";
 
 - (NSURL *)pageURL
 {
+    if (!self.domain && self.pageShortName) {
+        return [NSURL URLWithString:[NSString stringWithFormat:@"http://www.justgiving.com/%@",self.pageShortName]];
+    }
+    
     if (self.domain && self.pageShortName) {
-        
         return [NSURL URLWithString:[[NSString stringWithFormat:@"http://%@/", self.domain] stringByAppendingString:self.pageShortName]];
     }
     
