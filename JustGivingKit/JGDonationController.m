@@ -24,7 +24,7 @@
     //setup base url
     donateURLString = [NSString stringWithFormat:@"https://www.justgiving.com/4w350m3/donation/direct/charity/%@", charityId];
     
-    donateURLString = [donateURLString stringByAppendingString:[NSString stringWithFormat:@"?amount=%.2f&exitUrl=%@", [donationAmount floatValue], [@"JGK://" urlEncodedString]]];
+    donateURLString = [donateURLString stringByAppendingString:[NSString stringWithFormat:@"?amount=%.2f&exitUrl=%@", [donationAmount floatValue], [@"JGTRO://" urlEncodedString]]];
     
     donateURLString = [donateURLString stringByAppendingString:[NSString stringWithFormat:@"&currency=%@", [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode]]];
     
