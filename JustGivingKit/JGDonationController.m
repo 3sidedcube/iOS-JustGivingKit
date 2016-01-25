@@ -41,7 +41,7 @@
         NSLog(@"The page does not have a domain or short name");
     }
     
-    donateURLString = [NSString stringWithFormat:@"%@/4w350m3/donate/?amount=%.2f&exitUrl=%@", donateURLString, [donationAmount floatValue], [@"JGK://" urlEncodedString]];
+    donateURLString = [NSString stringWithFormat:@"%@/4w350m3/donate/?amount=%.2f&exitUrl=%@", donateURLString, [donationAmount floatValue], [@"JGTRO://" urlEncodedString]];
     donateURLString = [donateURLString stringByAppendingString:[NSString stringWithFormat:@"&currency=%@", [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode]]];
     
     NSLog(@"THE URL: %@", donateURLString);
