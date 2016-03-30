@@ -44,6 +44,11 @@
     donateURLString = [NSString stringWithFormat:@"%@/4w350m3/donate/?amount=%.2f&exitUrl=%@", donateURLString, [donationAmount floatValue], [@"JGTRO://" urlEncodedString]];
     donateURLString = [donateURLString stringByAppendingString:[NSString stringWithFormat:@"&currency=%@", [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode]]];
     
+    NSString *donateRef = [[NSBundle mainBundle] infoDictionary][@"JGDonationReference"];
+    if (donateRef) {
+        donateURLString = [donateURLString stringByAppendingString:[NSString stringWithFormat:@"&reference=%@", donateRef]];
+    }
+    
     NSLog(@"THE URL: %@", donateURLString);
     
     return [NSURL URLWithString:donateURLString];
